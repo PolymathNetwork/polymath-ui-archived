@@ -1,7 +1,8 @@
 import { ToastNotification } from 'carbon-components-react'
 import React, { Component } from 'react'
+import { Transition } from 'react-transition-group'
 
-import styles from '../styles.css'
+import styles from '../style.css'
 
 const STAY_TIME = 4000
 
@@ -21,11 +22,14 @@ export default class Toaster extends Component {
 
       return {
         ...previousState,
-        toasts: [...toasts, {
-          key: newKey,
-          data: toast,
-          hiding: false
-        }]
+        toasts: [
+          {
+            key: newKey,
+            data: toast,
+            hiding: false
+          },
+          ...toasts,
+        ]
       }
     })
   }
@@ -47,7 +51,7 @@ export default class Toaster extends Component {
 
       setTimeout(() => {
         this.removeKey(key)
-      }, styles.toastFadeDuration)
+      }, styles.toastAnimationDuration)
 
       return {
         ...previousState,
@@ -85,12 +89,19 @@ export default class Toaster extends Component {
       hiding,
       data
     }) => (
-      <ToastNotification
-        {...data}
+      <Transition
         key={key}
-        onCloseButtonClick={() => this.removeKey(key)}
-        className={`pui-toast ${hiding ? 'hide' : ''}`}
-      />
+        in={!hiding}
+        appear={true}
+        timeout={0} >
+        {(status) => (
+          <ToastNotification
+            {...data}
+            onCloseButtonClick={() => this.removeKey(key)}
+            className={`pui-toast pui-toast-${status}`}
+          />
+        )}
+      </Transition>
     ))
 
     return (
