@@ -4,21 +4,21 @@ import { Transition } from 'react-transition-group'
 
 import styles from '../style.css'
 
-const STAY_TIME = 4000
-
-export default class Toaster extends Component {
+export class Toaster extends Component {
   state = {
     toasts: []
   }
 
-  show (toast) {
+  show (toast, duration = 4000) {
     this.setState((previousState) => {
       const toasts = previousState.toasts
       const newKey = toasts.reduce((max, toast) => Math.max(max, toast.key), toasts[0] ? toasts[0].key : 0) + 1
 
-      setTimeout(() => {
-        this.startHidingKey(newKey)
-      }, STAY_TIME)
+      if (duration > 0) {
+        setTimeout(() => {
+          this.startHidingKey(newKey)
+        }, duration)
+      }
 
       return {
         ...previousState,
@@ -105,9 +105,13 @@ export default class Toaster extends Component {
     ))
 
     return (
-      <div>
+      <div className="pui-toaster">
         {toastElements}
       </div>
     )
   }
 }
+
+export const ToasterContainer = ({ children }) => (
+  <div className="pui-toaster-container">{children}</div>
+)

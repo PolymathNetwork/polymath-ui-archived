@@ -3,10 +3,30 @@ $toast-animation-duration-ms: $toast-animation-duration + 0ms;
 
 $toast-half-animation-duration: ($toast-animation-duration / 2) + 0ms;
 
-$toast-rough-height: 90px;
+$toast-approx-height: 90px;
 
 :export {
   toastAnimationDuration: $toast-animation-duration;
+}
+
+.pui-toaster-container {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top: 0;
+
+  z-index: 1000;
+
+  pointer-events: none;
+}
+
+.pui-toaster {
+  // Position in top right
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  pointer-events: all;
 }
 
 .pui-toast {
@@ -17,7 +37,7 @@ $toast-rough-height: 90px;
 }
 
 .pui-toast-entering, .pui-toast-entering ~ .pui-toast {
-  transform: translateY(-$toast-rough-height);
+  transform: translateY(-$toast-approx-height);
   transition: none;
 }
 
@@ -33,7 +53,7 @@ $toast-rough-height: 90px;
 }
 
 .pui-toast-exited {
-  transform: translateY(-$toast-rough-height);
+  transform: translateY(-$toast-approx-height);
   opacity: 0;
   transition: opacity $toast-half-animation-duration 0ms, transform $toast-half-animation-duration $toast-half-animation-duration;
 }

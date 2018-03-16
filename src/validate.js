@@ -22,13 +22,13 @@ export const alphanumeric = (value) =>
   value && !/^[a-z0-9]+$/i.test(value) ? 'Invalid characters.' : null
 
 export const email = (value) =>
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+  value && !/^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z0-9-]+$/i.test(value)
     ? 'Invalid email address.'
     : null
 
 export const url = (value) =>
   value &&
-  !/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/i.test(
+  !/^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[-a-zA-Z0-9@:%._+~#=]{2,256}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/i.test(
     value,
   )
     ? 'Invalid URL (example: http(s)://www.example.com).'
