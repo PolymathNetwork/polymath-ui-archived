@@ -1,6 +1,7 @@
 import { ToastNotification } from 'carbon-components-react'
 import React, { Component } from 'react'
 import { Transition } from 'react-transition-group'
+import PropTypes from 'prop-types'
 
 import styles from '../style.css'
 
@@ -115,3 +116,7 @@ export class Toaster extends Component {
 export const ToasterContainer = ({ children }) => (
   <div className="pui-toaster-container">{children}</div>
 )
+
+ToasterContainer.propTypes = {
+  children: PropTypes.node
+}

@@ -2,8 +2,5 @@
   "extends": [
     "plugin:react/recommended",
     "plugin:polymath/recommended"
-  ],
-  "rules": {
-    "react/prop-types": 0
-  }
+  ]
 }

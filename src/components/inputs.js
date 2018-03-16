@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from 'react'
+import PropTypes from 'prop-types'
 import { TextInput as CarbonTextInput } from 'carbon-components-react'
 
 export const TextInput = ({
@@ -18,4 +19,14 @@ export const TextInput = ({
     className={className}
     {...rest}
   />)
+}
+
+TextInput.propTypes = {
+  input: PropTypes.object,
+  label: PropTypes.string,
+  meta: PropTypes.shape({
+    touched: PropTypes.bool,
+    error: PropTypes.string
+  }),
+  className: PropTypes.string
 }
