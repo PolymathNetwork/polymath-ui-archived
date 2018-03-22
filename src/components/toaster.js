@@ -1,19 +1,36 @@
+// @flow
+
 import { ToastNotification } from 'carbon-components-react'
 import React, { Component } from 'react'
+import type { Node } from 'react'
 import { Transition } from 'react-transition-group'
-import PropTypes from 'prop-types'
 
+// This line would be 'style.scss' if we were to bundle with Webpack.
+// $FlowFixMe
 import styles from '../style.css'
 
-export class Toaster extends Component {
+export type Toast = {
+  key: number,
+  hiding: bool,
+  data: Object,
+}
+
+type State = {
+  toasts: Array<Toast>
+}
+
+export class Toaster extends Component<{}, State> {
   state = {
     toasts: []
   }
 
-  show (toast, duration = 4000) {
+  show (toast: Toast, duration: number = 4000) {
     this.setState((previousState) => {
       const toasts = previousState.toasts
-      const newKey = toasts.reduce((max, toast) => Math.max(max, toast.key), toasts[0] ? toasts[0].key : 0) + 1
+      const newKey = toasts.reduce(
+        (max, toast) => Math.max(max, toast.key),
+        toasts[0] ? toasts[0].key : 0
+      ) + 1
 
       if (duration > 0) {
         setTimeout(() => {
@@ -39,11 +56,11 @@ export class Toaster extends Component {
     this.setState({ toasts: [] })
   }
 
-  getToastIndexByKey = (state, key) => state.toasts
+  getToastIndexByKey = (state: State, key: number) => state.toasts
     .map(toast => toast.key)
     .indexOf(key)
 
-  startHidingKey = (key) => {
+  startHidingKey = (key: number) => {
     this.setState((previousState) => {
       const index = this.getToastIndexByKey(previousState, key)
       if (index === -1 || previousState.toasts[index].hiding) {
@@ -67,7 +84,7 @@ export class Toaster extends Component {
     })
   }
 
-  removeKey = (key) => {
+  removeKey = (key: number) => {
     this.setState((previousState) => {
       const index = this.getToastIndexByKey(previousState, key)
       if (index === -1) {
@@ -113,10 +130,10 @@ export class Toaster extends Component {
   }
 }
 
-export const ToasterContainer = ({ children }) => (
+export const ToasterContainer = ({
+  children
+}: {
+  children: Node
+}) => (
   <div className="pui-toaster-container">{children}</div>
 )
-
-ToasterContainer.propTypes = {
-  children: PropTypes.node
-}

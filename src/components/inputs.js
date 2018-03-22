@@ -1,7 +1,22 @@
+// @flow
+
 /* eslint-disable no-unused-vars */
 import React from 'react'
-import PropTypes from 'prop-types'
 import { TextInput as CarbonTextInput } from 'carbon-components-react'
+
+type Props = {
+  input: {
+    name: string,
+    [any]: any
+  },
+  label: string,
+  meta: {
+    touched: bool,
+    error: string
+  },
+  className: string,
+  [any]: any
+}
 
 export const TextInput = ({
   input,
@@ -9,7 +24,7 @@ export const TextInput = ({
   meta: { touched, error },
   className,
   ...rest
-}) => {
+}: Props) => {
   return (<CarbonTextInput
     {...input}
     id={input.name}
@@ -19,14 +34,4 @@ export const TextInput = ({
     className={className}
     {...rest}
   />)
-}
-
-TextInput.propTypes = {
-  input: PropTypes.object,
-  label: PropTypes.string,
-  meta: PropTypes.shape({
-    touched: PropTypes.bool,
-    error: PropTypes.string
-  }),
-  className: PropTypes.string
 }
