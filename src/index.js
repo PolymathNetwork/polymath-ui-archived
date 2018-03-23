@@ -1,3 +1,6 @@
-import 'babel-polyfill'
+// @flow
 
-export { TextInput } from './inputs'
+import 'carbon-components/css/carbon-components.min.css'
+
+export { TextInput } from './components/inputs'
+export { Toast, Toaster, ToasterContainer } from './components/toaster'
