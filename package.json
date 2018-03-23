@@ -1,6 +1,6 @@
 {
   "name": "polymath-ui",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "7.2.3",
@@ -41,7 +41,7 @@
     "dev": "npm-run-all -p \"build:js --watch\" \"build:scss --watch\" \"lint -w\"",
     "lint": "esw --fix src",
     "typecheck": "flow",
-    "precommit": "lint-staged && typecheck",
+    "precommit": "lint-staged && npm run typecheck",
     "build": "npm-run-all -p 'build:*'",
     "build:js": "babel src --out-dir dist",
     "build:scss": "node-sass-chokidar src/ -o dist/",
