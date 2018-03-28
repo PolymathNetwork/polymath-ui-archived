@@ -9,11 +9,13 @@ import { Transition } from 'react-transition-group'
 // $FlowFixMe
 import styles from '../style.css'
 
-export type Toast = {
+type Toast = {
   key: number,
   hiding: bool,
   data: Object,
 }
+
+export type ToastArgs = any
 
 type State = {
   toasts: Array<Toast>
@@ -24,7 +26,7 @@ export class Toaster extends Component<{}, State> {
     toasts: []
   }
 
-  show (toast: Toast, duration: number = 4000) {
+  show (toast: ToastArgs, duration: number = 4000) {
     this.setState((previousState) => {
       const toasts = previousState.toasts
       const newKey = toasts.reduce(
