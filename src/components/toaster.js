@@ -20,7 +20,7 @@ type Toast = {|
 
 export type ToastArgs = any
 
-export type ToasterProps = {|
+type Props = {|
   notify: ?Notify,
 |}
 
@@ -30,7 +30,7 @@ type State = {|
 
 const duration = 6000
 
-class ToasterUnwrapped extends Component<ToasterProps, State> {
+class ToasterUnwrapped extends Component<Props, State> {
   state = {
     toasts: []
   }
@@ -160,7 +160,7 @@ class ToasterUnwrapped extends Component<ToasterProps, State> {
   }
 }
 
-const connector = connect((state): ToasterProps => ({
+const connector = connect((state): Props => ({
   notify: getToasterState(state).notify,
 }))
 
