@@ -2,31 +2,57 @@
 
 import { ToastNotification } from 'carbon-components-react'
 import React, { Component } from 'react'
-import type { Node } from 'react'
 import { Transition } from 'react-transition-group'
+import { connect } from 'react-redux'
+
+import { getToasterState } from '../redux/toaster/selectors'
+import type { Notify } from '../redux/toaster/actions'
 
 // This line would be 'style.scss' if we were to bundle with Webpack.
 // $FlowFixMe
 import styles from '../style.css'
 
-type Toast = {
+type Toast = {|
   key: number,
   hiding: bool,
   data: Object,
-}
+|}
 
 export type ToastArgs = any
 
-type State = {
-  toasts: Array<Toast>
-}
+export type ToasterProps = {|
+  notify: ?Notify,
+|}
 
-export class Toaster extends Component<{}, State> {
+type State = {|
+  toasts: Array<Toast>
+|}
+
+const duration = 6000
+
+class ToasterUnwrapped extends Component<ToasterProps, State> {
   state = {
     toasts: []
   }
 
-  show (toast: ToastArgs, duration: number = 4000) {
+  static defaultProps = {
+    notify: null,
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const notify = nextProps.notify
+
+    if (notify && notify !== this.props.notify) {
+      this.show({
+        title: notify.title || '',
+        subtitle: notify.subtitle || '',
+        caption: notify.caption || null,
+        kind: notify.isSuccess ? 'success' : 'error',
+      }, notify.isPinned || false)
+    }
+  }
+
+  show (toast: ToastArgs, isPinned: boolean = false) {
     this.setState((previousState) => {
       const toasts = previousState.toasts
       const newKey = toasts.reduce(
@@ -34,7 +60,7 @@ export class Toaster extends Component<{}, State> {
         toasts[0] ? toasts[0].key : 0
       ) + 1
 
-      if (duration > 0) {
+      if (!isPinned) {
         setTimeout(() => {
           this.startHidingKey(newKey)
         }, duration)
@@ -125,17 +151,17 @@ export class Toaster extends Component<{}, State> {
     ))
 
     return (
-      <div className="pui-toaster">
-        {toastElements}
+      <div className="pui-toaster-container">
+        <div className="pui-toaster">
+          {toastElements}
+        </div>
       </div>
     )
   }
 }
 
-export const ToasterContainer = ({
-  children
-}: {
-  children: Node
-}) => (
-  <div className="pui-toaster-container">{children}</div>
-)
+const connector = connect((state): ToasterProps => ({
+  notify: getToasterState(state).notify,
+}))
+
+export const Toaster = connector(ToasterUnwrapped)
