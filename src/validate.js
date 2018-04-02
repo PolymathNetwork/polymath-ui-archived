@@ -1,10 +1,10 @@
 // @flow
 
-export const required = (value: any) => (
-  (value !== null && value !== 'undefined' && value !== '') ?
+export const required = (value: any) => {
+  return (value !== null && value !== undefined && value !== '') ?
     null :
     'Required.'
-)
+}
 
 export const maxLength = (max: number) => (value: ?string) =>
   value && value.length > max ? `Must be ${max} characters or fewer.` : null

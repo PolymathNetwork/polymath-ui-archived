@@ -2,7 +2,9 @@
 
 import 'carbon-components/css/carbon-components.min.css'
 
-export { TextInput } from './components/inputs'
+export { default as TextInput } from './components/TextInput'
+export { default as SelectInput } from './components/SelectInput'
+export { default as DatePickerRangeInput } from './components/DatePickerRangeInput'
 export { default as Toaster } from './components/Toaster'
 export { default as TxModal } from './components/TxModal'
 export { notify } from './redux/toaster/actions'

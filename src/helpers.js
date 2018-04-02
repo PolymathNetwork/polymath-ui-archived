@@ -1,8 +1,9 @@
 // @flow
 
 import React from 'react'
+import type { Node } from 'react'
 
-const etherscan = (type: string, value: string, label: string) => {
+const etherscan = (type: string, value: string, label: string | Node) => {
   return (
     <a href={'https://ropsten.etherscan.io/' + type + '/' + value} target='_blank'>
       {label}
@@ -10,16 +11,16 @@ const etherscan = (type: string, value: string, label: string) => {
   )
 }
 
-export const etherscanAddress = (address: string) => {
-  return etherscan('address', address, address)
+export const etherscanAddress = (address: string, label?: string | Node) => {
+  return etherscan('address', address, label || address)
 }
 
-export const etherscanTx = (hash: string, isHashLabel: boolean = false) => {
-  return etherscan('tx', hash, isHashLabel ? hash : 'See on Etherscan')
+export const etherscanTx = (hash: string, label?: string | Node) => {
+  return etherscan('tx', hash, label || 'See on Etherscan')
 }
 
-export const etherscanToken = (address: string) => {
-  return etherscan('token', address, address)
+export const etherscanToken = (address: string, label?: string | Node) => {
+  return etherscan('token', address, label || address)
 }
 
 export const thousandsDelimiter = (v: number) =>

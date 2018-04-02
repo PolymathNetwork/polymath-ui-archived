@@ -1,14 +1,15 @@
 // @flow
 
 import React from 'react'
-import { TextInput as CarbonTextInput } from 'carbon-components-react'
+import { TextInput } from 'carbon-components-react'
+import type { Node } from 'react'
 
 type Props = {
   input: {
     name: string,
     [any]: any
   },
-  label: string,
+  label: string | Node,
   meta: {
     touched: boolean,
     error: string
@@ -17,15 +18,14 @@ type Props = {
   [any]: any
 }
 
-// eslint-disable-next-line
-export const TextInput = ({
+export default ({
   input,
   label,
   meta: { touched, error },
   className,
   ...rest
 }: Props) => {
-  return (<CarbonTextInput
+  return (<TextInput
     {...input}
     id={input.name}
     labelText={label}
