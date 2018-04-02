@@ -1,4 +1,8 @@
+[version]
+0.68.0
+
 [ignore]
+.*incomplete\.js
 
 [include]
 

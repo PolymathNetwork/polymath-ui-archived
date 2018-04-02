@@ -57,3 +57,20 @@ $toast-approx-height: 90px;
   opacity: 0;
   transition: opacity $toast-half-animation-duration 0ms, transform $toast-half-animation-duration $toast-half-animation-duration;
 }
+
+.pui-tx-modal {
+  .bx--modal-close {
+    display: none;
+  }
+  .bx--loading {
+    margin: -20px auto 0;
+  }
+}
+
+.bx--btn {
+  text-transform: uppercase;
+}
+
+.bx--loading-overlay {
+  background-color: white !important;
+}

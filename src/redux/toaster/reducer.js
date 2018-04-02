@@ -3,7 +3,7 @@
 import * as a from './actions'
 import type { Notify } from './actions'
 
-type ToasterState = {
+export type ToasterState = {
   notify: ?Notify
 }
 
@@ -11,7 +11,7 @@ const defaultState = {
   notify: null,
 }
 
-export default (state: ToasterState = defaultState, action: a.ToasterAction) => {
+export default (state: ToasterState = defaultState, action: a.Action) => {
   switch (action.type) {
     case a.NOTIFY:
       return {

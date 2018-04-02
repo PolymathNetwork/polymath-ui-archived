@@ -3,9 +3,14 @@
 import 'carbon-components/css/carbon-components.min.css'
 
 export { TextInput } from './components/inputs'
-export { Toaster } from './components/toaster'
-export type { ToastArgs } from './components/toaster'
-export type { Notify } from './redux/toaster/actions'
+export { default as Toaster } from './components/Toaster'
+export { default as TxModal } from './components/TxModal'
 export { notify } from './redux/toaster/actions'
+export { txStart, txEnd, txFailed, txHash } from './redux/tx/actions'
+export { fetching, fetched, fetchingFailed } from './redux/common/actions'
+export { etherscanAddress, etherscanTx, etherscanToken, thousandsDelimiter } from './helpers'
+export { default as reducer } from './redux/reducer'
+export { default as PolymathUI } from './PolymathUI'
 
-export { default as puiReducer } from './redux/reducer'
+export type { ToastArgs } from './components/Toaster'
+export type { Notify } from './redux/toaster/actions'

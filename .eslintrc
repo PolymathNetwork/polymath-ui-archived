@@ -1,6 +1,5 @@
 {
   "extends": [
-    "plugin:react/recommended",
-    "plugin:polymath/recommended"
+    "plugin:polymath-react/recommended"
   ]
 }

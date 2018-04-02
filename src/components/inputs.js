@@ -1,6 +1,5 @@
 // @flow
 
-/* eslint-disable no-unused-vars */
 import React from 'react'
 import { TextInput as CarbonTextInput } from 'carbon-components-react'
 
@@ -11,13 +10,14 @@ type Props = {
   },
   label: string,
   meta: {
-    touched: bool,
+    touched: boolean,
     error: string
   },
   className: string,
   [any]: any
 }
 
+// eslint-disable-next-line
 export const TextInput = ({
   input,
   label,

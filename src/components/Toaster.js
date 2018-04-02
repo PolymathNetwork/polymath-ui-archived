@@ -1,20 +1,21 @@
 // @flow
+/* eslint-disable import/no-unresolved */
 
 import { ToastNotification } from 'carbon-components-react'
 import React, { Component } from 'react'
 import { Transition } from 'react-transition-group'
 import { connect } from 'react-redux'
 
-import { getToasterState } from '../redux/toaster/selectors'
 import type { Notify } from '../redux/toaster/actions'
 
 // This line would be 'style.scss' if we were to bundle with Webpack.
-// $FlowFixMe
+// noinspection JSFileReferences $FlowFixMe
 import styles from '../style.css'
+import type { RootState } from '../redux/reducer'
 
 type Toast = {|
   key: number,
-  hiding: bool,
+  hiding: boolean,
   data: Object,
 |}
 
@@ -30,13 +31,18 @@ type State = {|
 
 const duration = 6000
 
-class ToasterUnwrapped extends Component<Props, State> {
-  state = {
-    toasts: []
-  }
+const mapStateToProps = (state: RootState): Props => ({
+  notify: state.pui.toaster.notify,
+})
+
+class Toaster extends Component<Props, State> {
 
   static defaultProps = {
     notify: null,
+  }
+
+  state = {
+    toasts: [],
   }
 
   componentWillReceiveProps (nextProps) {
@@ -50,6 +56,14 @@ class ToasterUnwrapped extends Component<Props, State> {
         kind: notify.isSuccess ? 'success' : 'error',
       }, notify.isPinned || false)
     }
+  }
+
+  getToastIndexByKey = (state: State, key: number) => state.toasts
+    .map((toast) => toast.key)
+    .indexOf(key)
+
+  clear () {
+    this.setState({ toasts: [] })
   }
 
   show (toast: ToastArgs, isPinned: boolean = false) {
@@ -72,21 +86,13 @@ class ToasterUnwrapped extends Component<Props, State> {
           {
             key: newKey,
             data: toast,
-            hiding: false
+            hiding: false,
           },
           ...toasts,
-        ]
+        ],
       }
     })
   }
-
-  clear () {
-    this.setState({ toasts: [] })
-  }
-
-  getToastIndexByKey = (state: State, key: number) => state.toasts
-    .map(toast => toast.key)
-    .indexOf(key)
 
   startHidingKey = (key: number) => {
     this.setState((previousState) => {
@@ -95,6 +101,7 @@ class ToasterUnwrapped extends Component<Props, State> {
         return
       }
 
+      // noinspection JSUnresolvedVariable
       setTimeout(() => {
         this.removeKey(key)
       }, styles.toastAnimationDuration)
@@ -103,11 +110,11 @@ class ToasterUnwrapped extends Component<Props, State> {
         ...previousState,
         toasts: Object.assign(
           [...previousState.toasts],
-          {[index]: {
+          { [index]: {
             ...previousState.toasts[index],
-            hiding: true
-          }}
-        )
+            hiding: true,
+          } }
+        ),
       }
     })
   }
@@ -123,8 +130,8 @@ class ToasterUnwrapped extends Component<Props, State> {
         ...previousState,
         toasts: [
           ...previousState.toasts.slice(0, index),
-          ...previousState.toasts.slice(index + 1)
-        ]
+          ...previousState.toasts.slice(index + 1),
+        ],
       }
     })
   }
@@ -133,16 +140,18 @@ class ToasterUnwrapped extends Component<Props, State> {
     const toastElements = this.state.toasts.map(({
       key,
       hiding,
-      data
+      data,
     }) => (
       <Transition
         key={key}
         in={!hiding}
-        appear={true}
-        timeout={0} >
+        appear
+        timeout={0}
+      >
         {(status) => (
           <ToastNotification
             {...data}
+            // eslint-disable-next-line
             onCloseButtonClick={() => this.removeKey(key)}
             className={`pui-toast pui-toast-${status}`}
           />
@@ -151,8 +160,8 @@ class ToasterUnwrapped extends Component<Props, State> {
     ))
 
     return (
-      <div className="pui-toaster-container">
-        <div className="pui-toaster">
+      <div className='pui-toaster-container'>
+        <div className='pui-toaster'>
           {toastElements}
         </div>
       </div>
@@ -160,8 +169,4 @@ class ToasterUnwrapped extends Component<Props, State> {
   }
 }
 
-const connector = connect((state): Props => ({
-  notify: getToasterState(state).notify,
-}))
-
-export const Toaster = connector(ToasterUnwrapped)
+export default connect(mapStateToProps)(Toaster)
