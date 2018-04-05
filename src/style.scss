@@ -1,3 +1,5 @@
+@import 'node_modules/carbon-components/src/globals/scss/spacing';
+
 $toast-animation-duration: 400;
 $toast-animation-duration-ms: $toast-animation-duration + 0ms;
 
@@ -7,6 +9,12 @@ $toast-approx-height: 90px;
 
 :export {
   toastAnimationDuration: $toast-animation-duration;
+}
+
+.page-box {
+  padding: 25px;
+  background-color: white;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
 }
 
 .pui-toaster-container {
@@ -73,4 +81,32 @@ $toast-approx-height: 90px;
 
 .bx--loading-overlay {
   background-color: white !important;
+}
+
+#pui-sto-status-title {
+  padding-bottom: $spacing-lg;
+}
+
+.pui-sto-status-numbers {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: $spacing-md;
+
+  > * {
+    // Align to bottom
+    margin-top: auto;
+  }
+}
+
+.pui-sto-status-progress-bar {
+  margin-bottom: $spacing-xl;
+}
+
+.pui-sto-status-bottom-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pui-sto-status-dates {
+  display: flex;
 }
