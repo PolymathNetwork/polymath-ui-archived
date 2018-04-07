@@ -1,7 +1,5 @@
 // @flow
 
-import type { Web3Receipt } from 'polymath.js_v2/types'
-
 import * as a from './actions'
 import type { Action } from './actions'
 
@@ -9,7 +7,7 @@ export type TxState = {
   isProcessing: boolean,
   message: ?string,
   hash: ?string,
-  receipt: ?Web3Receipt,
+  receipt: ?Object,
 }
 
 const defaultState = {

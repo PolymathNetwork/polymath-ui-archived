@@ -1,6 +1,6 @@
 {
   "name": "polymath-ui",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "7.2.3",
@@ -37,7 +37,6 @@
     "react-redux": "^5.0.7",
     "react-transition-group": "^2.2.1",
     "redux": "^3.7.2",
-    "polymath.js_v2": "0.2.12",
     "react-router-dom": "4.1.1"
   },
   "main": "./dist/index.js",

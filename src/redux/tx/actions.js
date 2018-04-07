@@ -1,7 +1,5 @@
 // @flow
 
-import type { Web3Receipt } from 'polymath.js_v2/types'
-
 import { notify } from '../..'
 import { etherscanTx } from '../../helpers'
 import type { ExtractReturn } from '../../redux/helpers'
@@ -14,7 +12,7 @@ export const HASH = 'polymath-ui/tx/HASH'
 export const txHash = (hash: string) => ({ type: HASH, hash })
 
 export const END = 'polymath-ui/tx/END'
-export const txEnd = (receipt: Web3Receipt) => ({ type: END, receipt })
+export const txEnd = (receipt: Object) => ({ type: END, receipt })
 
 export const FAILED = 'polymath-ui/tx/FAILED'
 const txFailedAction = () => ({ type: FAILED })
