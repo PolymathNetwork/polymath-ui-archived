@@ -1,3 +1,5 @@
+// @flow
+
 import React, { Component } from 'react'
 import Measure from 'react-measure'
 
@@ -26,7 +28,7 @@ export default class ProgressBar extends Component<Props, State> {
     width: 0,
   }
 
-  handleResize = (contentRect) => {
+  handleResize = (contentRect: any) => {
     this.setState({ width: contentRect.bounds.width })
   }
 
