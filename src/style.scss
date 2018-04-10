@@ -1,3 +1,12 @@
+@import 'node_modules/carbon-components/src/globals/scss/styles.scss';
+
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700);
+
+body {
+  // Why are we unable to override Carbon's styles without !important?
+  font-family: "Source Sans Pro","Helvetica Neue",Arial,sans-serif !important;
+}
+
 $toast-animation-duration: 400;
 $toast-animation-duration-ms: $toast-animation-duration + 0ms;
 
@@ -7,6 +16,24 @@ $toast-approx-height: 90px;
 
 :export {
   toastAnimationDuration: $toast-animation-duration;
+}
+
+.page-box {
+  padding: 25px;
+  background-color: white;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
+}
+
+.pui-key-value {
+  > div {
+    margin-bottom: 8px;
+
+    color: #152935;
+    font-weight: 600;
+  }
+
+  color: #5A6872;
+  font-size: 14px;
 }
 
 .pui-toaster-container {
@@ -73,4 +100,180 @@ $toast-approx-height: 90px;
 
 .bx--loading-overlay {
   background-color: white !important;
+}
+
+#pui-sto-status-title {
+  padding-bottom: $spacing-lg;
+}
+
+.pui-sto-status-grow {
+  flex-grow: 1;
+}
+
+.pui-sto-status-numbers {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: $spacing-md;
+
+  > * {
+    // Align to bottom
+    margin-top: auto;
+  }
+}
+
+.pui-sto-status-progress-bar {
+  margin-bottom: $spacing-xl;
+}
+
+.pui-sto-status-bottom-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pui-sto-status-dates {
+  display: flex;
+
+  > div:first-child {
+    padding-right: 34px;
+
+    @include breakpoint(bp--lg--major) {
+      padding-right: 68px;
+    }
+  }
+}
+
+.pui-sto-countdown-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 20px;
+
+  @include breakpoint(bp--md--major) {
+    padding-top: 0;
+  }
+}
+
+.pui-countdown {
+  flex-basis: 350px;
+  flex-shrink: 1;
+  overflow: hidden;
+
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px 0 rgba(42,63,125,0.2);
+}
+
+.pui-countdown-top-bar {
+  padding: 5px 16px;
+  line-height: 35px; // Why not just increase vertical padding?
+
+  font-size: 18px;
+  color: white;
+  background-color: #3D70B2;
+
+  @include breakpoint(bp--md--major) {
+    font-size: 20px;
+  }
+}
+
+.pui-countdown-content {
+  display: flex;
+  flex-direction: row;
+  padding: 16px;
+
+  > * {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.pui-countdown-number-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    padding: 5px 0;
+  }
+}
+
+.pui-countdown-days {
+  .pui-countdown-number {
+    font-size: 56px;
+  }
+
+  .pui-countdown-number-text {
+    font-size: 22px;
+  }
+
+  @include breakpoint(bp--md--major) {
+    .pui-countdown-number {
+      font-size: 64px;
+    }
+
+    .pui-countdown-number-text {
+      font-size: 34px;
+    }
+  }
+}
+
+.pui-countdown-number {
+  display: flex;
+  padding-right: 10px;
+
+  font-size: 28px;
+
+  @include breakpoint(bp--md--major) {
+    font-size: 32px;
+  }
+
+  > * {
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .pui-countdown-hours {
+    font-weight: 600;
+  }
+
+  .pui-countdown-minutes {
+    font-weight: 400;
+  }
+
+  .pui-countdown-seconds {
+    font-weight: 300;
+  }
+}
+
+.pui-countdown-number-text {
+  display: flex;
+  padding-left: 10px;
+
+  font-size: 16px;
+  font-weight: 600;
+  color: #8C9BA5;
+
+  > * {
+    align-items: center;
+    justify-content: flex-start;
+  }
+}
+
+.pui-countdown-poly {
+  > div {
+    font-size: 14px;
+  }
+
+  padding: 15px;
+
+  color: #2E3F8F;
+  font-size: 36px;
+
+  border-radius: 4px;
+  background-color: #EBF0F7;
 }
