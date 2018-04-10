@@ -2,7 +2,8 @@
 
 import React, { Component } from 'react'
 
-type Props = {|
+export type CountdownProps = {|
+  title: string,
   deadline: Date,
 |}
 
@@ -17,7 +18,7 @@ function leading0 (num) {
   return num < 10 ? '0' + num : num
 }
 
-class Countdown extends Component<Props, State> {
+class Countdown extends Component<CountdownProps, State> {
   state = {
     days: 0,
     hours: 0,
@@ -52,7 +53,7 @@ class Countdown extends Component<Props, State> {
     return (
       <div className='pui-countdown'>
         <div className='pui-countdown-top-bar'>
-          Time left until the offering ends
+          {this.props.title}
         </div>
         <div className='pui-countdown-content'>
           <div className='pui-countdown-days'>

@@ -106,6 +106,10 @@ $toast-approx-height: 90px;
   padding-bottom: $spacing-lg;
 }
 
+.pui-sto-status-grow {
+  flex-grow: 1;
+}
+
 .pui-sto-status-numbers {
   display: flex;
   justify-content: space-between;
