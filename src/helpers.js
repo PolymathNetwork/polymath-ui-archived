@@ -25,3 +25,6 @@ export const etherscanToken = (address: string, label?: string | Node) => {
 
 export const thousandsDelimiter = (v: number) =>
   v.toString(10).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+export const addressShortifier = (address: string) =>
+  address.substring(0, 7) + '...' + address.slice(-7)

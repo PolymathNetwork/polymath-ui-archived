@@ -55,14 +55,10 @@ export default class STOStatus extends Component<Props> {
     const fractionComplete = raised.div(cap).times(100).toFixed(1)
 
     return (
-      <div className='page-box'>
+      <div className='pui-page-box'>
+        <h2 className='pui-h2'>{title}</h2>
         <div className='bx--row'>
-          <div className='bx--col-xs-auto'>
-            <h3 id='pui-sto-status-title' className='bx--type-beta'>{title}</h3>
-          </div>
-        </div>
-        <div className='bx--row'>
-          <div className='bx--col-xs-12 bx--col-md-6 pui-sto-status-grow'>
+          <div className='bx--col-xs-7 pui-sto-status-grow'>
             <div className='pui-sto-status-numbers'>
               <div>{fractionComplete}%</div>
               <div className='pui-key-value'>
@@ -90,8 +86,9 @@ export default class STOStatus extends Component<Props> {
               </div>
             </div>
           </div>
+          <div className='bx--col-xs-1' />
           {countdownProps != null && (
-            <div className='bx--col-xs-12 bx--col-md-6'>
+            <div className='bx--col-xs-4'>
               <div className='pui-sto-countdown-container'>
                 <Countdown deadline={countdownProps.deadline} title={countdownProps.title} />
               </div>

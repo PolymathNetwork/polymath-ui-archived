@@ -25,7 +25,7 @@ class TxModal extends Component<TxState> {
         {this.props.hash ? (
           <p className='bx--modal-content__text'>
             See on Etherscan:{' '}
-            { etherscanTx(this.props.hash, true) }
+            { etherscanTx(this.props.hash, this.props.hash) }
           </p>
         ) : ''}
       </Modal>
