@@ -9,11 +9,11 @@ import ProgressBar from './ProgressBar'
 
 type Props = {|
   title: string,
-  start: Date,
-  end: Date,
-  raised: BigNumber,
-  cap: BigNumber,
-  isPolyFundraise: boolean,
+    start: Date,
+      end: Date,
+        raised: BigNumber,
+          cap: BigNumber,
+            isPolyFundraise: boolean,
 |}
 
 const niceAmount = (poly: BigNumber) => Math.round(poly.toNumber()).toLocaleString()
@@ -58,7 +58,7 @@ export default class STOStatus extends Component<Props> {
       <div className='page-box'>
         <div className='bx--row'>
           <div className='bx--col-xs-auto'>
-            <h3 id='pui-sto-status-title' className='bx--type-beta'>{title}</h3>
+            <h3 id='pui-sto-status-title' className='bx--type-beta'>{title} <span className='bx--tag bx--tag--ibm'>Raise in {symbol}</span></h3>
           </div>
         </div>
         <div className='bx--row'>
