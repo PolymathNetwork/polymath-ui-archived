@@ -17,20 +17,29 @@ type Props = {|
 |}
 
 export default class Sidebar extends Component<Props> {
+
+  // noinspection JSMethodCanBeStatic
+  items (items: Array<MenuItem>) {
+    return (
+      <ul>
+        {items.map((item: MenuItem) => (
+          <Link key={item.to} to={item.to}>
+            <li className={item.isActive ? 'active' : ''}>
+              {item.icon}
+              <p>{item.title}</p>
+            </li>
+          </Link>
+        ))}
+      </ul>
+    )
+  }
+
   render () {
-    const { topItems } = this.props
+    const { topItems, bottomItems } = this.props
     return (
       <div className='pui-sidebar'>
-        <ul>
-          {topItems.map((item: MenuItem) => (
-            <Link key={item.to} to={item.to}>
-              <li className={item.isActive ? 'active' : ''}>
-                {item.icon}
-                <p>{item.title}</p>
-              </li>
-            </Link>
-          ))}
-        </ul>
+        {this.items(topItems)}
+        {this.items(bottomItems)}
       </div>
     )
   }

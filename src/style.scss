@@ -2,8 +2,8 @@
 @import url('https://fonts.googleapis.com/css?family=Overpass:300,400,600');
 
 body {
-  font-family: "Overpass", sans-serif !important;
-  background-color: white;
+  font-family: 'Overpass', sans-serif !important;
+  background-color: white !important;
 }
 
 /**
@@ -44,7 +44,7 @@ body {
 
 .pui-h3 {
   color: #5A6872;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 300;
   line-height: 30px;
   margin-bottom: 7px;
@@ -81,7 +81,7 @@ $toast-approx-height: 90px;
   margin-top: 28px;
   text-transform: uppercase;
   background: #28266E !important;
-  font-family: "Overpass", sans-serif !important;
+  font-family: 'Overpass', sans-serif !important;
 
   &:hover {
     background: rgba(40, 38, 110, 0.8) !important;
@@ -114,7 +114,7 @@ $toast-approx-height: 90px;
   font-weight: 300;
   line-height: 22px;
   color: #152935 !important;
-  font-family: "Overpass", sans-serif !important;
+  font-family: 'Overpass', sans-serif !important;
 
   &::placeholder {
     color: #5A6872 !important;
@@ -122,7 +122,7 @@ $toast-approx-height: 90px;
 }
 
 .bx--form-requirement {
-  font-family: "Overpass", sans-serif !important;
+  font-family: 'Overpass', sans-serif !important;
 }
 
 .bx--loading-overlay {
@@ -158,7 +158,7 @@ $toast-approx-height: 90px;
   font-weight: 300;
   line-height: 18px;
   margin-top: 4px;
-  font-family: "Overpass", sans-serif !important;
+  font-family: 'Overpass', sans-serif !important;
 }
 
 .pui-key-value {
@@ -218,6 +218,53 @@ $toast-approx-height: 90px;
 }
 
 /**
+ * PROGRESS INDICATOR
+ */
+.bx--progress {
+
+  margin-top: 38px;
+  margin-bottom: 9px;
+
+  .bx--progress-label {
+    font-family: 'Overpass', sans-serif;
+    font-size: 14px;
+    color: #252E6A !important;
+  }
+  
+  .bx--progress-step--current circle:first-child {
+    stroke: #252E62;
+  }
+
+  .bx--progress-step--current circle:last-child {
+    fill: #252E62;
+  }
+
+  .bx--progress-step--complete circle {
+    stroke: #252E62;
+  }
+
+  .bx--progress-step--complete polygon {
+    fill: #252E62;
+  }
+
+  .bx--progress-step--incomplete {
+    .bx--progress-label {
+      color: #8C9BA5 !important;
+    }
+
+    .bx--progress-line {
+      background-color: #8C9BA5;
+    }
+  }
+
+  .bx--progress-step--complete {
+    .bx--progress-line {
+      background-color: #252E6A;
+    }
+  }
+}
+
+/**
  * SIDEBAR
  */
 .pui-sidebar {
@@ -232,6 +279,11 @@ $toast-approx-height: 90px;
 
   a {
     text-decoration: none;
+  }
+
+  ul:last-child {
+    position: absolute;
+    bottom: 40px;
   }
 
   li {

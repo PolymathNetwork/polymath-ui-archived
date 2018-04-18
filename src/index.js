@@ -16,10 +16,12 @@ export { etherscanAddress, etherscanTx, etherscanToken, thousandsDelimiter, addr
 export { default as reducer } from './redux/reducer'
 export { default as PolymathUI } from './PolymathUI'
 
+export { default as logo } from '../img/logo.svg'
 export { default as bull } from '../img/bull.svg'
 export { default as icoBriefcase } from '../img/icons/briefcase.svg'
 export { default as icoInbox } from '../img/icons/inbox.svg'
 export { default as icoHandshake } from '../img/icons/handshake.svg'
+export { default as icoHelp } from '../img/icons/help.svg'
 
 export type { RootState } from './redux/reducer'
 export type { ToastArgs } from './components/Toaster'
