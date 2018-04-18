@@ -9,11 +9,11 @@ import ProgressBar from './ProgressBar'
 
 type Props = {|
   title: string,
-    start: Date,
-      end: Date,
-        raised: BigNumber,
-          cap: BigNumber,
-            isPolyFundraise: boolean,
+  start: Date,
+  end: Date,
+  raised: BigNumber,
+  cap: BigNumber,
+  isPolyFundraise: boolean,
 |}
 
 const niceAmount = (poly: BigNumber) => Math.round(poly.toNumber()).toLocaleString()
