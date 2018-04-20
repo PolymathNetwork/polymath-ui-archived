@@ -1789,9 +1789,9 @@ eslint-plugin-jsx-a11y@6.0.2:
     emoji-regex "^6.1.0"
     jsx-ast-utils "^1.4.0"
 
-"eslint-plugin-polymath-react@github:PolymathNetwork/eslint-plugin-polymath-react#4.0.0":
+"eslint-plugin-polymath-react@github:PolymathNetwork/eslint-plugin-polymath-react#6.0.0":
   version "1.0.0"
-  resolved "https://codeload.github.com/PolymathNetwork/eslint-plugin-polymath-react/tar.gz/40a78431bd6d4169d10eaa5061f3dc135eab2f1f"
+  resolved "https://codeload.github.com/PolymathNetwork/eslint-plugin-polymath-react/tar.gz/b21d73c6face5b09d6d731cff80dd35009ee3bd9"
   dependencies:
     eslint-config-airbnb "16.1.0"
     eslint-plugin-import "^2.7.0"

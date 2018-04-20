@@ -58,7 +58,7 @@ export default class STOStatus extends Component<Props> {
       <div className='pui-page-box'>
         <h2 className='pui-h2'>{title}</h2>
         <div className='bx--row'>
-          <div className='bx--col-xs-7 pui-sto-status-grow'>
+          <div className='bx--col-xs-8 pui-sto-status-grow'>
             <div className='pui-sto-status-numbers'>
               <div>{fractionComplete}%</div>
               <div className='pui-key-value'>
@@ -86,7 +86,6 @@ export default class STOStatus extends Component<Props> {
               </div>
             </div>
           </div>
-          <div className='bx--col-xs-1' />
           {countdownProps != null && (
             <div className='bx--col-xs-4'>
               <div className='pui-sto-countdown-container'>

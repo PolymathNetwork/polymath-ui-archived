@@ -52,7 +52,7 @@ body {
 
 .pui-h4 {
   color: #5A6872;
-  font-size: 14.8px;
+  font-size: 16px;
   font-weight: 300;
   line-height: 24px;
   margin-bottom: 7px;
@@ -95,6 +95,7 @@ $toast-approx-height: 90px;
 
   &:hover {
     color: white !important;
+    border-color: #58468E !important;
   }
 }
 
@@ -102,11 +103,28 @@ $toast-approx-height: 90px;
   font-size: 14px;
   font-weight: 600;
   line-height: 22px;
+  width: 100%;
 }
 
 .bx--form-item {
   margin-bottom: 16px;
   margin-right: 0 !important;
+
+  p {
+    font-size: 14px;
+    font-family: 'Overpass', sans-serif;
+    display: inline-flex;
+    line-height: 16px;
+
+    svg {
+      margin-right: 4px;
+    }
+
+    a {
+      font-size: 13px;
+      font-family: 'Overpass', sans-serif;
+    }
+  }
 }
 
 .bx--text-input {
@@ -129,21 +147,49 @@ $toast-approx-height: 90px;
   background-color: white !important;
 }
 
+.bx--tooltip {
+  p {
+    font-size: 14px !important;
+  }
+}
+
+.bx--tooltip__trigger {
+  > div {
+    display: inline-flex;
+  }
+}
+
 /**
  * COMMON
  */
 .pui-single-box {
-  margin: 47px auto;
+  margin: 103px auto;
   padding: 48px;
+  width: 734px;
   background-color: white;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
 
+  .pui-single-box-header-text {
+    width: 436px;
+    float: left;
+  }
+
   .pui-single-box-bull {
+    float: right;
+    width: 200px;
+
     img {
-      width: 100%;
+      width: 260px;
+      position: relative;
+      left: -30px;
       margin-top: 15px;
+      margin-bottom: -47px;
     }
   }
+}
+
+.pui-clearfix {
+  clear: both;
 }
 
 .pui-page-box {
@@ -171,6 +217,27 @@ $toast-approx-height: 90px;
 
   color: #5A6872;
   font-size: 14px;
+}
+
+.pui-go-back {
+  background: transparent !important;
+  margin-top: -12px;
+  margin-left: -16px;
+  margin-bottom: 5px;
+  color: #252E6A !important;
+
+  svg, path {
+    fill: #252E6A !important;
+  }
+
+  &:hover {
+    background: transparent !important;
+    color: #58468E !important;
+
+    svg, path {
+      fill: #58468E !important;
+    }
+  }
 }
 
 /**
@@ -231,20 +298,27 @@ $toast-approx-height: 90px;
     color: #252E6A !important;
   }
   
-  .bx--progress-step--current circle:first-child {
-    stroke: #252E62;
+  .bx--progress-step--current {
+    circle:first-child {
+      stroke: #252E62;
+    }
+
+    circle:last-child {
+      fill: #252E62;
+    }
+
+    .bx--progress-line {
+      background-color: #252E6A;
+    }
   }
 
-  .bx--progress-step--current circle:last-child {
-    fill: #252E62;
-  }
-
-  .bx--progress-step--complete circle {
-    stroke: #252E62;
-  }
-
-  .bx--progress-step--complete polygon {
-    fill: #252E62;
+  .bx--progress-step--complete {
+    circle {
+      stroke: #252E62;
+    }
+    polygon {
+      fill: #252E62;
+    }
   }
 
   .bx--progress-step--incomplete {
@@ -300,9 +374,18 @@ $toast-approx-height: 90px;
       background-color: rgba(61, 112, 178, 0.2);
       border-left-color: #5596E6;
 
+      g {
+        fill: #5596E6;
+      }
+
       p {
         color: #5596E6;
       }
+    }
+
+    svg {
+      display: inline-flex;
+      height: 27px;
     }
 
     p {
@@ -310,7 +393,7 @@ $toast-approx-height: 90px;
       font-weight: 300;
       font-size: 12px;
       line-height: 18px;
-      margin-top: 5px;
+      margin-top: -2px;
     }
   }
 }
@@ -328,7 +411,7 @@ $toast-approx-height: 90px;
   position: fixed;
   right: 0;
   left: 0;
-  top: 0;
+  top: 50px;
 
   z-index: 1000;
 
@@ -390,6 +473,7 @@ $toast-approx-height: 90px;
  */
 .pui-sto-status-grow {
   flex-grow: 1;
+  padding-right: 40px !important;
 }
 
 .pui-sto-status-numbers {
