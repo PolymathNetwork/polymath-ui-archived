@@ -1,20 +1,17 @@
 // @flow
 
-import BigNumber from 'bignumber.js'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Loading } from 'carbon-components-react'
 import type { RouterHistory } from 'react-router-dom'
 
-import Toaster from './components/Toaster'
-import TxModal from './components/TxModal'
+import Toaster from './modules/toaster/Toaster'
+import TxModal from './modules/tx/TxModal'
 import Navbar from './components/Navbar'
 import { setupHistory } from './redux/common/actions'
 
 type StateProps = {
   isFetching: boolean,
-  network: string,
-  account: string,
 }
 
 type DispatchProps = {|
@@ -23,8 +20,6 @@ type DispatchProps = {|
 
 const mapStateToProps = (state): StateProps => ({
   isFetching: state.pui.common.isFetching,
-  network: state.network.name,
-  account: state.network.account,
 })
 
 const mapDispatchToProps: DispatchProps = {
@@ -33,7 +28,6 @@ const mapDispatchToProps: DispatchProps = {
 
 type Props = {|
   history: RouterHistory,
-  balance: ?BigNumber,
   ticker: ?string,
 |} & StateProps & DispatchProps
 
@@ -44,10 +38,10 @@ class PolymathUI extends Component<Props> {
   }
 
   render () {
-    const { network, balance, account, ticker } = this.props
+    const { ticker } = this.props
     return (
       <div>
-        <Navbar network={network} balance={balance} account={account} ticker={ticker} />
+        <Navbar ticker={ticker} />
         <Toaster />
         <TxModal />
         {this.props.isFetching ? <Loading /> : ''}

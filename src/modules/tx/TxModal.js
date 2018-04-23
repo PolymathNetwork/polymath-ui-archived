@@ -4,9 +4,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Modal, Loading } from 'carbon-components-react'
 
-import { etherscanTx } from '../helpers'
-import type { RootState } from '../redux/reducer'
-import type { TxState } from '../redux/tx/reducer'
+import { etherscanTx } from '../../helpers'
+import type { RootState } from '../../redux/reducer'
+import type { TxState } from './reducer'
 
 const mapStateToProps = (state: RootState): TxState => state.pui.tx
 

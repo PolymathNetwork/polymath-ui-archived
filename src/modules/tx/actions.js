@@ -1,9 +1,9 @@
 // @flow
 
-import { notify } from '../..'
+import { notify } from '../../index'
 import { etherscanTx } from '../../helpers'
 import type { ExtractReturn } from '../../redux/helpers'
-import type { GetState } from '../reducer'
+import type { GetState } from '../../redux/reducer'
 
 export const START = 'polymath-ui/tx/START'
 export const txStart = (message: string) => ({ type: START, message })

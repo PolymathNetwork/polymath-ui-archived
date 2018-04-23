@@ -2,6 +2,7 @@
 
 import BigNumber from 'bignumber.js'
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { thousandsDelimiter, addressShortifier } from '../helpers'
@@ -10,15 +11,25 @@ import networkIcon from '../../img/icons/network.svg'
 import polyIcon from '../../img/icons/poly.svg'
 import accountIcon from '../../img/icons/account.svg'
 import tokenIcon from '../../img/icons/token.svg'
+import type { RootState } from '../redux/reducer'
 
-type Props = {|
+type StateProps = {|
   network: string,
-  balance: ?BigNumber,
   account: string,
-  ticker: ?string,
+  balance: ?BigNumber,
 |}
 
-export default class Navbar extends Component<Props> {
+const mapStateToProps = (state: RootState): StateProps => ({
+  network: state.network.name,
+  account: state.network.account,
+  balance: state.pui.account.balance,
+})
+
+type Props = {|
+  ticker: ?string,
+|} & StateProps
+
+class Navbar extends Component<Props> {
   render () {
     const { balance, account, network, ticker } = this.props
     return (
@@ -52,3 +63,5 @@ export default class Navbar extends Component<Props> {
     )
   }
 }
+
+export default connect(mapStateToProps)(Navbar)
