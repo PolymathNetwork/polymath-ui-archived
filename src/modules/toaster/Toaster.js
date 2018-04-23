@@ -11,7 +11,7 @@ import type { Notify } from './actions'
 // this line would be 'style.scss' if we were to bundle with Webpack.
 // noinspection JSFileReferences $FlowFixMe
 import styles from '../../style.css'
-import type { RootState } from '../../redux/reducer'
+import type { PUIState } from '../../redux/reducer'
 
 type Toast = {|
   key: number,
@@ -31,7 +31,7 @@ type State = {|
 
 const duration = 6000
 
-const mapStateToProps = (state: RootState): Props => ({
+const mapStateToProps = (state: PUIState): Props => ({
   notify: state.pui.toaster.notify,
 })
 

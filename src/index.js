@@ -26,6 +26,6 @@ export { default as icoInbox } from './svg/inbox'
 export { default as icoHandshake } from './svg/handshake'
 export { default as icoHelp } from './svg/help'
 
-export type { RootState as PUIState } from './redux/reducer'
+export type { PUIState } from './redux/reducer'
 export type { ToastArgs } from './modules/toaster/Toaster'
 export type { Notify } from './modules/toaster/actions'

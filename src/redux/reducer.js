@@ -17,7 +17,7 @@ export default combineReducers({
   account,
 })
 
-export type RootState = {
+export type PUIState = {
   form: any, // redux-form
   network: any, // TODO @bshevchenko: polymath-auth
   pui: {
@@ -28,4 +28,4 @@ export type RootState = {
   }
 }
 
-export type GetState = () => RootState
+export type GetState = () => PUIState
