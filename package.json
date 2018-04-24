@@ -1,6 +1,6 @@
 {
   "name": "polymath-ui",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "7.2.3",
@@ -33,16 +33,17 @@
     "carbon-components": "8.16.8",
     "carbon-components-react": "5.31.0",
     "carbon-icons": "6.3.2",
+    "eth-sig-util": "^1.4.2",
+    "polymathjs": "1.0.1",
     "react": "16.2.0",
-    "react-dom": "16.2.0",
-    "react-redux": "5.0.7",
-    "react-transition-group": "^2.2.1",
-    "react-router-dom": "4.1.1",
-    "react-measure": "2.0.2",
     "react-document-title": "2.0.3",
+    "react-dom": "16.2.0",
+    "react-measure": "2.0.2",
+    "react-redux": "5.0.7",
+    "react-router-dom": "4.1.1",
+    "react-transition-group": "^2.2.1",
     "redux": "3.7.2",
-    "redux-form": "7.0.4",
-    "polymathjs": "1.0.1"
+    "redux-form": "7.0.4"
   },
   "main": "./dist/index.js",
   "scripts": {

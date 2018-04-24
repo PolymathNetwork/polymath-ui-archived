@@ -3,8 +3,9 @@
 import BigNumber from 'bignumber.js'
 // $FlowFixMe
 import { PolyToken } from 'polymathjs'
+import sigUtil from 'eth-sig-util'
 
-import { fetching, fetchingFailed, fetched, notify } from '../..'
+import { fetching, fetchingFailed, fetched, notify, txStart, txEnd, txFailed } from '../..'
 import { formName } from './SignUpForm'
 import type { ExtractReturn } from '../../redux/helpers'
 import type { GetState } from '../../redux/reducer'
@@ -37,8 +38,45 @@ export const initAccount = () => async (dispatch: Function, getState: GetState) 
   dispatch(fetched())
 }
 
+const signData = (web3, data, account) => {
+  return new Promise((resolve, reject) => {
+    const msgParams = [
+      {
+        type: 'string',
+        name: 'Name',
+        value: data.name,
+      },
+      {
+        type: 'string',
+        name: 'Email',
+        value: data.email,
+      },
+    ]
+    web3.currentProvider.sendAsync({
+      method: 'eth_signTypedData',
+      params: [msgParams, account],
+      from: account,
+    }, (error, result) => {
+      if (error) {
+        return reject(error)
+      }
+      if (result.error) {
+        return reject(result.error)
+      }
+      const recovered = sigUtil.recoverTypedSignature({
+        data: msgParams,
+        sig: result.result,
+      })
+      if (recovered.toLowerCase() === account.toLowerCase()) {
+        return resolve(result.result)
+      }
+      reject(new Error('Failed to verify signer, got: ' + result))
+    })
+  })
+}
+
 export const signUp = () => async (dispatch: Function, getState: GetState) => {
-  dispatch(fetching())
+  dispatch(txStart('Requesting your signature...'))
   try {
     const data = getState().form[formName].values
     const account = getState().network.account
@@ -46,16 +84,15 @@ export const signUp = () => async (dispatch: Function, getState: GetState) => {
     if (!web3 || !account) {
       throw new Error('web3 or account is undefined')
     }
-    const jsonData = JSON.stringify(data)
-    data.signature = await web3.eth.sign(jsonData, account)
-    localStorage.setItem(account, jsonData)
+    data.signature = await signData(web3, data, account)
+    localStorage.setItem(account, JSON.stringify(data))
     dispatch(signedUp(true))
     dispatch(notify(
       'You were successfully signed up',
       true
     ))
-    dispatch(fetched())
+    dispatch(txEnd({}))
   } catch (e) {
-    dispatch(fetchingFailed(e))
+    dispatch(txFailed(e))
   }
 }
