@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js'
 // $FlowFixMe
 import { PolyToken } from 'polymathjs'
 
-import { fetching, fetchingFailed, fetched, notify } from '../..'
+import { fetching, fetchingFailed, fetched, notify, txStart, txEnd, txFailed } from '../..'
 import { formName } from './SignUpForm'
 import type { ExtractReturn } from '../../redux/helpers'
 import type { GetState, PUIState } from '../../redux/reducer'
@@ -47,7 +47,7 @@ export const initAccount = () => async (dispatch: Function, getState: GetState) 
 }
 
 export const signUp = () => async (dispatch: Function, getState: GetState) => {
-  dispatch(fetching())
+  dispatch(txStart('Requesting your signature...'))
   try {
     const data = getState().form[formName].values
     const { web3 } = getState().network
@@ -77,9 +77,9 @@ export const signUp = () => async (dispatch: Function, getState: GetState) => {
       'You were successfully signed up',
       true
     ))
-    dispatch(fetched())
+    dispatch(txEnd({}))
   } catch (e) {
-    dispatch(fetchingFailed(e))
+    dispatch(txFailed(e))
   }
 }
 
