@@ -18,6 +18,7 @@ type State = {|
 |}
 
 export default class ProgressBar extends Component<Props, State> {
+
   static defaultProps = {
     className: '',
     progress: 0,
@@ -40,6 +41,7 @@ export default class ProgressBar extends Component<Props, State> {
     } = this.props
     const width = this.state.width
 
+    // noinspection SpellCheckingInspection
     const pathStyle = {
       strokeDasharray: `${width} ${width}`,
       // Draw a stroke from the beginning (the center of the rounded circle on

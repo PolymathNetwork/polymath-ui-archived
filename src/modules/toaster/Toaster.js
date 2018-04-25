@@ -6,12 +6,12 @@ import React, { Component } from 'react'
 import { Transition } from 'react-transition-group'
 import { connect } from 'react-redux'
 
-import type { Notify } from '../redux/toaster/actions'
+import type { Notify } from './actions'
 
-// This line would be 'style.scss' if we were to bundle with Webpack.
+// this line would be 'style.scss' if we were to bundle with Webpack.
 // noinspection JSFileReferences $FlowFixMe
-import styles from '../style.css'
-import type { RootState } from '../redux/reducer'
+import styles from '../../style.css'
+import type { PUIState } from '../../redux/reducer'
 
 type Toast = {|
   key: number,
@@ -31,7 +31,7 @@ type State = {|
 
 const duration = 6000
 
-const mapStateToProps = (state: RootState): Props => ({
+const mapStateToProps = (state: PUIState): Props => ({
   notify: state.pui.toaster.notify,
 })
 

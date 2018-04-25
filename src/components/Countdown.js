@@ -1,4 +1,4 @@
-//@flow
+// @flow
 
 import React, { Component } from 'react'
 
@@ -19,6 +19,7 @@ function leading0 (num) {
 }
 
 class Countdown extends Component<CountdownProps, State> {
+
   state = {
     days: 0,
     hours: 0,

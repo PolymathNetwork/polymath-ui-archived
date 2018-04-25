@@ -1,11 +1,67 @@
-@import 'node_modules/carbon-components/src/globals/scss/styles.scss';
-
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700);
+@import "node_modules/carbon-components/src/globals/scss/styles.scss";
+@import url("https://fonts.googleapis.com/css?family=Overpass:300,400,600");
 
 body {
-  // Why are we unable to override Carbon's styles without !important?
-  font-family: "Source Sans Pro","Helvetica Neue",Arial,sans-serif !important;
+  font-family: "Overpass", sans-serif !important;
+  background-color: white !important;
 }
+
+/**
+ * TYPOGRAPHY
+ */
+.pui-h-tags {
+  display: inline-flex;
+  align-items: center;
+
+  .bx--tag {
+    margin-left: 8px !important;
+  }
+}
+
+.pui-h0 {
+  color: #252e6a;
+  font-size: 52px;
+  font-weight: 600;
+  line-height: 68px;
+  margin-bottom: 10px;
+}
+
+.pui-h1 {
+  color: #252e6a;
+  font-size: 33.6px;
+  font-weight: 600;
+  line-height: 40px;
+  margin-bottom: 10px;
+}
+
+.pui-h2 {
+  color: #252e6a;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 42px;
+  margin-bottom: 7px;
+}
+
+.pui-h3 {
+  color: #5a6872;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 30px;
+  margin-bottom: 7px;
+}
+
+.pui-h4 {
+  color: #5a6872;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 24px;
+  margin-bottom: 7px;
+}
+
+/**
+ * VARIABLES
+ */
+$navbar-height: 48px;
 
 $toast-animation-duration: 400;
 $toast-animation-duration-ms: $toast-animation-duration + 0ms;
@@ -14,14 +70,141 @@ $toast-half-animation-duration: ($toast-animation-duration / 2) + 0ms;
 
 $toast-approx-height: 90px;
 
-:export {
-  toastAnimationDuration: $toast-animation-duration;
+/**
+ * CARBON
+ */
+.bx--grid {
+  margin-top: $navbar-height;
 }
 
-.page-box {
-  padding: 25px;
+.bx--btn {
+  margin-top: 28px;
+  text-transform: uppercase;
+  background: #28266e !important;
+  font-family: "Overpass", sans-serif !important;
+
+  &:hover {
+    background: rgba(40, 38, 110, 0.8) !important;
+  }
+}
+
+.bx--btn--secondary {
+  border: 2px solid #252e6a !important;
+  color: #252e6a !important;
+  background: white !important;
+
+  &:hover {
+    color: white !important;
+    border-color: #58468e !important;
+  }
+}
+
+.bx--label {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 22px;
+  width: 100%;
+}
+
+.bx--form-item {
+  margin-bottom: 16px;
+  margin-right: 0 !important;
+
+  p {
+    font-size: 14px;
+    font-family: "Overpass", sans-serif;
+    display: inline-flex;
+    line-height: 16px;
+
+    svg {
+      margin-right: 4px;
+    }
+
+    a {
+      font-size: 13px;
+      font-family: "Overpass", sans-serif;
+    }
+  }
+}
+
+.bx--text-input {
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 22px;
+  color: #152935 !important;
+  font-family: "Overpass", sans-serif !important;
+
+  &::placeholder {
+    color: #5a6872 !important;
+  }
+}
+
+.bx--form-requirement {
+  font-family: "Overpass", sans-serif !important;
+}
+
+.bx--loading-overlay {
+  background-color: white !important;
+}
+
+.bx--tooltip {
+  p {
+    font-size: 14px !important;
+  }
+}
+
+.bx--tooltip__trigger {
+  > div {
+    display: inline-flex;
+  }
+}
+
+/**
+ * COMMON
+ */
+.pui-single-box {
+  margin: 103px auto;
+  padding: 48px;
+  width: 734px;
   background-color: white;
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+
+  .pui-single-box-header-text {
+    width: 436px;
+    float: left;
+  }
+
+  .pui-single-box-bull {
+    float: right;
+    width: 200px;
+
+    img {
+      width: 260px;
+      position: relative;
+      left: -30px;
+      margin-top: 15px;
+      margin-bottom: -47px;
+    }
+  }
+}
+
+.pui-clearfix {
+  clear: both;
+}
+
+.pui-page-box {
+  padding: 24px;
+  background-color: white;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+}
+
+.pui-input-hint {
+  font-size: 12px;
+  color: #8c9ba5;
+  font-weight: 300;
+  line-height: 18px;
+  margin-top: 4px;
+  font-family: "Overpass", sans-serif !important;
 }
 
 .pui-key-value {
@@ -32,15 +215,206 @@ $toast-approx-height: 90px;
     font-weight: 600;
   }
 
-  color: #5A6872;
+  color: #5a6872;
   font-size: 14px;
+}
+
+.pui-go-back {
+  background: transparent !important;
+  margin-top: -12px;
+  margin-left: -16px;
+  margin-bottom: 5px;
+  color: #252e6a !important;
+
+  svg,
+  path {
+    fill: #252e6a !important;
+  }
+
+  &:hover {
+    background: transparent !important;
+    color: #58468e !important;
+
+    svg,
+    path {
+      fill: #58468e !important;
+    }
+  }
+}
+
+/**
+ * NAVBAR
+ */
+.pui-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: $navbar-height;
+  background-color: white;
+  box-shadow: 0 1px 0 0 #dfe3e6;
+
+  > a {
+    float: left;
+  }
+
+  .pui-navbar-logo {
+    margin-top: 9px;
+    margin-left: 120px;
+    width: 188px;
+  }
+
+  .pui-navbar-menu {
+    float: right;
+    margin-right: 56px;
+    margin-top: 11px;
+
+    li {
+      display: inline-flex;
+      align-items: center;
+      color: #5a6872;
+      font-size: 14px;
+      line-height: 22px;
+      margin-left: 30px;
+      font-weight: 300;
+
+      svg,
+      img {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+/**
+ * PROGRESS INDICATOR
+ */
+.bx--progress {
+  margin-top: 38px;
+  margin-bottom: 9px;
+
+  .bx--progress-label {
+    font-family: "Overpass", sans-serif;
+    font-size: 14px;
+    color: #252e6a !important;
+  }
+
+  .bx--progress-step--current {
+    circle:first-child {
+      stroke: #252e62;
+    }
+
+    circle:last-child {
+      fill: #252e62;
+    }
+
+    .bx--progress-line {
+      background-color: #252e6a;
+    }
+  }
+
+  .bx--progress-step--complete {
+    circle {
+      stroke: #252e62;
+    }
+    polygon {
+      fill: #252e62;
+    }
+  }
+
+  .bx--progress-step--incomplete {
+    .bx--progress-label {
+      color: #8c9ba5 !important;
+    }
+
+    .bx--progress-line {
+      background-color: #8c9ba5;
+    }
+  }
+
+  .bx--progress-step--complete {
+    .bx--progress-line {
+      background-color: #252e6a;
+    }
+  }
+}
+
+/**
+ * SIDEBAR
+ */
+.pui-sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 20;
+  width: 64px;
+  height: 100%;
+  padding-top: $navbar-height;
+  background-color: #252e6a;
+
+  a {
+    text-decoration: none;
+  }
+
+  ul:last-child {
+    position: absolute;
+    bottom: 40px;
+  }
+
+  li {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 2px;
+    border-left: 8px solid transparent;
+    margin-left: -4px;
+    padding-left: 4px;
+    padding-top: 9px;
+    text-align: center;
+
+    &:hover,
+    &.active {
+      background-color: rgba(61, 112, 178, 0.2);
+      border-left-color: #5596e6;
+
+      g {
+        fill: #5596e6;
+      }
+
+      p {
+        color: #5596e6;
+      }
+    }
+
+    svg {
+      display: inline-flex;
+      height: 27px;
+    }
+
+    p {
+      color: white;
+      font-weight: 300;
+      font-size: 12px;
+      line-height: 18px;
+      margin-top: -2px;
+    }
+  }
+}
+
+/**
+ * TOASTER
+ */
+// noinspection CssInvalidPseudoSelector
+:export {
+  // noinspection CssUnknownProperty
+  toastAnimationDuration: $toast-animation-duration;
 }
 
 .pui-toaster-container {
   position: fixed;
   right: 0;
   left: 0;
-  top: 0;
+  top: 50px;
 
   z-index: 1000;
 
@@ -60,20 +434,24 @@ $toast-approx-height: 90px;
   box-sizing: border-box;
   overflow: hidden;
 
-  transition: transform $toast-animation-duration-ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform $toast-animation-duration-ms
+    cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.pui-toast-entering, .pui-toast-entering ~ .pui-toast {
+.pui-toast-entering,
+.pui-toast-entering ~ .pui-toast {
   transform: translateY(-$toast-approx-height);
   transition: none;
 }
 
 .pui-toast-entered {
   transform: translateY(0);
-  transition: transform $toast-animation-duration-ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform $toast-animation-duration-ms
+    cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.pui-toast-exiting, .pui-toast-exiting ~ .pui-toast {
+.pui-toast-exiting,
+.pui-toast-exiting ~ .pui-toast {
   transform: translateY(0);
   opacity: 1;
   transition: none;
@@ -82,9 +460,13 @@ $toast-approx-height: 90px;
 .pui-toast-exited {
   transform: translateY(-$toast-approx-height);
   opacity: 0;
-  transition: opacity $toast-half-animation-duration 0ms, transform $toast-half-animation-duration $toast-half-animation-duration;
+  transition: opacity $toast-half-animation-duration 0ms,
+    transform $toast-half-animation-duration $toast-half-animation-duration;
 }
 
+/**
+ * TX HANDLING
+ */
 .pui-tx-modal {
   .bx--modal-close {
     display: none;
@@ -94,20 +476,12 @@ $toast-approx-height: 90px;
   }
 }
 
-.bx--btn {
-  text-transform: uppercase;
-}
-
-.bx--loading-overlay {
-  background-color: white !important;
-}
-
-#pui-sto-status-title {
-  padding-bottom: $spacing-lg;
-}
-
+/**
+ * STO OVERVIEW
+ */
 .pui-sto-status-grow {
   flex-grow: 1;
+  padding-right: 40px !important;
 }
 
 .pui-sto-status-numbers {
@@ -133,7 +507,7 @@ $toast-approx-height: 90px;
 .pui-sto-status-dates {
   display: flex;
 
-  > div:first-child {
+  > div {
     padding-right: 34px;
 
     @include breakpoint(bp--lg--major) {
@@ -161,16 +535,16 @@ $toast-approx-height: 90px;
 
   background-color: white;
   border-radius: 16px;
-  box-shadow: 0 4px 16px 0 rgba(42,63,125,0.2);
+  box-shadow: 0 4px 16px 0 rgba(42, 63, 125, 0.2);
 }
 
 .pui-countdown-top-bar {
   padding: 5px 16px;
-  line-height: 35px; // Why not just increase vertical padding?
+  line-height: 35px; // TODO Why not just increase vertical padding?
 
   font-size: 18px;
   color: white;
-  background-color: #3D70B2;
+  background-color: #252e6a;
 
   @include breakpoint(bp--md--major) {
     font-size: 20px;
@@ -208,7 +582,7 @@ $toast-approx-height: 90px;
   }
 
   .pui-countdown-number-text {
-    font-size: 22px;
+    font-size: 22px !important;
   }
 
   @include breakpoint(bp--md--major) {
@@ -256,7 +630,7 @@ $toast-approx-height: 90px;
 
   font-size: 16px;
   font-weight: 600;
-  color: #8C9BA5;
+  color: #8c9ba5;
 
   > * {
     align-items: center;
@@ -271,9 +645,9 @@ $toast-approx-height: 90px;
 
   padding: 15px;
 
-  color: #2E3F8F;
+  color: #2e3f8f;
   font-size: 36px;
 
   border-radius: 4px;
-  background-color: #EBF0F7;
+  background-color: #ebf0f7;
 }

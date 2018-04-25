@@ -5,17 +5,18 @@ import { connect } from 'react-redux'
 import { Loading } from 'carbon-components-react'
 import type { RouterHistory } from 'react-router-dom'
 
-import Toaster from './components/Toaster'
-import TxModal from './components/TxModal'
+import Toaster from './modules/toaster/Toaster'
+import TxModal from './modules/tx/TxModal'
+import Navbar from './components/Navbar'
 import { setupHistory } from './redux/common/actions'
 
 type StateProps = {
-  isFetching: boolean,
-}
+  isFetching: boolean
+};
 
 type DispatchProps = {|
-  setupHistory: (history: RouterHistory) => any,
-|}
+  setupHistory: (history: RouterHistory) => any
+|};
 
 const mapStateToProps = (state): StateProps => ({
   isFetching: state.pui.common.isFetching,
@@ -27,17 +28,21 @@ const mapDispatchToProps: DispatchProps = {
 
 type Props = {|
   history: RouterHistory,
-|} & StateProps & DispatchProps
+  ticker: ?string,
+  logo: ?string
+|} & StateProps &
+  DispatchProps;
 
 class PolymathUI extends Component<Props> {
-
   componentWillMount () {
     this.props.setupHistory(this.props.history)
   }
 
   render () {
+    const { ticker, logo } = this.props
     return (
       <div>
+        <Navbar ticker={ticker} logo={logo} />
         <Toaster />
         <TxModal />
         {this.props.isFetching ? <Loading /> : ''}

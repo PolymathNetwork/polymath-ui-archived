@@ -2,7 +2,7 @@
 
 import type { Node } from 'react'
 
-import type { ExtractReturn } from '../helpers'
+import type { ExtractReturn } from '../../redux/helpers'
 
 export type Notify = {|
   title: string,
