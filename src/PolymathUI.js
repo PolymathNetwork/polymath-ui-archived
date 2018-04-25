@@ -34,6 +34,7 @@ type Props = {|
   DispatchProps;
 
 class PolymathUI extends Component<Props> {
+  
   componentWillMount () {
     this.props.setupHistory(this.props.history)
   }

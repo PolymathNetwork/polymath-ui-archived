@@ -31,14 +31,13 @@ type Props = {|
 |} & StateProps;
 
 class Navbar extends Component<Props> {
+
   render () {
     const { balance, account, network, ticker, logo } = this.props
-    // const company_logo = logo;
     return (
       <div className='pui-navbar'>
         <Link to='/'>
           <div className='pui-navbar-logo'>
-            {/* <img src={polyLogo} alt="Polymath Test" /> */}
             {logo ? (
               <img src={logo} alt='Company Logo' />
             ) : (
