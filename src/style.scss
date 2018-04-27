@@ -101,7 +101,7 @@ $toast-approx-height: 90px;
 
 .bx--label {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 600 !important;
   line-height: 22px;
   width: 100%;
 }
@@ -121,7 +121,7 @@ $toast-approx-height: 90px;
     }
 
     a {
-      font-size: 13px;
+      font-size: 12.5px;
       font-family: 'Overpass', sans-serif;
     }
   }
@@ -145,6 +145,10 @@ $toast-approx-height: 90px;
 
 .bx--loading-overlay {
   background-color: white !important;
+}
+
+.bx--loading__svg {
+  stroke: #3D70B2 !important;
 }
 
 .bx--tooltip {
