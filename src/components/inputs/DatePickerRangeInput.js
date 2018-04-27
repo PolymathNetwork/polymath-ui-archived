@@ -6,7 +6,7 @@ import { DatePicker, DatePickerInput } from 'carbon-components-react'
 type Props = {
   input: {
     name: string,
-    [any]: any
+    onChange: (any) => void,
   },
   label: string,
   meta: {
@@ -15,7 +15,6 @@ type Props = {
   },
   className: string,
   placeholder: string,
-  [any]: any
 }
 
 export default ({
@@ -36,11 +35,20 @@ export default ({
       datePickerType='range'
       // eslint-disable-next-line
       onChange={(dates: Array<Date>) => {
+        if (dates.length < 2) {
+          // DatePicker can return an array of one while you're in the process
+          // of selecting a range.
+          return
+        }
         input.onChange(dates || null)
       }}
       {...rest}
     >
       <DatePickerInput
+        /* eslint-disable react/jsx-no-bind */
+        onChange={() => {}}
+        onClick={() => {}}
+        /* eslint-enable react/jsx-no-bind */
         labelText={labelStart}
         placeholder={placeholder}
         id={idStart}
@@ -49,6 +57,10 @@ export default ({
         pattern={null}
       />
       <DatePickerInput
+        /* eslint-disable react/jsx-no-bind */
+        onChange={() => {}}
+        onClick={() => {}}
+        /* eslint-enable react/jsx-no-bind */
         labelText={labelEnd}
         placeholder={placeholder}
         id={idEnd}
