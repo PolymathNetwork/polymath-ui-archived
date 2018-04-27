@@ -7,6 +7,7 @@ type Props = {
   input: {
     name: string,
     onChange: (any) => void,
+    onBlur: () => void,
   },
   label: string,
   meta: {
@@ -18,19 +19,19 @@ type Props = {
 }
 
 export default ({
-  input,
+  input: { name, onChange, onBlur },
   label,
   meta: { touched, error },
   className,
   placeholder,
   ...rest
 }: Props) => {
-  const [idStart, idEnd] = input.name.split('-')
+  const [idStart, idEnd] = name.split('-')
   const [labelStart, labelEnd] = label.split(';')
   const invalid = touched && !!error
   return (
     <DatePicker
-      id={input.name}
+      id={name}
       className={className}
       datePickerType='range'
       // eslint-disable-next-line
@@ -40,7 +41,9 @@ export default ({
           // of selecting a range.
           return
         }
-        input.onChange(dates || null)
+        onChange(dates || null)
+        // redux-form updates `touched` on blur.
+        onBlur()
       }}
       {...rest}
     >
