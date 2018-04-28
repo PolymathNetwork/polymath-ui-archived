@@ -17,7 +17,7 @@ export { notify } from './modules/toaster/actions'
 export { initAccount } from './modules/account/actions'
 export { txStart, txEnd, txFailed, txHash } from './modules/tx/actions'
 export { fetching, fetched, fetchingFailed } from './redux/common/actions'
-export { etherscanAddress, etherscanTx, etherscanToken, thousandsDelimiter, addressShortifier } from './helpers'
+export { etherscanAddress, etherscanTx, etherscanToken, thousandsDelimiter, addressShortifier, timeZoneName } from './helpers'
 export { default as reducer } from './redux/reducer'
 export { default as PolymathUI } from './PolymathUI'
 

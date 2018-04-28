@@ -18,6 +18,8 @@ type Props = {
   placeholder: string,
 }
 
+const doNothing = () => {}
+
 export default ({
   input: { name, onChange, onBlur },
   label,
@@ -48,10 +50,8 @@ export default ({
       {...rest}
     >
       <DatePickerInput
-        /* eslint-disable react/jsx-no-bind */
-        onChange={() => {}}
-        onClick={() => {}}
-        /* eslint-enable react/jsx-no-bind */
+        onChange={doNothing}
+        onClick={doNothing}
         labelText={labelStart}
         placeholder={placeholder}
         id={idStart}
@@ -60,10 +60,8 @@ export default ({
         pattern={null}
       />
       <DatePickerInput
-        /* eslint-disable react/jsx-no-bind */
-        onChange={() => {}}
-        onClick={() => {}}
-        /* eslint-enable react/jsx-no-bind */
+        onChange={doNothing}
+        onClick={doNothing}
         labelText={labelEnd}
         placeholder={placeholder}
         id={idEnd}
