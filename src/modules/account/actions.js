@@ -22,7 +22,8 @@ export type Action =
 
 export const initAccount = () => async (dispatch: Function, getState: GetState) => {
   dispatch(fetching())
-  const value = localStorage.getItem(String(getState().network.account)) !== null
+  const account = String(getState().network.account)
+  const value = localStorage.getItem(account) !== null
   let balance
   try {
     balance = await PolyToken.myBalance()
@@ -35,6 +36,13 @@ export const initAccount = () => async (dispatch: Function, getState: GetState) 
   }
   dispatch(signedUp(value))
   dispatch(setBalance(balance))
+
+  if (global.FS) {
+    global.FS.identify(account, {
+      ethAddress: account,
+    })
+  }
+
   dispatch(fetched())
 }
 
