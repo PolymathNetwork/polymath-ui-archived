@@ -101,7 +101,7 @@ $toast-approx-height: 90px;
 
 .bx--label {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 600 !important;
   line-height: 22px;
   width: 100%;
 }
@@ -121,7 +121,7 @@ $toast-approx-height: 90px;
     }
 
     a {
-      font-size: 13px;
+      font-size: 12.5px;
       font-family: 'Overpass', sans-serif;
     }
   }
@@ -166,6 +166,10 @@ $toast-approx-height: 90px;
   }
 }
 
+.bx--loading__svg {
+  stroke: #3D70B2 !important;
+}
+
 .bx--tooltip {
   p {
     font-size: 14px !important;
@@ -176,6 +180,15 @@ $toast-approx-height: 90px;
   > div {
     display: inline-flex;
   }
+}
+
+.bx--accordion__heading,
+.bx--accordion__content {
+  font-family: 'Overpass', sans-serif !important;
+}
+
+.bx--accordion__content {
+  padding-top: 4px !important;
 }
 
 /**
@@ -205,10 +218,29 @@ $toast-approx-height: 90px;
       margin-bottom: -47px;
     }
   }
+
+  .pui-single-box-metamask {
+    float: right;
+    width: 200px;
+
+    img {
+      width: 206.4px;
+      position: relative;
+      right: -20px;
+      margin-top: 0;
+      margin-bottom: -30px;
+    }
+  }
 }
 
 .pui-clearfix {
   clear: both;
+}
+
+.pui-metamask-logo {
+  position: absolute;
+  left: 72px;
+  top: 50px;
 }
 
 .pui-page-box {
