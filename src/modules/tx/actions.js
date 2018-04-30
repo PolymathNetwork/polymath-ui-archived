@@ -17,6 +17,16 @@ export const txEnd = (receipt: Object) => ({ type: END, receipt })
 export const FAILED = 'polymath-ui/tx/FAILED'
 const txFailedAction = () => ({ type: FAILED })
 
+export const SUCCESS = 'polymath-ui/tx/SUCCESS'
+export const txSuccess = (title: string, goTitle: string, route: string) => ({ type: SUCCESS, title, goTitle, route })
+
+export const CONTINUE = 'polymath-ui/tx/CONTINUE'
+export const txContinue = () => (dispatch: Function, getState: GetState) => {
+  // $FlowFixMe
+  getState().pui.common.history.push(getState().pui.tx.success.route)
+  dispatch({ type: CONTINUE })
+}
+
 export type Action =
   | ExtractReturn<typeof txStart>
   | ExtractReturn<typeof txHash>
