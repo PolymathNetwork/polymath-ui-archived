@@ -3,11 +3,18 @@
 import * as a from './actions'
 import type { Action } from './actions'
 
+export type TxSuccessState = {
+  title: string,
+  goTitle: string,
+  route: string
+}
+
 export type TxState = {
   isProcessing: boolean,
   message: ?string,
   hash: ?string,
   receipt: ?Object,
+  success: ?TxSuccessState,
 }
 
 const defaultState = {
@@ -15,6 +22,7 @@ const defaultState = {
   message: null,
   hash: null,
   receipt: null,
+  success: null,
 }
 
 export default (state: TxState = defaultState, action: Action) => {
@@ -42,6 +50,18 @@ export default (state: TxState = defaultState, action: Action) => {
       return {
         ...state,
         isProcessing: false,
+      }
+    case a.SUCCESS:
+      return {
+        ...state,
+        success: {
+          ...action,
+        },
+      }
+    case a.CONTINUE:
+      return {
+        ...state,
+        success: null,
       }
     default:
       return state

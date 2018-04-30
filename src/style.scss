@@ -40,6 +40,10 @@ body {
   font-weight: 400;
   line-height: 42px;
   margin-bottom: 7px;
+
+  svg {
+    margin-right: 6px;
+  }
 }
 
 .pui-h3 {
@@ -121,7 +125,7 @@ $toast-approx-height: 90px;
     }
 
     a {
-      font-size: 12.5px;
+      font-size: 12px;
       font-family: 'Overpass', sans-serif;
     }
   }
@@ -182,6 +186,10 @@ $toast-approx-height: 90px;
   background-color: white;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
 
+  &.pui-single-box-internal {
+    margin: 10px auto;
+  }
+
   .pui-single-box-header-text {
     width: 436px;
     float: left;
@@ -235,7 +243,7 @@ $toast-approx-height: 90px;
   color: #8C9BA5;
   font-weight: 300;
   line-height: 18px;
-  margin-top: 4px;
+  margin-top: 7px;
   font-family: 'Overpass', sans-serif !important;
 }
 
@@ -269,6 +277,19 @@ $toast-approx-height: 90px;
     svg, path {
       fill: #58468E !important;
     }
+  }
+}
+
+.pui-form-item-blue {
+  border-radius: 4px;
+  background-color: #EBF0F7;
+  padding-left: 94px;
+  padding-top: 23px;
+  padding-bottom: 23px;
+  margin-top: 12px;
+
+  a {
+    font-weight: 600;
   }
 }
 
