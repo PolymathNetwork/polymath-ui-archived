@@ -151,6 +151,25 @@ $toast-approx-height: 90px;
   background-color: white !important;
 }
 
+.bx--time-picker__input-field {
+  width: 4.4rem !important;
+  padding-right: 0.5rem !important;
+}
+
+.bx--time-picker__select {
+  .bx--select-input {
+    height: 40px !important;
+    padding-left: 0.5rem !important;
+    background-color: rgba(61,112,178,0.1) !important;
+    color: #152935 !important;
+    font-weight: normal !important;
+  }
+
+  .bx--select__arrow {
+    fill: #152935 !important;
+  }
+}
+
 .bx--loading__svg {
   stroke: #3D70B2 !important;
 }
@@ -350,7 +369,7 @@ $toast-approx-height: 90px;
     font-size: 14px;
     color: #252E6A !important;
   }
-  
+
   .bx--progress-step--current {
     circle:first-child {
       stroke: #252E62;

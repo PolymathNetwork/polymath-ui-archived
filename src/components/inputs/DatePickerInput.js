@@ -6,7 +6,7 @@ import { DatePicker, DatePickerInput } from 'carbon-components-react'
 type Props = {
   input: {
     name: string,
-    [any]: any
+    onChange: (any) => void,
   },
   label: string,
   meta: {
@@ -15,7 +15,6 @@ type Props = {
   },
   className: string,
   placeholder: string,
-  [any]: any
 }
 
 export default ({

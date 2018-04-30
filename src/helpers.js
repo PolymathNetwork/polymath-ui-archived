@@ -28,3 +28,13 @@ export const thousandsDelimiter = (v: number) =>
 
 export const addressShortifier = (address: string) =>
   address.substring(0, 7) + '...' + address.slice(-7)
+
+export const timeZoneName = (): ?string => {
+  const dateString = (new Date()).toLocaleDateString('en', { timeZoneName: 'long' })
+  const comma = dateString.indexOf(', ')
+  if (comma === -1) {
+    return null
+  }
+
+  return dateString.substring(comma + 2)
+}
