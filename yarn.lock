@@ -5210,9 +5210,9 @@ polymath-core@1.0.1:
     web3 "^1.0.0-beta.33"
     zeppelin-solidity "^1.8.0"
 
-polymathjs@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/polymathjs/-/polymathjs-1.1.0.tgz#ebd05df0f9f514995f3739b6cbe791fadc93eb82"
+polymathjs@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/polymathjs/-/polymathjs-1.1.1.tgz#b976c72f0185da49137291d3e0a0059f63ad0cd1"
   dependencies:
     bignumber.js "5.0.0"
     bs58 "^4.0.1"
