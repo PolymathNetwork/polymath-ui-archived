@@ -12,11 +12,11 @@ import { setupHistory } from './redux/common/actions'
 
 type StateProps = {
   isFetching: boolean
-};
+}
 
 type DispatchProps = {|
   setupHistory: (history: RouterHistory) => any
-|};
+|}
 
 const mapStateToProps = (state): StateProps => ({
   isFetching: state.pui.common.isFetching,
@@ -31,10 +31,10 @@ type Props = {|
   ticker: ?string,
   logo: ?string
 |} & StateProps &
-  DispatchProps;
+  DispatchProps
 
 class PolymathUI extends Component<Props> {
-  
+
   componentWillMount () {
     this.props.setupHistory(this.props.history)
   }
