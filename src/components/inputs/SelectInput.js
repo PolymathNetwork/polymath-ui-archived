@@ -7,14 +7,13 @@ type Props = {
   input: {
     name: string,
     value: string,
-    [any]: any
+    onChange: (any) => void,
   },
   label: string,
   className: string,
   placeholder: string,
   multi: boolean,
   options: Array<Object>,
-  [any]: any
 }
 
 export default ({

@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Overpass:300,400,600');
 
 body {
-  font-family: "Overpass", sans-serif !important;
+  font-family: 'Overpass', sans-serif !important;
   background-color: white !important;
 }
 
@@ -19,7 +19,7 @@ body {
 }
 
 .pui-h0 {
-  color: #252e6a;
+  color: #252E6A;
   font-size: 52px;
   font-weight: 600;
   line-height: 68px;
@@ -27,7 +27,7 @@ body {
 }
 
 .pui-h1 {
-  color: #252e6a;
+  color: #252E6A;
   font-size: 33.6px;
   font-weight: 600;
   line-height: 40px;
@@ -35,15 +35,19 @@ body {
 }
 
 .pui-h2 {
-  color: #252e6a;
+  color: #252E6A;
   font-size: 26px;
   font-weight: 400;
   line-height: 42px;
   margin-bottom: 7px;
+
+  svg {
+    margin-right: 6px;
+  }
 }
 
 .pui-h3 {
-  color: #5a6872;
+  color: #5A6872;
   font-size: 20px;
   font-weight: 300;
   line-height: 30px;
@@ -51,7 +55,7 @@ body {
 }
 
 .pui-h4 {
-  color: #5a6872;
+  color: #5A6872;
   font-size: 16px;
   font-weight: 300;
   line-height: 24px;
@@ -80,8 +84,8 @@ $toast-approx-height: 90px;
 .bx--btn {
   margin-top: 28px;
   text-transform: uppercase;
-  background: #28266e !important;
-  font-family: "Overpass", sans-serif !important;
+  background: #28266E !important;
+  font-family: 'Overpass', sans-serif !important;
 
   &:hover {
     background: rgba(40, 38, 110, 0.8) !important;
@@ -89,19 +93,19 @@ $toast-approx-height: 90px;
 }
 
 .bx--btn--secondary {
-  border: 2px solid #252e6a !important;
-  color: #252e6a !important;
+  border: 2px solid #252E6A !important;
+  color: #252E6A !important;
   background: white !important;
 
   &:hover {
     color: white !important;
-    border-color: #58468e !important;
+    border-color: #58468E !important;
   }
 }
 
 .bx--label {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 600 !important;
   line-height: 22px;
   width: 100%;
 }
@@ -112,7 +116,7 @@ $toast-approx-height: 90px;
 
   p {
     font-size: 14px;
-    font-family: "Overpass", sans-serif;
+    font-family: 'Overpass', sans-serif;
     display: inline-flex;
     line-height: 16px;
 
@@ -121,8 +125,8 @@ $toast-approx-height: 90px;
     }
 
     a {
-      font-size: 13px;
-      font-family: "Overpass", sans-serif;
+      font-size: 12px;
+      font-family: 'Overpass', sans-serif;
     }
   }
 }
@@ -132,19 +136,42 @@ $toast-approx-height: 90px;
   font-weight: 300;
   line-height: 22px;
   color: #152935 !important;
-  font-family: "Overpass", sans-serif !important;
+  font-family: 'Overpass', sans-serif !important;
 
   &::placeholder {
-    color: #5a6872 !important;
+    color: #5A6872 !important;
   }
 }
 
 .bx--form-requirement {
-  font-family: "Overpass", sans-serif !important;
+  font-family: 'Overpass', sans-serif !important;
 }
 
 .bx--loading-overlay {
   background-color: white !important;
+}
+
+.bx--time-picker__input-field {
+  width: 4.4rem !important;
+  padding-right: 0.5rem !important;
+}
+
+.bx--time-picker__select {
+  .bx--select-input {
+    height: 40px !important;
+    padding-left: 0.5rem !important;
+    background-color: rgba(61,112,178,0.1) !important;
+    color: #152935 !important;
+    font-weight: normal !important;
+  }
+
+  .bx--select__arrow {
+    fill: #152935 !important;
+  }
+}
+
+.bx--loading__svg {
+  stroke: #3D70B2 !important;
 }
 
 .bx--tooltip {
@@ -159,6 +186,15 @@ $toast-approx-height: 90px;
   }
 }
 
+.bx--accordion__heading,
+.bx--accordion__content {
+  font-family: 'Overpass', sans-serif !important;
+}
+
+.bx--accordion__content {
+  padding-top: 4px !important;
+}
+
 /**
  * COMMON
  */
@@ -168,6 +204,10 @@ $toast-approx-height: 90px;
   width: 734px;
   background-color: white;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+
+  &.pui-single-box-internal {
+    margin: 10px auto;
+  }
 
   .pui-single-box-header-text {
     width: 436px;
@@ -186,10 +226,29 @@ $toast-approx-height: 90px;
       margin-bottom: -47px;
     }
   }
+
+  .pui-single-box-metamask {
+    float: right;
+    width: 200px;
+
+    img {
+      width: 206.4px;
+      position: relative;
+      right: -20px;
+      margin-top: 0;
+      margin-bottom: -30px;
+    }
+  }
 }
 
 .pui-clearfix {
   clear: both;
+}
+
+.pui-metamask-logo {
+  position: absolute;
+  left: 72px;
+  top: 50px;
 }
 
 .pui-page-box {
@@ -200,11 +259,11 @@ $toast-approx-height: 90px;
 
 .pui-input-hint {
   font-size: 12px;
-  color: #8c9ba5;
+  color: #8C9BA5;
   font-weight: 300;
   line-height: 18px;
-  margin-top: 4px;
-  font-family: "Overpass", sans-serif !important;
+  margin-top: 7px;
+  font-family: 'Overpass', sans-serif !important;
 }
 
 .pui-key-value {
@@ -215,7 +274,7 @@ $toast-approx-height: 90px;
     font-weight: 600;
   }
 
-  color: #5a6872;
+  color: #5A6872;
   font-size: 14px;
 }
 
@@ -224,21 +283,32 @@ $toast-approx-height: 90px;
   margin-top: -12px;
   margin-left: -16px;
   margin-bottom: 5px;
-  color: #252e6a !important;
+  color: #252E6A !important;
 
-  svg,
-  path {
-    fill: #252e6a !important;
+  svg, path {
+    fill: #252E6A !important;
   }
 
   &:hover {
     background: transparent !important;
-    color: #58468e !important;
+    color: #58468E !important;
 
-    svg,
-    path {
-      fill: #58468e !important;
+    svg, path {
+      fill: #58468E !important;
     }
+  }
+}
+
+.pui-form-item-blue {
+  border-radius: 4px;
+  background-color: #EBF0F7;
+  padding-left: 94px;
+  padding-top: 23px;
+  padding-bottom: 23px;
+  margin-top: 12px;
+
+  a {
+    font-weight: 600;
   }
 }
 
@@ -253,7 +323,7 @@ $toast-approx-height: 90px;
   width: 100%;
   height: $navbar-height;
   background-color: white;
-  box-shadow: 0 1px 0 0 #dfe3e6;
+  box-shadow: 0 1px 0 0 #DFE3E6;
 
   > a {
     float: left;
@@ -273,14 +343,13 @@ $toast-approx-height: 90px;
     li {
       display: inline-flex;
       align-items: center;
-      color: #5a6872;
+      color: #5A6872;
       font-size: 14px;
       line-height: 22px;
       margin-left: 30px;
       font-weight: 300;
 
-      svg,
-      img {
+      svg, img {
         margin-right: 8px;
       }
     }
@@ -291,51 +360,52 @@ $toast-approx-height: 90px;
  * PROGRESS INDICATOR
  */
 .bx--progress {
+
   margin-top: 38px;
   margin-bottom: 9px;
 
   .bx--progress-label {
-    font-family: "Overpass", sans-serif;
+    font-family: 'Overpass', sans-serif;
     font-size: 14px;
-    color: #252e6a !important;
+    color: #252E6A !important;
   }
 
   .bx--progress-step--current {
     circle:first-child {
-      stroke: #252e62;
+      stroke: #252E62;
     }
 
     circle:last-child {
-      fill: #252e62;
+      fill: #252E62;
     }
 
     .bx--progress-line {
-      background-color: #252e6a;
+      background-color: #252E6A;
     }
   }
 
   .bx--progress-step--complete {
     circle {
-      stroke: #252e62;
+      stroke: #252E62;
     }
     polygon {
-      fill: #252e62;
+      fill: #252E62;
     }
   }
 
   .bx--progress-step--incomplete {
     .bx--progress-label {
-      color: #8c9ba5 !important;
+      color: #8C9BA5 !important;
     }
 
     .bx--progress-line {
-      background-color: #8c9ba5;
+      background-color: #8C9BA5;
     }
   }
 
   .bx--progress-step--complete {
     .bx--progress-line {
-      background-color: #252e6a;
+      background-color: #252E6A;
     }
   }
 }
@@ -351,7 +421,7 @@ $toast-approx-height: 90px;
   width: 64px;
   height: 100%;
   padding-top: $navbar-height;
-  background-color: #252e6a;
+  background-color: #252E6A;
 
   a {
     text-decoration: none;
@@ -372,17 +442,16 @@ $toast-approx-height: 90px;
     padding-top: 9px;
     text-align: center;
 
-    &:hover,
-    &.active {
+    &:hover, &.active {
       background-color: rgba(61, 112, 178, 0.2);
-      border-left-color: #5596e6;
+      border-left-color: #5596E6;
 
       g {
-        fill: #5596e6;
+        fill: #5596E6;
       }
 
       p {
-        color: #5596e6;
+        color: #5596E6;
       }
     }
 
@@ -434,24 +503,20 @@ $toast-approx-height: 90px;
   box-sizing: border-box;
   overflow: hidden;
 
-  transition: transform $toast-animation-duration-ms
-    cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform $toast-animation-duration-ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.pui-toast-entering,
-.pui-toast-entering ~ .pui-toast {
+.pui-toast-entering, .pui-toast-entering ~ .pui-toast {
   transform: translateY(-$toast-approx-height);
   transition: none;
 }
 
 .pui-toast-entered {
   transform: translateY(0);
-  transition: transform $toast-animation-duration-ms
-    cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform $toast-animation-duration-ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.pui-toast-exiting,
-.pui-toast-exiting ~ .pui-toast {
+.pui-toast-exiting, .pui-toast-exiting ~ .pui-toast {
   transform: translateY(0);
   opacity: 1;
   transition: none;
@@ -460,8 +525,7 @@ $toast-approx-height: 90px;
 .pui-toast-exited {
   transform: translateY(-$toast-approx-height);
   opacity: 0;
-  transition: opacity $toast-half-animation-duration 0ms,
-    transform $toast-half-animation-duration $toast-half-animation-duration;
+  transition: opacity $toast-half-animation-duration 0ms, transform $toast-half-animation-duration $toast-half-animation-duration;
 }
 
 /**
@@ -507,7 +571,7 @@ $toast-approx-height: 90px;
 .pui-sto-status-dates {
   display: flex;
 
-  > div {
+  > div:first-child {
     padding-right: 34px;
 
     @include breakpoint(bp--lg--major) {
@@ -544,7 +608,7 @@ $toast-approx-height: 90px;
 
   font-size: 18px;
   color: white;
-  background-color: #252e6a;
+  background-color: #252E6A;
 
   @include breakpoint(bp--md--major) {
     font-size: 20px;
@@ -630,7 +694,7 @@ $toast-approx-height: 90px;
 
   font-size: 16px;
   font-weight: 600;
-  color: #8c9ba5;
+  color: #8C9BA5;
 
   > * {
     align-items: center;
@@ -645,9 +709,9 @@ $toast-approx-height: 90px;
 
   padding: 15px;
 
-  color: #2e3f8f;
+  color: #2E3F8F;
   font-size: 36px;
 
   border-radius: 4px;
-  background-color: #ebf0f7;
+  background-color: #EBF0F7;
 }

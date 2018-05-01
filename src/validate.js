@@ -1,5 +1,7 @@
 // @flow
 
+import type { TwelveHourTime } from './components/inputs/TimePicker'
+
 export const required = (value: any) => {
   return (value !== null && value !== undefined && value !== '') ?
     null :
@@ -55,7 +57,57 @@ export const ethereumAddress = (value: ?string) =>
 export const date = (value: any) =>
   value instanceof Date ? null : 'Pick date from the calendar.'
 
+export const dateRange = (value: any) => {
+  if (!value) {
+    return null
+  }
+
+  if (!(value instanceof Array) || value.length !== 2 ||
+    !(value[0] instanceof Date) || !(value[1] instanceof Date)) {
+    return 'Pick dates from the calendar.'
+  }
+
+  return null
+}
+
 export const laterThan = (x: Date, value: Date, label: string) =>
   value && x && value.getTime() > x.getTime()
     ? null
     : `Must be later than ${label}.`
+
+export const todayOrLater = (date: ?Date): ?string => {
+  if (!date) {
+    return null
+  }
+
+  const now = new Date()
+  const dayBegin = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+
+  if (dayBegin.getTime() > date.getTime()) {
+    return 'Date is in the past.'
+  }
+
+  return null
+}
+
+export const dateRangeTodayOrLater = (value: [Date, Date]): ?string => {
+  return todayOrLater(value[0]) || todayOrLater(value[1])
+}
+
+export const twelveHourTime = (value: ?TwelveHourTime) => {
+  if (!value || !value.timeString) {
+    return 'Required.'
+  }
+
+  const regex = /^([01]?[0-9]):([012345][0-9])$/
+  const match = regex.exec(value.timeString)
+
+  if (match) {
+    const hours = parseInt(match[1])
+    if (hours > 0 && hours <= 12) {
+      return null
+    }
+  }
+
+  return 'Invalid time.'
+}

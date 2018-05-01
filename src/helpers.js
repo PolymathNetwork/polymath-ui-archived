@@ -3,9 +3,21 @@
 import React from 'react'
 import type { Node } from 'react'
 
+let network = ''
+
+export const setHelpersNetwork = (name: string) => {
+  if (!name) {
+    return
+  }
+  network = name.split(' ')[0].toLowerCase()
+  if (network === 'mainnet') {
+    network = ''
+  }
+}
+
 const etherscan = (type: string, value: string, label: string | Node) => {
   return (
-    <a href={'https://ropsten.etherscan.io/' + type + '/' + value} target='_blank'>
+    <a href={`https://${network ? network + '.' : ''}etherscan.io/${type}/${value}`} target='_blank'>
       {label}
     </a>
   )
@@ -28,3 +40,13 @@ export const thousandsDelimiter = (v: number) =>
 
 export const addressShortifier = (address: string) =>
   address.substring(0, 7) + '...' + address.slice(-7)
+
+export const timeZoneName = (): ?string => {
+  const dateString = (new Date()).toLocaleDateString('en', { timeZoneName: 'long' })
+  const comma = dateString.indexOf(', ')
+  if (comma === -1) {
+    return null
+  }
+
+  return dateString.substring(comma + 2)
+}

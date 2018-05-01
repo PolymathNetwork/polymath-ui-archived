@@ -6,7 +6,8 @@ import { DatePicker, DatePickerInput } from 'carbon-components-react'
 type Props = {
   input: {
     name: string,
-    [any]: any
+    onChange: (any) => void,
+    onBlur: () => void,
   },
   label: string,
   meta: {
@@ -15,32 +16,42 @@ type Props = {
   },
   className: string,
   placeholder: string,
-  [any]: any
 }
 
+const doNothing = () => {}
+
 export default ({
-  input,
+  input: { name, onChange, onBlur },
   label,
   meta: { touched, error },
   className,
   placeholder,
   ...rest
 }: Props) => {
-  const [idStart, idEnd] = input.name.split('-')
+  const [idStart, idEnd] = name.split('-')
   const [labelStart, labelEnd] = label.split(';')
   const invalid = touched && !!error
   return (
     <DatePicker
-      id={input.name}
+      id={name}
       className={className}
       datePickerType='range'
       // eslint-disable-next-line
       onChange={(dates: Array<Date>) => {
-        input.onChange(dates || null)
+        if (dates.length < 2) {
+          // DatePicker can return an array of one while you're in the process
+          // of selecting a range.
+          return
+        }
+        onChange(dates || null)
+        // redux-form updates `touched` on blur.
+        onBlur()
       }}
       {...rest}
     >
       <DatePickerInput
+        onChange={doNothing}
+        onClick={doNothing}
         labelText={labelStart}
         placeholder={placeholder}
         id={idStart}
@@ -49,6 +60,8 @@ export default ({
         pattern={null}
       />
       <DatePickerInput
+        onChange={doNothing}
+        onClick={doNothing}
         labelText={labelEnd}
         placeholder={placeholder}
         id={idEnd}
