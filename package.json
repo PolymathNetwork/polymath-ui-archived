@@ -1,6 +1,6 @@
 {
   "name": "polymath-ui",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "7.2.3",
@@ -34,7 +34,7 @@
     "carbon-components-react": "5.31.0",
     "carbon-icons": "6.3.2",
     "eth-sig-util": "^1.4.2",
-    "polymathjs": "1.1.1",
+    "polymathjs": "1.2.0",
     "polymath-auth": "1.0.0",
     "react": "16.2.0",
     "react-document-title": "2.0.3",
