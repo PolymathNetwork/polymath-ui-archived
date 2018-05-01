@@ -3,9 +3,21 @@
 import React from 'react'
 import type { Node } from 'react'
 
+let network = ''
+
+export const setHelpersNetwork = (name: string) => {
+  if (!name) {
+    return
+  }
+  network = name.split(' ')[0].toLowerCase()
+  if (network === 'mainnet') {
+    network = ''
+  }
+}
+
 const etherscan = (type: string, value: string, label: string | Node) => {
   return (
-    <a href={'https://ropsten.etherscan.io/' + type + '/' + value} target='_blank'>
+    <a href={`https://${network ? network + '.' : ''}etherscan.io/${type}/${value}`} target='_blank'>
       {label}
     </a>
   )

@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import DocumentTitle from 'react-document-title'
 import { Accordion, AccordionItem } from 'carbon-components-react'
-import { ERROR_LOCKED, ERROR_NETWORK } from 'polymath-auth'
+import { ERROR_LOCKED, ERROR_NETWORK, ERROR_DISCONNECTED } from 'polymath-auth'
 
 import { logo, metamask } from '../../'
 
@@ -38,6 +38,15 @@ class MetamaskPage extends Component<Props> {
           <span>
             Network that you chose is not supported.<br />
             Open MetaMask and choose {this.props.networks}.
+          </span>
+        )
+        break
+
+      case ERROR_DISCONNECTED:
+        h1 = 'Aw, Snap!'
+        h3 = (
+          <span>
+            You were disconnected from the node for some reason. Please refresh the page.
           </span>
         )
         break

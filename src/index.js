@@ -7,7 +7,6 @@ export { default as SelectInput } from './components/inputs/SelectInput'
 export { default as DatePickerInput } from './components/inputs/DatePickerInput'
 export { default as DatePickerRangeInput } from './components/inputs/DatePickerRangeInput'
 export { default as TimePicker, twelveHourTimeToMinutes } from './components/inputs/TimePicker'
-export type { TwelveHourTime } from './components/inputs/TimePicker'
 export { default as STOStatus } from './components/STOStatus'
 export { default as Toaster } from './modules/toaster/Toaster'
 export { default as TxModal } from './modules/tx/TxModal'
@@ -19,7 +18,15 @@ export { notify } from './modules/toaster/actions'
 export { initAccount } from './modules/account/actions'
 export { txStart, txEnd, txFailed, txHash, txSuccess } from './modules/tx/actions'
 export { fetching, fetched, fetchingFailed } from './redux/common/actions'
-export { etherscanAddress, etherscanTx, etherscanToken, thousandsDelimiter, addressShortifier, timeZoneName } from './helpers'
+export {
+  setHelpersNetwork,
+  etherscanAddress,
+  etherscanTx,
+  etherscanToken,
+  thousandsDelimiter,
+  addressShortifier,
+  timeZoneName,
+} from './helpers'
 export { default as reducer } from './redux/reducer'
 export { default as PolymathUI } from './PolymathUI'
 
@@ -34,3 +41,4 @@ export { default as icoHelp } from './svg/help'
 export type { PUIState } from './redux/reducer'
 export type { ToastArgs } from './modules/toaster/Toaster'
 export type { Notify } from './modules/toaster/actions'
+export type { TwelveHourTime } from './components/inputs/TimePicker'
