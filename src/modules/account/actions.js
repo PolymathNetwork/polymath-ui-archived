@@ -60,11 +60,10 @@ const signData = (web3, data, account) => {
         value: data.email,
       },
     ]
-    const { sendAsync } = web3.currentProvider
-    if (!sendAsync) {
+    if (!web3.currentProvider.sendAsync) {
       return resolve(web3.eth.sign(JSON.stringify(msgParams), account))
     }
-    sendAsync({
+    web3.currentProvider.sendAsync({
       method: 'eth_signTypedData',
       params: [msgParams, account],
       from: account,

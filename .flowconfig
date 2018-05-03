@@ -3,9 +3,6 @@
 
 [ignore]
 .*incomplete\.js
-node_modules/polymathjs/.*
-node_modules/redux-form/.*
-node_modules/polymath-auth/.*
 
 [include]
 
