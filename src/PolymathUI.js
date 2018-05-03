@@ -11,11 +11,11 @@ import Navbar from './components/Navbar'
 import { setupHistory } from './redux/common/actions'
 
 type StateProps = {
-  isFetching: boolean,
+  isFetching: boolean
 }
 
 type DispatchProps = {|
-  setupHistory: (history: RouterHistory) => any,
+  setupHistory: (history: RouterHistory) => any
 |}
 
 const mapStateToProps = (state): StateProps => ({
@@ -29,7 +29,9 @@ const mapDispatchToProps: DispatchProps = {
 type Props = {|
   history: RouterHistory,
   ticker: ?string,
-|} & StateProps & DispatchProps
+  logo: ?string
+|} & StateProps &
+  DispatchProps
 
 class PolymathUI extends Component<Props> {
 
@@ -38,10 +40,10 @@ class PolymathUI extends Component<Props> {
   }
 
   render () {
-    const { ticker } = this.props
+    const { ticker, logo } = this.props
     return (
       <div>
-        <Navbar ticker={ticker} />
+        <Navbar ticker={ticker} logo={logo} />
         <Toaster />
         <TxModal />
         {this.props.isFetching ? <Loading /> : ''}
