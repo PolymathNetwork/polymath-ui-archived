@@ -1,14 +1,15 @@
 // @flow
 
 import BigNumber from 'bignumber.js'
+import sigUtil from 'eth-sig-util'
 // $FlowFixMe
 import { PolyToken } from 'polymathjs'
-import sigUtil from 'eth-sig-util'
 
 import { fetching, fetchingFailed, fetched, notify, txStart, txEnd, txFailed } from '../..'
 import { formName } from './SignUpForm'
 import type { ExtractReturn } from '../../redux/helpers'
-import type { GetState } from '../../redux/reducer'
+import type { GetState, PUIState } from '../../redux/reducer'
+import offchainFetch from '../../offchainFetch'
 
 export const SIGNED_UP = 'polymath-ui/account/SIGNED_UP'
 export const signedUp = (value: boolean) => ({ type: SIGNED_UP, value })
@@ -20,10 +21,19 @@ export type Action =
   | ExtractReturn<typeof signedUp>
   | ExtractReturn<typeof setBalance>
 
+export type AccountData = {|
+  account: {
+    name: string,
+    email: string,
+  },
+  accountJSON: string,
+  signature: string,
+  signerAddress?: string,
+|}
+
 export const initAccount = () => async (dispatch: Function, getState: GetState) => {
   dispatch(fetching())
-  const account = String(getState().network.account)
-  const value = localStorage.getItem(account) !== null
+  const isSignedUp = getAccountData(getState()) != null
   let balance
   try {
     balance = await PolyToken.myBalance()
@@ -34,10 +44,11 @@ export const initAccount = () => async (dispatch: Function, getState: GetState) 
     dispatch(fetchingFailed(e))
     return
   }
-  dispatch(signedUp(value))
+  dispatch(signedUp(isSignedUp))
   dispatch(setBalance(balance))
 
   if (global.FS) {
+    const account = getState().network.account
     global.FS.identify(account, {
       ethAddress: account,
     })
@@ -46,9 +57,50 @@ export const initAccount = () => async (dispatch: Function, getState: GetState) 
   dispatch(fetched())
 }
 
-const signData = (web3, data, account) => {
-  return new Promise((resolve, reject) => {
-    const msgParams = [
+const signData = async (web3, account, accountJSON, address) => {
+  if (!web3.currentProvider.sendAsync) {
+    return web3.eth.sign(accountJSON, address)
+  }
+
+  const result = await new Promise((resolve, reject) => {
+    web3.currentProvider.sendAsync(
+      {
+        method: 'eth_signTypedData',
+        params: [account, address],
+        from: address,
+      },
+      (err, result) => err ? reject(err) : resolve(result),
+    )
+  })
+
+  if (result.error) {
+    throw result.error
+  }
+
+  const recovered = sigUtil.recoverTypedSignature({
+    data: account,
+    sig: result.result,
+  })
+
+  if (recovered.toLowerCase() !== address.toLowerCase()) {
+    throw new Error('Failed to verify signer, got: ' + result)
+  }
+
+  return result.result
+}
+
+export const signUp = () => async (dispatch: Function, getState: GetState) => {
+  dispatch(txStart('Requesting your signature...'))
+  try {
+    const data = getState().form[formName].values
+    const { web3 } = getState().network
+    const address = getState().network.account
+
+    if (!web3 || !address) {
+      throw new Error('web3 or account is undefined')
+    }
+
+    const typedSigAccount = [
       {
         type: 'string',
         name: 'Name',
@@ -60,43 +112,22 @@ const signData = (web3, data, account) => {
         value: data.email,
       },
     ]
-    if (!web3.currentProvider.sendAsync) {
-      return resolve(web3.eth.sign(JSON.stringify(msgParams), account))
-    }
-    web3.currentProvider.sendAsync({
-      method: 'eth_signTypedData',
-      params: [msgParams, account],
-      from: account,
-    }, (error, result) => {
-      if (error) {
-        return reject(error)
-      }
-      if (result.error) {
-        return reject(result.error)
-      }
-      const recovered = sigUtil.recoverTypedSignature({
-        data: msgParams,
-        sig: result.result,
-      })
-      if (recovered.toLowerCase() === account.toLowerCase()) {
-        return resolve(result.result)
-      }
-      reject(new Error('Failed to verify signer, got: ' + result))
-    })
-  })
-}
+    const accountJSON = JSON.stringify(typedSigAccount)
+    const signature = await signData(web3, typedSigAccount, accountJSON, address)
 
-export const signUp = () => async (dispatch: Function, getState: GetState) => {
-  dispatch(txStart('Requesting your signature...'))
-  try {
-    const data = getState().form[formName].values
-    const account = getState().network.account
-    const { web3 } = getState().network
-    if (!web3 || !account) {
-      throw new Error('web3 or account is undefined')
+    let accountData: AccountData = {
+      account: {
+        name: data.name,
+        email: data.email,
+      },
+      accountJSON,
+      signature,
     }
-    data.signature = await signData(web3, data, account)
-    localStorage.setItem(account, JSON.stringify(data))
+    const accountDataString = JSON.stringify(accountData)
+    localStorage.setItem(address, accountDataString)
+
+    await dispatch(sendRegisterEmail())
+
     dispatch(signedUp(true))
     dispatch(notify(
       'You were successfully signed up',
@@ -105,5 +136,54 @@ export const signUp = () => async (dispatch: Function, getState: GetState) => {
     dispatch(txEnd({}))
   } catch (e) {
     dispatch(txFailed(e))
+  }
+}
+
+export const getAccountData = (state: PUIState): ?AccountData => {
+  const address = state.network.account
+  const accountDataJSON = localStorage.getItem(address)
+
+  if (accountDataJSON == null) {
+    return null
+  }
+
+  const accountData = JSON.parse(accountDataJSON)
+
+  if (!accountData.accountJSON) {
+    // Stored from old version
+    return null
+  }
+
+  accountData.signerAddress = address
+
+  return accountData
+}
+
+export const sendRegisterEmail = () => async (dispatch: Function, getState: GetState) => {
+  const accountData = getAccountData(getState())
+  if (!accountData) {
+    throw new Error('Not signed in.')
+  }
+
+  const emailResult = await offchainFetch({
+    query: `
+      mutation ($input: RegisterInput!) {
+        register(input: $input)
+      }
+    `,
+    variables: {
+      input: {
+        accountData: {
+          accountJSON: accountData.accountJSON,
+          signature: accountData.signature,
+          signerAddress: accountData.signerAddress,
+        },
+      },
+    },
+  })
+
+  if (emailResult.errors) {
+    // eslint-disable-next-line no-console
+    console.error('sendRegisterEmail failed.', emailResult.errors)
   }
 }
