@@ -1,6 +1,7 @@
 // @flow
 
 import BigNumber from 'bignumber.js'
+import sigUtil from 'eth-sig-util'
 // $FlowFixMe
 import { PolyToken } from 'polymathjs'
 
@@ -8,6 +9,7 @@ import { fetching, fetchingFailed, fetched, notify, txStart, txEnd, txFailed } f
 import { formName } from './SignUpForm'
 import type { ExtractReturn } from '../../redux/helpers'
 import type { GetState, PUIState } from '../../redux/reducer'
+import offchainFetch from '../../offchainFetch'
 
 export const SIGNED_UP = 'polymath-ui/account/SIGNED_UP'
 export const signedUp = (value: boolean) => ({ type: SIGNED_UP, value })
@@ -26,6 +28,7 @@ export type AccountData = {|
   },
   accountJSON: string,
   signature: string,
+  signerAddress?: string,
 |}
 
 export const initAccount = () => async (dispatch: Function, getState: GetState) => {
@@ -43,7 +46,47 @@ export const initAccount = () => async (dispatch: Function, getState: GetState) 
   }
   dispatch(signedUp(isSignedUp))
   dispatch(setBalance(balance))
+
+  if (global.FS) {
+    const account = getState().network.account
+    global.FS.identify(account, {
+      ethAddress: account,
+    })
+  }
+
   dispatch(fetched())
+}
+
+const signData = async (web3, account, accountJSON, address) => {
+  if (!web3.currentProvider.sendAsync) {
+    return web3.eth.sign(accountJSON, address)
+  }
+
+  const result = await new Promise((resolve, reject) => {
+    web3.currentProvider.sendAsync(
+      {
+        method: 'eth_signTypedData',
+        params: [account, address],
+        from: address,
+      },
+      (err, result) => err ? reject(err) : resolve(result),
+    )
+  })
+
+  if (result.error) {
+    throw result.error
+  }
+
+  const recovered = sigUtil.recoverTypedSignature({
+    data: account,
+    sig: result.result,
+  })
+
+  if (recovered.toLowerCase() !== address.toLowerCase()) {
+    throw new Error('Failed to verify signer, got: ' + result)
+  }
+
+  return result.result
 }
 
 export const signUp = () => async (dispatch: Function, getState: GetState) => {
@@ -57,20 +100,33 @@ export const signUp = () => async (dispatch: Function, getState: GetState) => {
       throw new Error('web3 or account is undefined')
     }
 
-    const innerAccount = {
-      ...data,
-      address,
-    }
-    const accountJSON = JSON.stringify(innerAccount)
-    const signature = await web3.eth.sign(accountJSON, address)
+    const typedSigAccount = [
+      {
+        type: 'string',
+        name: 'Name',
+        value: data.name,
+      },
+      {
+        type: 'string',
+        name: 'Email',
+        value: data.email,
+      },
+    ]
+    const accountJSON = JSON.stringify(typedSigAccount)
+    const signature = await signData(web3, typedSigAccount, accountJSON, address)
 
     let accountData: AccountData = {
-      account: innerAccount,
+      account: {
+        name: data.name,
+        email: data.email,
+      },
       accountJSON,
       signature,
     }
     const accountDataString = JSON.stringify(accountData)
     localStorage.setItem(address, accountDataString)
+
+    await dispatch(sendRegisterEmail())
 
     dispatch(signedUp(true))
     dispatch(notify(
@@ -98,5 +154,36 @@ export const getAccountData = (state: PUIState): ?AccountData => {
     return null
   }
 
+  accountData.signerAddress = address
+
   return accountData
+}
+
+export const sendRegisterEmail = () => async (dispatch: Function, getState: GetState) => {
+  const accountData = getAccountData(getState())
+  if (!accountData) {
+    throw new Error('Not signed in.')
+  }
+
+  const emailResult = await offchainFetch({
+    query: `
+      mutation ($input: RegisterInput!) {
+        register(input: $input)
+      }
+    `,
+    variables: {
+      input: {
+        accountData: {
+          accountJSON: accountData.accountJSON,
+          signature: accountData.signature,
+          signerAddress: accountData.signerAddress,
+        },
+      },
+    },
+  })
+
+  if (emailResult.errors) {
+    // eslint-disable-next-line no-console
+    console.error('sendRegisterEmail failed.', emailResult.errors)
+  }
 }

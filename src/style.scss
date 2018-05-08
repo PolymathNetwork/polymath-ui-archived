@@ -40,6 +40,10 @@ body {
   font-weight: 400;
   line-height: 42px;
   margin-bottom: 7px;
+
+  svg {
+    margin-right: 6px;
+  }
 }
 
 .pui-h3 {
@@ -101,7 +105,7 @@ $toast-approx-height: 90px;
 
 .bx--label {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 600 !important;
   line-height: 22px;
   width: 100%;
 }
@@ -121,7 +125,7 @@ $toast-approx-height: 90px;
     }
 
     a {
-      font-size: 13px;
+      font-size: 12px;
       font-family: 'Overpass', sans-serif;
     }
   }
@@ -147,6 +151,29 @@ $toast-approx-height: 90px;
   background-color: white !important;
 }
 
+.bx--time-picker__input-field {
+  width: 4.4rem !important;
+  padding-right: 0.5rem !important;
+}
+
+.bx--time-picker__select {
+  .bx--select-input {
+    height: 40px !important;
+    padding-left: 0.5rem !important;
+    background-color: rgba(61,112,178,0.1) !important;
+    color: #152935 !important;
+    font-weight: normal !important;
+  }
+
+  .bx--select__arrow {
+    fill: #152935 !important;
+  }
+}
+
+.bx--loading__svg {
+  stroke: #3D70B2 !important;
+}
+
 .bx--tooltip {
   p {
     font-size: 14px !important;
@@ -159,6 +186,15 @@ $toast-approx-height: 90px;
   }
 }
 
+.bx--accordion__heading,
+.bx--accordion__content {
+  font-family: 'Overpass', sans-serif !important;
+}
+
+.bx--accordion__content {
+  padding-top: 4px !important;
+}
+
 /**
  * COMMON
  */
@@ -168,6 +204,10 @@ $toast-approx-height: 90px;
   width: 734px;
   background-color: white;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+
+  &.pui-single-box-internal {
+    margin: 10px auto;
+  }
 
   .pui-single-box-header-text {
     width: 436px;
@@ -186,10 +226,29 @@ $toast-approx-height: 90px;
       margin-bottom: -47px;
     }
   }
+
+  .pui-single-box-metamask {
+    float: right;
+    width: 200px;
+
+    img {
+      width: 206.4px;
+      position: relative;
+      right: -20px;
+      margin-top: 0;
+      margin-bottom: -30px;
+    }
+  }
 }
 
 .pui-clearfix {
   clear: both;
+}
+
+.pui-metamask-logo {
+  position: absolute;
+  left: 72px;
+  top: 50px;
 }
 
 .pui-page-box {
@@ -203,7 +262,7 @@ $toast-approx-height: 90px;
   color: #8C9BA5;
   font-weight: 300;
   line-height: 18px;
-  margin-top: 4px;
+  margin-top: 7px;
   font-family: 'Overpass', sans-serif !important;
 }
 
@@ -237,6 +296,19 @@ $toast-approx-height: 90px;
     svg, path {
       fill: #58468E !important;
     }
+  }
+}
+
+.pui-form-item-blue {
+  border-radius: 4px;
+  background-color: #EBF0F7;
+  padding-left: 94px;
+  padding-top: 23px;
+  padding-bottom: 23px;
+  margin-top: 12px;
+
+  a {
+    font-weight: 600;
   }
 }
 
@@ -297,7 +369,7 @@ $toast-approx-height: 90px;
     font-size: 14px;
     color: #252E6A !important;
   }
-  
+
   .bx--progress-step--current {
     circle:first-child {
       stroke: #252E62;

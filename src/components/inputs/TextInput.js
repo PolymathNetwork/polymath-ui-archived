@@ -7,7 +7,6 @@ import type { Node } from 'react'
 type Props = {
   input: {
     name: string,
-    [any]: any
   },
   label: string | Node,
   meta: {
@@ -15,7 +14,6 @@ type Props = {
     error: string
   },
   className: string,
-  [any]: any
 }
 
 export default ({
