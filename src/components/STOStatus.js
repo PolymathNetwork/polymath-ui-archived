@@ -8,20 +8,24 @@ import type { CountdownProps } from './Countdown'
 import ProgressBar from './ProgressBar'
 
 type Props = {|
+  ticker: string,
+  rate: BigNumber,
   title: string,
   start: Date,
   end: Date,
   raised: BigNumber,
   cap: BigNumber,
-  isPolyFundraise: boolean,
-|}
+  isPolyFundraise: boolean
+|};
 
-const niceAmount = (poly: BigNumber) => Math.round(poly.toNumber()).toLocaleString()
-const dateFormat = (date: Date) => date.toLocaleDateString('en', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-})
+const niceAmount = (poly: BigNumber) =>
+  Math.round(poly.toNumber()).toLocaleString()
+const dateFormat = (date: Date) =>
+  date.toLocaleDateString('en', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
 
 const getCountdownProps = (startDate: Date, endDate: Date): ?CountdownProps => {
   const now = new Date()
@@ -43,7 +47,16 @@ const getCountdownProps = (startDate: Date, endDate: Date): ?CountdownProps => {
 
 export default class STOStatus extends Component<Props> {
   render () {
-    const { title, start, end, raised, cap, isPolyFundraise } = this.props
+    const {
+      title,
+      start,
+      end,
+      raised,
+      cap,
+      isPolyFundraise,
+      ticker,
+      rate,
+    } = this.props
 
     const countdownProps = getCountdownProps(start, end)
 
@@ -52,7 +65,12 @@ export default class STOStatus extends Component<Props> {
     const raisedText = `${niceAmount(raised)} ${symbol}`
     const capText = `${niceAmount(cap)} ${symbol}`
 
-    const fractionComplete = raised.div(cap).times(100).toFixed(1)
+    const distTokens = niceAmount(raised.times(rate))
+
+    const fractionComplete = raised
+      .div(cap)
+      .times(100)
+      .toFixed(1)
 
     return (
       <div className='pui-page-box'>
@@ -66,7 +84,10 @@ export default class STOStatus extends Component<Props> {
                 {capText}
               </div>
             </div>
-            <ProgressBar className='pui-sto-status-progress-bar' progress={fractionComplete} />
+            <ProgressBar
+              className='pui-sto-status-progress-bar'
+              progress={fractionComplete}
+            />
             <div className='pui-sto-status-bottom-row'>
               <div className='pui-sto-status-dates'>
                 <div className='pui-key-value'>
@@ -77,11 +98,19 @@ export default class STOStatus extends Component<Props> {
                   <div>End Date</div>
                   {dateFormat(end)}
                 </div>
+                <div className='pui-key-value'>
+                  <div>
+                    1 ETH = {rate} {ticker}
+                  </div>
+                </div>
               </div>
               <div>
                 <div className='pui-key-value pui-countdown-poly'>
                   <div>Total funds raised</div>
                   {raisedText}
+                  <div>
+                    {distTokens} {ticker}
+                  </div>
                 </div>
               </div>
             </div>
@@ -89,7 +118,10 @@ export default class STOStatus extends Component<Props> {
           {countdownProps != null && (
             <div className='bx--col-xs-4'>
               <div className='pui-sto-countdown-container'>
-                <Countdown deadline={countdownProps.deadline} title={countdownProps.title} />
+                <Countdown
+                  deadline={countdownProps.deadline}
+                  title={countdownProps.title}
+                />
               </div>
             </div>
           )}
