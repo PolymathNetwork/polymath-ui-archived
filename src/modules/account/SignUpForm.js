@@ -27,22 +27,18 @@ class SignUpForm extends Component<Props> {
           name='name'
           component={TextInput}
           label='Name'
-          placeholder='Enter your full name'
+          placeholder='Enter your name'
           validate={[required, maxLength100]}
         />
         <Field
           name='email'
           component={TextInput}
           label='Email'
-          placeholder='Enter your contact email address'
+          placeholder='Enter your email address'
           validate={[required, email]}
         />
-        <p className='pui-input-hint'>
-          We don&apos;t store your name and email.
-          They will be saved on your computer for further email sendings about your transactions.
-        </p>
         <Button type='submit'>
-          Save Account Info
+          CREATE ACCOUNT
         </Button>
       </Form>
     )

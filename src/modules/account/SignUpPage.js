@@ -28,8 +28,12 @@ class SignUpPage extends Component<DispatchProps> {
         <div className='pui-single-box'>
           <div className='pui-single-box-header'>
             <div className='pui-single-box-header-text'>
-              <h1 className='pui-h1'>Sign up</h1>
-              <h3 className='pui-h3'>Create your account by entering your name<br /> and email below.</h3>
+              <h1 className='pui-h1'>Create Your Account</h1>
+              <h3 className='pui-h3'>
+                Start your private environment to select your
+                Token symbol, create your Token, plan and
+                execute your Security Token Offering.
+              </h3>
             </div>
             <div className='pui-single-box-bull'>
               <img src={bull} alt='Bull' />

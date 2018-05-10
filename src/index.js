@@ -37,6 +37,7 @@ export { default as icoBriefcase } from './svg/briefcase'
 export { default as icoInbox } from './svg/inbox'
 export { default as icoHandshake } from './svg/handshake'
 export { default as icoHelp } from './svg/help'
+export { default as icoWhitelist } from './svg/whitelist'
 
 export type { PUIState } from './redux/reducer'
 export type { ToastArgs } from './modules/toaster/Toaster'

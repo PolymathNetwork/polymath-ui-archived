@@ -55,9 +55,8 @@ class MetamaskPage extends Component<Props> {
         h1 = 'You Need MetaMask'
         h3 = (
           <span>
-            Go to&nbsp;
-            {link}
-            &nbsp;and install MetaMask as an extension on the browser of your choice.
+            MetaMask is a browser extension that links the operations performed on this dashboard with the blockchain.
+            Please visit {link} and install the MetaMask extension to your browser of choice.
           </span>
         )
     }
@@ -81,12 +80,6 @@ class MetamaskPage extends Component<Props> {
                 <p>
                   To issue your Security Token, you need to have MetaMask installed in your browser.<br />
                   Additionally, in a wallet in your MetaMask account you need to have ETH and POLY.
-                </p>
-              </AccordionItem>
-              <AccordionItem title='Installing MetaMask, your digital wallet.'>
-                <p>
-                  To install MetaMask, click this link {link}<br />
-                  and install MetaMask as an extension on the browser of your choice.
                 </p>
               </AccordionItem>
               <AccordionItem title='Why is MetaMask locked?'>

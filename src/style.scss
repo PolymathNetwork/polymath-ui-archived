@@ -3,7 +3,7 @@
 
 body {
   font-family: 'Overpass', sans-serif !important;
-  background-color: white !important;
+  background: white !important;
 }
 
 /**
@@ -714,4 +714,14 @@ $toast-approx-height: 90px;
 
   border-radius: 4px;
   background-color: #EBF0F7;
+}
+
+.pui-no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  // noinspection CssUnknownProperty
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
