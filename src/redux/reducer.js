@@ -1,6 +1,8 @@
 // @flow
 
 import { combineReducers } from 'redux'
+import type { NetworkState } from 'polymath-auth'
+
 import common from './common/reducer'
 import toaster from '../modules/toaster/reducer'
 import tx from '../modules/tx/reducer'
@@ -18,14 +20,16 @@ export default combineReducers({
 })
 
 export type PUIState = {
-  form: any, // redux-form
-  network: any, // TODO @bshevchenko: polymath-auth
-  pui: {
-    common: CommonState,
-    tx: TxState,
-    toaster: ToasterState,
-    account: AccountState,
-  }
+  common: CommonState,
+  tx: TxState,
+  toaster: ToasterState,
+  account: AccountState,
 }
 
-export type GetState = () => PUIState
+export type RootState = {
+  form: any, // redux-form
+  network: NetworkState,
+  pui: PUIState,
+}
+
+export type GetState = () => RootState
