@@ -49,9 +49,8 @@ class TxSuccess extends Component<Props> {
               {this.props.title}
             </h1>
             <h3 className='pui-h3'>
-              You can check the transaction details on<br />
-              Etherscan for independent validation by clicking<br />
-              on the transaction hash below.
+              You can check the transaction details by clicking<br /> on the link below.
+              This link will take you to a<br /> third-party site, Etherscan for independent validation.
             </h3>
           </div>
           <div className='pui-single-box-bull'>
@@ -59,7 +58,7 @@ class TxSuccess extends Component<Props> {
           </div>
           <div className='pui-clearfix' />
           <div className='bx--form-item pui-form-item-blue'>
-            <label className='bx--label'>Transaction hash</label>
+            <label className='bx--label'>Link to transaction details on Etherscan:</label>
             <p>{etherscanTx(this.props.hash, this.props.hash)}</p>
           </div>
           <h2
@@ -68,17 +67,12 @@ class TxSuccess extends Component<Props> {
             style={{ marginTop: '32px', marginBottom: '4px', color: '#5A6872', fontWeight: 300, lineHeight: '35px' }}
           >
             <img src={paperPlane} width='64' height='64' alt='Paper Plane' /><br />
-            We just sent you an email with the transaction<br />
-            details for your records. Check your inbox.
+            We just sent you an email with the transaction<br /> details for your records.
           </h2>
           <p align='center'>
             <Button onClick={this.handleGo}>
               {this.props.goTitle}
             </Button>
-          </p>
-          <p className='pui-input-hint'>
-            Your email address is not stored on Polymath servers, only on your browser&apos;s local storage.
-            To clear this information, simply clear your browser&apos;s cache.
           </p>
         </div>
       </div>

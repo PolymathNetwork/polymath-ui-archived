@@ -37,7 +37,7 @@ export const twelveHourTimeToMinutes = (time: TwelveHourTime) => {
   return hours * 60 + parseInt(match[2])
 }
 
-class TimePicker extends React.Component<Props> {
+export default class TimePickerInput extends React.Component<Props> {
   handleTimeStringChange = (event: Event) => {
     if (!(event.target instanceof HTMLInputElement)) {
       return
@@ -108,4 +108,3 @@ class TimePicker extends React.Component<Props> {
     )
   }
 }
-export default TimePicker
