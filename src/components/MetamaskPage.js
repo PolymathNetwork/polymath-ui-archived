@@ -67,13 +67,11 @@ class MetamaskPage extends Component<Props> {
           <img src={logo} alt='Logo' className='pui-metamask-logo' />
           <div className='pui-single-box'>
             <div className='pui-single-box-header'>
-              <div className='pui-single-box-header-text'>
-                <h1 className='pui-h1'>{h1}</h1>
-                <h3 className='pui-h3'>{h3}</h3>
-              </div>
               <div className='pui-single-box-metamask'>
                 <img src={metamask} alt='Metamask' />
               </div>
+              <h1 className='pui-h1'>{h1}</h1>
+              <h3 className='pui-h3'>{h3}</h3>
               <div className='pui-clearfix' />
             </div>
             <Accordion>

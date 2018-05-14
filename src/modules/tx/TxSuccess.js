@@ -43,20 +43,17 @@ class TxSuccess extends Component<Props> {
     return (
       <div className={'pui-single-box' + (className ? ' ' + className : '')}>
         <div className='pui-single-box-header'>
-          <div className='pui-single-box-header-text'>
-            <h1 className='pui-h1'>
-              <Icon name='checkmark--glyph' fill='#00AA5E' width='24' height='24' />&nbsp;
-              {this.props.title}
-            </h1>
-            <h3 className='pui-h3'>
-              You can check the transaction details on<br />
-              Etherscan for independent validation by clicking<br />
-              on the transaction hash below.
-            </h3>
-          </div>
           <div className='pui-single-box-bull'>
             <img src={bull} alt='Bull' />
           </div>
+          <h1 className='pui-h1'>
+            <Icon name='checkmark--glyph' fill='#00AA5E' width='24' height='24' />&nbsp;
+            {this.props.title}
+          </h1>
+          <h3 className='pui-h3'>
+            You can check the transaction details on Etherscan for independent
+            validation by clicking on the transaction hash below.
+          </h3>
           <div className='pui-clearfix' />
           <div className='bx--form-item pui-form-item-blue'>
             <label className='bx--label'>Transaction hash</label>

@@ -8,7 +8,7 @@ type Props = {
   input: {
     name: string,
   },
-  label: string | Node,
+  label: Node,
   meta: {
     touched: boolean,
     error: string

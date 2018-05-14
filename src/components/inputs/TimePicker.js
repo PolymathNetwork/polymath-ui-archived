@@ -11,7 +11,7 @@ type Props = {
     onChange: (value: TwelveHourTime) => void,
     onBlur: (value: TwelveHourTime) => void,
   },
-  label: string | Node,
+  label: Node,
   meta: {
     touched: boolean,
     error: string

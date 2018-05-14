@@ -209,19 +209,15 @@ $toast-approx-height: 90px;
     margin: 10px auto;
   }
 
-  .pui-single-box-header-text {
-    width: 436px;
-    float: left;
-  }
-
   .pui-single-box-bull {
     float: right;
-    width: 200px;
+    width: 225px;
+    overflow: hidden; // Don't cover things up below the bull.
 
     img {
-      width: 260px;
+      width: 256px;
       position: relative;
-      left: -30px;
+      left: -15px;
       margin-top: 15px;
       margin-bottom: -47px;
     }
@@ -714,4 +710,12 @@ $toast-approx-height: 90px;
 
   border-radius: 4px;
   background-color: #EBF0F7;
+}
+
+.pui-checkbox-small-text p {
+  display: block;
+  padding-left: 0.4rem;
+
+  font-size: 13px;
+  line-height: 18px;
 }
