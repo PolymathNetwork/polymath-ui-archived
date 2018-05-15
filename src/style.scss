@@ -255,7 +255,7 @@ body {
   .pui-single-box-bull {
     float: right;
     width: 225px;
-    overflow: hidden; // Don't cover things up below the bull.
+    pointer-events: none; // Don't cover things up below the bull.
 
     img {
       width: 256px;
