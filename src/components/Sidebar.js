@@ -9,6 +9,7 @@ type MenuItem = {|
   icon: Node,
   to: string,
   isActive: boolean,
+  isDisabled: boolean,
 |}
 
 type Props = {|
@@ -22,7 +23,12 @@ export default class Sidebar extends Component<Props> {
   items (items: Array<MenuItem>) {
     return (
       <ul>
-        {items.map((item: MenuItem) => (
+        {items.map((item: MenuItem) => item.isDisabled ? (
+          <li className='disabled'>
+            {item.icon}
+            <p>{item.title}</p>
+          </li>
+        ) : (
           <Link key={item.to} to={item.to}>
             <li className={item.isActive ? 'active' : ''}>
               {item.icon}

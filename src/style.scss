@@ -499,7 +499,7 @@ body {
     padding-top: 9px;
     text-align: center;
 
-    &:hover, &.active {
+    &:hover:not(.disabled), &.active {
       background-color: rgba(61, 112, 178, 0.2);
       border-left-color: #5596E6;
 
@@ -510,6 +510,10 @@ body {
       p {
         color: #5596E6;
       }
+    }
+
+    &.disabled {
+      opacity: 0.5;
     }
 
     svg {
