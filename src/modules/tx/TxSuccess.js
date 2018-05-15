@@ -43,19 +43,17 @@ class TxSuccess extends Component<Props> {
     return (
       <div className={'pui-single-box' + (className ? ' ' + className : '')}>
         <div className='pui-single-box-header'>
-          <div className='pui-single-box-header-text'>
-            <h1 className='pui-h1'>
-              <Icon name='checkmark--glyph' fill='#00AA5E' width='24' height='24' />&nbsp;
-              {this.props.title}
-            </h1>
-            <h3 className='pui-h3'>
-              You can check the transaction details by clicking<br /> on the link below.
-              This link will take you to a<br /> third-party site, Etherscan for independent validation.
-            </h3>
-          </div>
           <div className='pui-single-box-bull'>
             <img src={bull} alt='Bull' />
           </div>
+          <h1 className='pui-h1'>
+            <Icon name='checkmark--glyph' fill='#00AA5E' width='24' height='24' />&nbsp;
+            {this.props.title}
+          </h1>
+          <h3 className='pui-h3'>
+            You can check the transaction details by clicking on the link below.
+            This link will take you to a third-party site, Etherscan for independent validation.
+          </h3>
           <div className='pui-clearfix' />
           <div className='bx--form-item pui-form-item-blue'>
             <label className='bx--label'>Link to transaction details on Etherscan:</label>
