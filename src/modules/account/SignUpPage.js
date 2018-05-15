@@ -52,6 +52,9 @@ class SignUpPage extends Component<Props> {
             <div className='pui-clearfix' />
           </div>
           <SignUpForm onSubmit={this.handleSubmit} enableSubmit={this.props.enableSubmit} />
+          <p className='pui-input-hint'>
+            <a href='https://www.fullstory.com/optout/'>Do not track my activity</a>
+          </p>
         </div>
       </DocumentTitle>
     )

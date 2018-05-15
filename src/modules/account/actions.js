@@ -101,8 +101,11 @@ export const initAccount = () => async (dispatch: Function, getState: GetState) 
 
   if (global.FS) {
     const account = getState().network.account
+    const accountData = getAccountData(getState())
+    const email = accountData && accountData.account && accountData.account.email
     global.FS.identify(account, {
       ethAddress: account,
+      ...(email ? { email } : {}),
     })
   }
 
