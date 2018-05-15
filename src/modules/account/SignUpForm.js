@@ -46,7 +46,7 @@ class SignUpForm extends Component<Props> {
             // $FlowFixMe
             <React.Fragment>
               <p>I accept that Polymath may contact me via email to send me updates on my token issuance process.</p>
-              <p>For more details, please consult our <Link href='https://polymath.network'>Privacy Policy</a>.</link>
+              <p>For more details, please consult our <Link href='https://polymath.network'>Privacy Policy</Link>.</p>
             </React.Fragment>
           }
         />
