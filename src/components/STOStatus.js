@@ -2,21 +2,16 @@
 
 import BigNumber from 'bignumber.js'
 import React, { Component } from 'react'
+import type { SecurityToken, STODetails } from 'polymathjs'
 
 import Countdown from './Countdown'
 import type { CountdownProps } from './Countdown'
 import ProgressBar from './ProgressBar'
 
 type Props = {|
-  ticker: string,
-  rate: BigNumber,
-  title: string,
-  start: Date,
-  end: Date,
-  raised: BigNumber,
-  cap: BigNumber,
-  isPolyFundraise: boolean
-|};
+  token: SecurityToken,
+  details: STODetails,
+|}
 
 const niceAmount = (poly: BigNumber) =>
   Math.round(poly.toNumber()).toLocaleString()
@@ -47,34 +42,25 @@ const getCountdownProps = (startDate: Date, endDate: Date): ?CountdownProps => {
 
 export default class STOStatus extends Component<Props> {
   render () {
-    const {
-      title,
-      start,
-      end,
-      raised,
-      cap,
-      isPolyFundraise,
-      ticker,
-      rate,
-    } = this.props
+    const { token, details } = this.props
 
-    const countdownProps = getCountdownProps(start, end)
+    const countdownProps = getCountdownProps(details.start, details.end)
 
-    const symbol = isPolyFundraise ? 'POLY' : 'ETH'
+    const symbol = details.isPolyFundraise ? 'POLY' : 'ETH'
 
-    const raisedText = `${niceAmount(raised)} ${symbol}`
-    const capText = `${niceAmount(cap)} ${symbol}`
+    const raisedText = `${niceAmount(details.raised)} ${symbol}`
+    const capText = `${niceAmount(details.cap)} ${symbol}`
 
-    const distTokens = niceAmount(raised.times(rate))
+    const distTokens = niceAmount(details.raised.times(details.rate))
 
-    const fractionComplete = raised
-      .div(cap)
+    const fractionComplete = details.raised
+      .div(details.cap)
       .times(100)
       .toFixed(1)
 
     return (
       <div className='pui-page-box'>
-        <h2 className='pui-h2'>{title}</h2>
+        <h2 className='pui-h2'>Capped STO</h2>
         <div className='bx--row'>
           <div className='bx--col-xs-8 pui-sto-status-grow'>
             <div className='pui-sto-status-numbers'>
@@ -92,15 +78,15 @@ export default class STOStatus extends Component<Props> {
               <div className='pui-sto-status-dates'>
                 <div className='pui-key-value'>
                   <div>Start Date</div>
-                  {dateFormat(start)}
+                  {dateFormat(details.start)}
                 </div>
                 <div className='pui-key-value'>
                   <div>End Date</div>
-                  {dateFormat(end)}
+                  {dateFormat(details.end)}
                 </div>
                 <div className='pui-key-value'>
-                  <div>
-                    1 ETH = {rate} {ticker}
+                  <div style={{ paddingLeft: '60px' }}>
+                    1 {symbol} = {details.rate} {token.ticker}
                   </div>
                 </div>
               </div>
@@ -109,7 +95,7 @@ export default class STOStatus extends Component<Props> {
                   <div>Total funds raised</div>
                   {raisedText}
                   <div>
-                    {distTokens} {ticker}
+                    {distTokens} {token.ticker}
                   </div>
                 </div>
               </div>

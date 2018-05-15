@@ -8,7 +8,7 @@ import { PolyToken } from 'polymathjs'
 import { fetching, fetchingFailed, fetched, notify, txStart, txEnd, txFailed } from '../..'
 import { formName } from './SignUpForm'
 import type { ExtractReturn } from '../../redux/helpers'
-import type { GetState, PUIState } from '../../redux/reducer'
+import type { GetState, RootState } from '../../redux/reducer'
 import offchainFetch from '../../offchainFetch'
 
 export const INITIALIZED = 'polymath-ui/account/INITIALIZED'
@@ -212,7 +212,7 @@ export const signUp = () => async (dispatch: Function, getState: GetState) => {
   }
 }
 
-export const getAccountData = (state: PUIState): ?AccountData => {
+export const getAccountData = (state: RootState): ?AccountData => {
   const address = state.network.account
   const accountDataJSON = localStorage.getItem(address)
 
@@ -232,7 +232,7 @@ export const getAccountData = (state: PUIState): ?AccountData => {
   return accountData
 }
 
-export const getAccountDataForFetch = (state: PUIState): ?AccountDataForFetch => {
+export const getAccountDataForFetch = (state: RootState): ?AccountDataForFetch => {
   const accountData = getAccountData(state)
   if (!accountData || !accountData.signerAddress) {
     return null

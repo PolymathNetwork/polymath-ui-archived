@@ -1,6 +1,6 @@
 // @flow
 
-import type { TwelveHourTime } from './components/inputs/TimePicker'
+import type { TwelveHourTime } from './components/inputs/TimePickerInput'
 
 export const required = (value: any) => {
   return (value !== null && value !== undefined && value !== '') ?

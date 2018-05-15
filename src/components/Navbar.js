@@ -11,7 +11,7 @@ import networkIcon from '../../img/icons/network.svg'
 import polyIcon from '../../img/icons/poly.svg'
 import accountIcon from '../../img/icons/account.svg'
 import tokenIcon from '../../img/icons/token.svg'
-import type { PUIState } from '../redux/reducer'
+import type { RootState } from '../redux/reducer'
 
 type StateProps = {|
   network: string,
@@ -19,7 +19,7 @@ type StateProps = {|
   balance: ?BigNumber
 |};
 
-const mapStateToProps = (state: PUIState): StateProps => ({
+const mapStateToProps = (state: RootState): StateProps => ({
   network: state.network.name,
   account: state.network.account,
   balance: state.pui.account.balance,

@@ -28,14 +28,14 @@ class SignUpForm extends Component<Props> {
           name='name'
           component={TextInput}
           label='Name'
-          placeholder='Enter your full name'
+          placeholder='Enter your name'
           validate={[required, maxLength100]}
         />
         <Field
           name='email'
           component={TextInput}
           label='Email'
-          placeholder='Enter your contact email address'
+          placeholder='Enter your email address'
           validate={[required, email]}
         />
         <Field
@@ -59,7 +59,7 @@ class SignUpForm extends Component<Props> {
           }
         />
         <Button type='submit' disabled={!this.props.enableSubmit}>
-          Save Account Info
+          CREATE ACCOUNT
         </Button>
       </Form>
     )

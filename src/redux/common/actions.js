@@ -24,6 +24,6 @@ export type Action =
 
 export const fetchingFailed = (e: Error) => async (dispatch: Function) => {
   // eslint-disable-next-line
-  console.error('Fetching failed', e)
+  // TODO @bshevchenko: console.error('Fetching failed', e)
   dispatch(fetchingFailedAction(e.message))
 }

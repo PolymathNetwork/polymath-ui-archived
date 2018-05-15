@@ -1,9 +1,30 @@
 @import 'node_modules/carbon-components/src/globals/scss/styles.scss';
 @import url('https://fonts.googleapis.com/css?family=Overpass:300,400,600');
 
+/**
+ * VARIABLES
+ */
+$navbar-height: 48px;
+
+$toast-animation-duration: 400;
+$toast-animation-duration-ms: $toast-animation-duration + 0ms;
+
+$toast-half-animation-duration: ($toast-animation-duration / 2) + 0ms;
+
+$toast-approx-height: 90px;
+
+$font-family: 'Overpass', sans-serif !important;
+
+/**
+ * GLOBAL
+ */
 body {
-  font-family: 'Overpass', sans-serif !important;
-  background-color: white !important;
+  font-family: $font-family;
+  background: white !important;
+}
+
+*:focus {
+  outline: 0 !important;
 }
 
 /**
@@ -63,18 +84,6 @@ body {
 }
 
 /**
- * VARIABLES
- */
-$navbar-height: 48px;
-
-$toast-animation-duration: 400;
-$toast-animation-duration-ms: $toast-animation-duration + 0ms;
-
-$toast-half-animation-duration: ($toast-animation-duration / 2) + 0ms;
-
-$toast-approx-height: 90px;
-
-/**
  * CARBON
  */
 .bx--grid {
@@ -85,7 +94,7 @@ $toast-approx-height: 90px;
   margin-top: 28px;
   text-transform: uppercase;
   background: #28266E !important;
-  font-family: 'Overpass', sans-serif !important;
+  font-family: $font-family;
 
   &:hover {
     background: rgba(40, 38, 110, 0.8) !important;
@@ -116,7 +125,7 @@ $toast-approx-height: 90px;
 
   p {
     font-size: 14px;
-    font-family: 'Overpass', sans-serif;
+    font-family: $font-family;
     display: inline-flex;
     line-height: 16px;
 
@@ -126,7 +135,7 @@ $toast-approx-height: 90px;
 
     a {
       font-size: 12px;
-      font-family: 'Overpass', sans-serif;
+      font-family: $font-family;
     }
   }
 }
@@ -136,15 +145,45 @@ $toast-approx-height: 90px;
   font-weight: 300;
   line-height: 22px;
   color: #152935 !important;
-  font-family: 'Overpass', sans-serif !important;
+  font-family: $font-family;
 
   &::placeholder {
     color: #5A6872 !important;
   }
 }
 
+.bx--text-area {
+  height: 80px;
+}
+
+.bx--modal {
+  .bx--modal-header__label {
+    text-transform: none;
+    font-size: 13px;
+  }
+
+  .bx--modal-content {
+    padding-bottom: 35px;
+  }
+
+  .bx--modal-content__text,
+  .bx--modal-content__text p {
+    font-family: $font-family;
+    font-weight: 300;
+    line-height: 24px;
+
+    p {
+      margin-top: 10px;
+    }
+
+    p:first-child {
+      margin-top: -3px;
+    }
+  }
+}
+
 .bx--form-requirement {
-  font-family: 'Overpass', sans-serif !important;
+  font-family: $font-family;
 }
 
 .bx--loading-overlay {
@@ -188,11 +227,15 @@ $toast-approx-height: 90px;
 
 .bx--accordion__heading,
 .bx--accordion__content {
-  font-family: 'Overpass', sans-serif !important;
+  font-family: $font-family;
 }
 
 .bx--accordion__content {
   padding-top: 4px !important;
+}
+
+.bx--tag {
+  font-family: $font-family;
 }
 
 /**
@@ -259,7 +302,15 @@ $toast-approx-height: 90px;
   font-weight: 300;
   line-height: 18px;
   margin-top: 7px;
-  font-family: 'Overpass', sans-serif !important;
+  font-family: $font-family;
+
+  a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .pui-key-value {
@@ -272,6 +323,12 @@ $toast-approx-height: 90px;
 
   color: #5A6872;
   font-size: 14px;
+}
+
+.pui-confirm-modal {
+  .bx--modal-header__label {
+    color: #E71D32;
+  }
 }
 
 .pui-go-back {
@@ -361,7 +418,7 @@ $toast-approx-height: 90px;
   margin-bottom: 9px;
 
   .bx--progress-label {
-    font-family: 'Overpass', sans-serif;
+    font-family: $font-family;
     font-size: 14px;
     color: #252E6A !important;
   }
@@ -718,4 +775,14 @@ $toast-approx-height: 90px;
 
   font-size: 13px;
   line-height: 18px;
+}
+
+.pui-no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  // noinspection CssUnknownProperty
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }

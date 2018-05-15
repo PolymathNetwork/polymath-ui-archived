@@ -5,10 +5,10 @@ import { connect } from 'react-redux'
 import { Modal, Loading } from 'carbon-components-react'
 
 import { etherscanTx } from '../../helpers'
-import type { PUIState } from '../../redux/reducer'
+import type { RootState } from '../../redux/reducer'
 import type { TxState } from './reducer'
 
-const mapStateToProps = (state: PUIState): TxState => state.pui.tx
+const mapStateToProps = (state: RootState): TxState => state.pui.tx
 
 class TxModal extends Component<TxState> {
 
