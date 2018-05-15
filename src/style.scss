@@ -600,6 +600,21 @@ body {
 /**
  * STO OVERVIEW
  */
+.pui-sto-status-contract {
+  color: #5A6872;
+  font-weight: 300;
+  margin-bottom: 22px;
+
+  a {
+    color: #3D70B2;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 .pui-sto-status-grow {
   flex-grow: 1;
   padding-right: 40px !important;

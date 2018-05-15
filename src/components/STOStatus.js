@@ -4,6 +4,7 @@ import BigNumber from 'bignumber.js'
 import React, { Component } from 'react'
 import type { SecurityToken, STODetails } from 'polymathjs'
 
+import { etherscanAddress } from '../helpers'
 import Countdown from './Countdown'
 import type { CountdownProps } from './Countdown'
 import ProgressBar from './ProgressBar'
@@ -15,6 +16,7 @@ type Props = {|
 
 const niceAmount = (poly: BigNumber) =>
   Math.round(poly.toNumber()).toLocaleString()
+
 const dateFormat = (date: Date) =>
   date.toLocaleDateString('en', {
     year: 'numeric',
@@ -28,12 +30,12 @@ const getCountdownProps = (startDate: Date, endDate: Date): ?CountdownProps => {
   if (now < startDate) {
     return {
       deadline: startDate,
-      title: 'Time left until the offering starts',
+      title: 'Time Left Until the Offering Starts',
     }
   } else if (now < endDate) {
     return {
       deadline: endDate,
-      title: 'Time left until the offering ends',
+      title: 'Time Left Until the Offering Ends',
     }
   }
 
@@ -61,6 +63,7 @@ export default class STOStatus extends Component<Props> {
     return (
       <div className='pui-page-box'>
         <h2 className='pui-h2'>Capped STO</h2>
+        <p className='pui-sto-status-contract'>Contract { etherscanAddress(details.address) }</p>
         <div className='bx--row'>
           <div className='bx--col-xs-8 pui-sto-status-grow'>
             <div className='pui-sto-status-numbers'>
@@ -92,7 +95,7 @@ export default class STOStatus extends Component<Props> {
               </div>
               <div>
                 <div className='pui-key-value pui-countdown-poly'>
-                  <div>Total funds raised</div>
+                  <div>Total Funds Raised</div>
                   {raisedText}
                   <div>
                     {distTokens} {token.ticker}
