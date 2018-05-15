@@ -1,10 +1,14 @@
 // @flow
 
 import React, { Component } from 'react'
+import { Button } from 'carbon-components-react'
 
 export type CountdownProps = {|
   title: string,
   deadline: Date,
+  buttonTitle?: string,
+  handleButtonClick?: () => any,
+  small?: boolean,
 |}
 
 type State = {|
@@ -14,11 +18,9 @@ type State = {|
   seconds: number,
 |}
 
-function leading0 (num) {
-  return num < 10 ? '0' + num : num
-}
+const leading0 = (num: number) => num < 10 ? '0' + num : num
 
-class Countdown extends Component<CountdownProps, State> {
+export default class Countdown extends Component<CountdownProps, State> {
 
   state = {
     days: 0,
@@ -52,34 +54,53 @@ class Countdown extends Component<CountdownProps, State> {
 
   render () {
     return (
-      <div className='pui-countdown'>
+      <div className={'pui-countdown' + (this.props.small ? ' pui-countdown-small' : '')}>
         <div className='pui-countdown-top-bar'>
           {this.props.title}
         </div>
         <div className='pui-countdown-content'>
-          <div className='pui-countdown-days'>
-            <div className='pui-countdown-number-column pui-countdown-number'>
-              <div><div>{leading0(this.state.days)}</div></div>
+          {!this.props.small ? (
+            <div className='pui-countdown-days'>
+              <div className='pui-countdown-number-column pui-countdown-number'>
+                <div><div>{leading0(this.state.days)}</div></div>
+              </div>
+              <div className='pui-countdown-number-column pui-countdown-number-text'>
+                <div><div>DAYS</div></div>
+              </div>
             </div>
-            <div className='pui-countdown-number-column pui-countdown-number-text'>
-              <div><div>DAYS</div></div>
-            </div>
-          </div>
+          ) : ''}
           <div className='pui-countdown-time'>
             <div className='pui-countdown-number-column pui-countdown-number'>
-              <div><div className='pui-countdown-hours'>{leading0(this.state.hours)}</div></div>
-              <div><div className='pui-countdown-minutes'>{leading0(this.state.minutes)}</div></div>
-              <div><div className='pui-countdown-seconds'>{leading0(this.state.seconds)}</div></div>
+              {!this.props.small ?
+                <div><div className='pui-countdown-hours'>{leading0(this.state.hours)}</div></div> :
+                <div><div className='pui-countdown-hours'>{leading0(this.state.days)}</div></div>
+              }
+              {!this.props.small ?
+                <div><div className='pui-countdown-minutes'>{leading0(this.state.minutes)}</div></div> :
+                <div><div className='pui-countdown-minutes'>{leading0(this.state.hours)}</div></div>
+              }
+              {!this.props.small ?
+                <div><div className='pui-countdown-seconds'>{leading0(this.state.seconds)}</div></div> :
+                <div><div className='pui-countdown-seconds'>{leading0(this.state.minutes)}</div></div>
+              }
             </div>
             <div className='pui-countdown-number-column pui-countdown-number-text'>
+              {this.props.small ? <div><div>DAYS</div></div> : ''}
               <div><div>HOURS</div></div>
               <div><div>MINUTES</div></div>
-              <div><div>SECONDS</div></div>
+              {!this.props.small ? <div><div>SECONDS</div></div> : ''}
             </div>
           </div>
         </div>
+        {this.props.buttonTitle ? (
+          <Button
+            kind='secondary'
+            onClick={this.props.handleButtonClick}
+          >
+            {this.props.buttonTitle}
+          </Button>
+        ) : ''}
       </div>
     )
   }
 }
-export default Countdown

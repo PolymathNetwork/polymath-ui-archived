@@ -495,7 +495,7 @@ body {
     padding-top: 9px;
     text-align: center;
 
-    &:hover, &.active {
+    &:hover:not(.disabled), &.active {
       background-color: rgba(61, 112, 178, 0.2);
       border-left-color: #5596E6;
 
@@ -506,6 +506,10 @@ body {
       p {
         color: #5596E6;
       }
+    }
+
+    &.disabled {
+      opacity: 0.5;
     }
 
     svg {
@@ -647,17 +651,55 @@ body {
 
 .pui-countdown {
   flex-basis: 350px;
+  width: 352px;
+  float: right;
   flex-shrink: 1;
   overflow: hidden;
+  text-align: center;
 
   background-color: white;
   border-radius: 16px;
   box-shadow: 0 4px 16px 0 rgba(42, 63, 125, 0.2);
+
+  &.pui-countdown-small {
+    width: 160px;
+    height: 160px;
+
+    .pui-countdown-content {
+      padding-top: 10px;
+      padding-right: 21px;
+    }
+
+    .pui-countdown-number-column {
+      padding-right: 0;
+
+      > * {
+        padding: 0;
+        width: 39px;
+      }
+    }
+
+    .pui-countdown-number-text {
+      padding-left: 0;
+      margin-left: -10px;
+
+      > * {
+        font-size: 14px;
+      }
+    }
+  }
+
+  button {
+    margin-bottom: 25px;
+    margin-top: -2px;
+  }
 }
 
 .pui-countdown-top-bar {
   padding: 5px 16px;
   line-height: 35px; // TODO Why not just increase vertical padding?
+  text-align: left;
+  font-weight: 300;
 
   font-size: 18px;
   color: white;
