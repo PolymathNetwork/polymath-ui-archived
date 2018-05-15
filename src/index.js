@@ -6,6 +6,7 @@ export { default as offchainFetch } from './offchainFetch'
 export { default as TextInput } from './components/inputs/TextInput'
 export { default as TextAreaInput } from './components/inputs/TextAreaInput'
 export { default as SelectInput } from './components/inputs/SelectInput'
+export { default as Checkbox } from './components/inputs/Checkbox'
 export { default as DatePickerInput } from './components/inputs/DatePickerInput'
 export { default as DatePickerRangeInput } from './components/inputs/DatePickerRangeInput'
 export { default as TimePickerInput, twelveHourTimeToMinutes } from './components/inputs/TimePickerInput'
@@ -18,7 +19,14 @@ export { default as Sidebar } from './components/Sidebar'
 export { default as SignUpPage } from './modules/account/SignUpPage'
 export { default as MetamaskPage } from './components/MetamaskPage'
 export { notify } from './modules/toaster/actions'
-export { initAccount, getAccountData } from './modules/account/actions'
+export {
+  initAccount,
+  getAccountData,
+  getAccountDataForFetch,
+  sendRegisterRequest,
+  sendActivationEmail,
+  updateAccount,
+} from './modules/account/actions'
 export type { AccountData } from './modules/account/actions'
 export { txStart, txEnd, txFailed, txHash, txSuccess } from './modules/tx/actions'
 export { fetching, fetched, fetchingFailed } from './redux/common/actions'

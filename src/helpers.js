@@ -15,7 +15,7 @@ export const setHelpersNetwork = (name: string) => {
   }
 }
 
-const etherscan = (type: string, value: string, label: string | Node) => {
+const etherscan = (type: string, value: string, label: Node) => {
   return (
     <a href={`https://${network ? network + '.' : ''}etherscan.io/${type}/${value}`} target='_blank'>
       {label}
@@ -23,15 +23,15 @@ const etherscan = (type: string, value: string, label: string | Node) => {
   )
 }
 
-export const etherscanAddress = (address: string, label?: string | Node) => {
+export const etherscanAddress = (address: string, label?: Node) => {
   return etherscan('address', address, label || address)
 }
 
-export const etherscanTx = (hash: string, label?: string | Node) => {
+export const etherscanTx = (hash: string, label?: Node) => {
   return etherscan('tx', hash, label || 'See on Etherscan')
 }
 
-export const etherscanToken = (address: string, label?: string | Node) => {
+export const etherscanToken = (address: string, label?: Node) => {
   return etherscan('token', address, label || address)
 }
 
