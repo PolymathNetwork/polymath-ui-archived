@@ -15,7 +15,7 @@ type Props = {|
 |}
 
 const niceAmount = (poly: BigNumber) =>
-  Math.round(poly.toNumber()).toLocaleString()
+  Math.ceil(poly.toNumber()).toLocaleString()
 
 const dateFormat = (date: Date) =>
   date.toLocaleDateString('en', {
@@ -51,12 +51,12 @@ export default class STOStatus extends Component<Props> {
     const symbol = details.isPolyFundraise ? 'POLY' : 'ETH'
 
     const raisedText = `${niceAmount(details.raised)} ${symbol}`
-    const capText = `${niceAmount(details.cap)} ${symbol}`
+    const capText = `${niceAmount(details.cap)} ${token.ticker}`
 
     const distTokens = niceAmount(details.raised.times(details.rate))
 
     const fractionComplete = details.raised
-      .div(details.cap)
+      .div(details.cap.div(details.rate))
       .times(100)
       .toFixed(1)
 
@@ -75,7 +75,7 @@ export default class STOStatus extends Component<Props> {
             </div>
             <ProgressBar
               className='pui-sto-status-progress-bar'
-              progress={fractionComplete}
+              progress={fractionComplete / 100}
             />
             <div className='pui-sto-status-bottom-row'>
               <div className='pui-sto-status-dates'>
@@ -96,9 +96,9 @@ export default class STOStatus extends Component<Props> {
               <div>
                 <div className='pui-key-value pui-countdown-poly'>
                   <div>Total Funds Raised</div>
-                  {raisedText}
+                  ~{raisedText}
                   <div>
-                    {distTokens} {token.ticker}
+                    ~{distTokens} {token.ticker}
                   </div>
                 </div>
               </div>
