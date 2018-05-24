@@ -5,15 +5,27 @@
  * VARIABLES
  */
 $navbar-height: 48px;
+$font-family: 'Overpass', sans-serif !important;
+
+$poly-blue: #252D6B;
+$poly-blue-hover: #58468E;
+$poly-blue-light: #3D70B2;
+$poly-blue-dark: #152935;
+$poly-gray: #8C9BA5;
+$poly-gray-light: #EBF0F7;
+$poly-gray-dark: #5A6872;
+$poly-red: #E71D32;
 
 $toast-animation-duration: 400;
 $toast-animation-duration-ms: $toast-animation-duration + 0ms;
-
 $toast-half-animation-duration: ($toast-animation-duration / 2) + 0ms;
-
 $toast-approx-height: 90px;
 
-$font-family: 'Overpass', sans-serif !important;
+// noinspection CssInvalidPseudoSelector
+:export {
+  // noinspection CssUnknownProperty
+  toastAnimationDuration: $toast-animation-duration;
+}
 
 /**
  * GLOBAL
@@ -40,7 +52,7 @@ body {
 }
 
 .pui-h0 {
-  color: #252E6A;
+  color: $poly-blue;
   font-size: 52px;
   font-weight: 600;
   line-height: 68px;
@@ -48,19 +60,19 @@ body {
 }
 
 .pui-h1 {
-  color: #252E6A;
-  font-size: 33.6px;
+  color: $poly-blue;
+  font-size: 36px;
   font-weight: 600;
-  line-height: 40px;
-  margin-bottom: 10px;
+  line-height: 55px;
+  margin-bottom: 6px;
 }
 
 .pui-h2 {
-  color: #252E6A;
+  color: $poly-blue;
   font-size: 26px;
   font-weight: 400;
   line-height: 42px;
-  margin-bottom: 7px;
+  margin-bottom: 6px;
 
   svg {
     margin-right: 6px;
@@ -68,19 +80,19 @@ body {
 }
 
 .pui-h3 {
-  color: #5A6872;
+  color: $poly-gray-dark;
   font-size: 20px;
   font-weight: 300;
   line-height: 30px;
-  margin-bottom: 7px;
+  margin-bottom: 6px;
 }
 
 .pui-h4 {
-  color: #5A6872;
+  color: $poly-gray-dark;
   font-size: 16px;
   font-weight: 300;
   line-height: 24px;
-  margin-bottom: 7px;
+  margin-bottom: 6px;
 }
 
 /**
@@ -91,9 +103,9 @@ body {
 }
 
 .bx--btn {
-  margin-top: 28px;
+  margin-top: 20px;
   text-transform: uppercase;
-  background: #28266E !important;
+  background: $poly-blue !important;
   font-family: $font-family;
 
   &:hover {
@@ -102,13 +114,13 @@ body {
 }
 
 .bx--btn--secondary {
-  border: 2px solid #252E6A !important;
-  color: #252E6A !important;
+  border: 2px solid $poly-blue !important;
+  color: $poly-blue !important;
   background: white !important;
 
   &:hover {
     color: white !important;
-    border-color: #58468E !important;
+    border-color: $poly-blue-hover !important;
   }
 }
 
@@ -120,7 +132,7 @@ body {
 }
 
 .bx--form-item {
-  margin-bottom: 16px;
+  margin-bottom: 16px !important;
   margin-right: 0 !important;
 
   p {
@@ -144,11 +156,11 @@ body {
   font-size: 14px;
   font-weight: 300;
   line-height: 22px;
-  color: #152935 !important;
+  color: $poly-blue-dark !important;
   font-family: $font-family;
 
   &::placeholder {
-    color: #5A6872 !important;
+    color: $poly-gray-dark !important;
   }
 }
 
@@ -163,7 +175,7 @@ body {
   }
 
   .bx--modal-content {
-    padding-bottom: 35px;
+    padding-bottom: 21px;
   }
 
   .bx--modal-content__text,
@@ -200,17 +212,17 @@ body {
     height: 40px !important;
     padding-left: 0.5rem !important;
     background-color: rgba(61,112,178,0.1) !important;
-    color: #152935 !important;
+    color: $poly-blue-dark !important;
     font-weight: normal !important;
   }
 
   .bx--select__arrow {
-    fill: #152935 !important;
+    fill: $poly-blue-dark !important;
   }
 }
 
 .bx--loading__svg {
-  stroke: #3D70B2 !important;
+  stroke: $poly-blue-light !important;
 }
 
 .bx--tooltip {
@@ -243,7 +255,7 @@ body {
  */
 .pui-single-box {
   margin: 103px auto;
-  padding: 48px;
+  padding: 39px 48px 45px;
   width: 734px;
   background-color: white;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
@@ -252,53 +264,54 @@ body {
     margin: 10px auto;
   }
 
-  .pui-single-box-bull {
-    float: right;
-    width: 225px;
-    pointer-events: none; // Don't cover things up below the bull.
+  .pui-single-box-header {
+    position: relative;
 
-    img {
-      width: 256px;
-      position: relative;
-      left: -15px;
-      margin-top: 15px;
-      margin-bottom: -47px;
+    .pui-h3,
+    .pui-h4 {
+      width: 438px;
+      margin-bottom: 28px;
+    }
+
+    .pui-single-box-bull,
+    .pui-single-box-metamask {
+      position: absolute;
+      right: -30px;
+      pointer-events: none;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .pui-single-box-bull {
+      top: 25px;
+      width: 254px;
+    }
+
+    .pui-single-box-metamask {
+      top: -13px;
+      width: 222px;
     }
   }
-
-  .pui-single-box-metamask {
-    float: right;
-    width: 200px;
-
-    img {
-      width: 206.4px;
-      position: relative;
-      right: -20px;
-      margin-top: 0;
-      margin-bottom: -30px;
-    }
-  }
-}
-
-.pui-clearfix {
-  clear: both;
-}
-
-.pui-metamask-logo {
-  position: absolute;
-  left: 72px;
-  top: 50px;
 }
 
 .pui-page-box {
   padding: 24px;
   background-color: white;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
+
+  hr {
+    border: 0;
+    border-top: 1px solid $poly-gray-light;
+    margin-bottom: 18px;
+    margin-top: -3px;
+  }
 }
 
 .pui-input-hint {
   font-size: 12px;
-  color: #8C9BA5;
+  color: $poly-gray;
   font-weight: 300;
   line-height: 18px;
   margin-top: 7px;
@@ -317,17 +330,17 @@ body {
   > div {
     margin-bottom: 8px;
 
-    color: #152935;
+    color: $poly-blue-dark;
     font-weight: 600;
   }
 
-  color: #5A6872;
+  color: $poly-gray-dark;
   font-size: 14px;
 }
 
 .pui-confirm-modal {
   .bx--modal-header__label {
-    color: #E71D32;
+    color: $poly-red;
   }
 }
 
@@ -336,25 +349,25 @@ body {
   margin-top: -12px;
   margin-left: -16px;
   margin-bottom: 5px;
-  color: #252E6A !important;
+  color: $poly-blue !important;
 
   svg, path {
-    fill: #252E6A !important;
+    fill: $poly-blue !important;
   }
 
   &:hover {
     background: transparent !important;
-    color: #58468E !important;
+    color: $poly-blue-hover !important;
 
     svg, path {
-      fill: #58468E !important;
+      fill: $poly-blue-hover !important;
     }
   }
 }
 
-.pui-form-item-blue {
+.pui-form-item-gray {
   border-radius: 4px;
-  background-color: #EBF0F7;
+  background-color: $poly-gray-light;
   padding-left: 94px;
   padding-top: 23px;
   padding-bottom: 23px;
@@ -363,6 +376,10 @@ body {
   a {
     font-weight: 600;
   }
+}
+
+.pui-clearfix {
+  clear: both;
 }
 
 /**
@@ -396,7 +413,7 @@ body {
     li {
       display: inline-flex;
       align-items: center;
-      color: #5A6872;
+      color: $poly-gray-dark;
       font-size: 14px;
       line-height: 22px;
       margin-left: 30px;
@@ -420,45 +437,45 @@ body {
   .bx--progress-label {
     font-family: $font-family;
     font-size: 14px;
-    color: #252E6A !important;
+    color: $poly-blue !important;
   }
 
   .bx--progress-step--current {
     circle:first-child {
-      stroke: #252E62;
+      stroke: $poly-blue;
     }
 
     circle:last-child {
-      fill: #252E62;
+      fill: $poly-blue;
     }
 
     .bx--progress-line {
-      background-color: #252E6A;
+      background-color: $poly-blue;
     }
   }
 
   .bx--progress-step--complete {
     circle {
-      stroke: #252E62;
+      stroke: $poly-blue;
     }
     polygon {
-      fill: #252E62;
+      fill: $poly-blue;
     }
   }
 
   .bx--progress-step--incomplete {
     .bx--progress-label {
-      color: #8C9BA5 !important;
+      color: $poly-gray !important;
     }
 
     .bx--progress-line {
-      background-color: #8C9BA5;
+      background-color: $poly-gray;
     }
   }
 
   .bx--progress-step--complete {
     .bx--progress-line {
-      background-color: #252E6A;
+      background-color: $poly-blue;
     }
   }
 }
@@ -474,7 +491,7 @@ body {
   width: 64px;
   height: 100%;
   padding-top: $navbar-height;
-  background-color: #252E6A;
+  background-color: $poly-blue;
 
   a {
     text-decoration: none;
@@ -530,59 +547,49 @@ body {
 /**
  * TOASTER
  */
-// noinspection CssInvalidPseudoSelector
-:export {
-  // noinspection CssUnknownProperty
-  toastAnimationDuration: $toast-animation-duration;
-}
-
 .pui-toaster-container {
   position: fixed;
   right: 0;
   left: 0;
   top: 50px;
-
   z-index: 1000;
-
   pointer-events: none;
-}
 
-.pui-toaster {
-  // Position in top right
-  position: absolute;
-  top: 0;
-  right: 0;
+  .pui-toaster {
+    position: absolute;
+    top: 0;
+    right: 0;
+    pointer-events: all;
 
-  pointer-events: all;
-}
+    .pui-toast {
+      box-sizing: border-box;
+      overflow: hidden;
 
-.pui-toast {
-  box-sizing: border-box;
-  overflow: hidden;
+      transition: transform $toast-animation-duration-ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
 
-  transition: transform $toast-animation-duration-ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+    .pui-toast-entering, .pui-toast-entering ~ .pui-toast {
+      transform: translateY(-$toast-approx-height);
+      transition: none;
+    }
 
-.pui-toast-entering, .pui-toast-entering ~ .pui-toast {
-  transform: translateY(-$toast-approx-height);
-  transition: none;
-}
+    .pui-toast-entered {
+      transform: translateY(0);
+      transition: transform $toast-animation-duration-ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
 
-.pui-toast-entered {
-  transform: translateY(0);
-  transition: transform $toast-animation-duration-ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+    .pui-toast-exiting, .pui-toast-exiting ~ .pui-toast {
+      transform: translateY(0);
+      opacity: 1;
+      transition: none;
+    }
 
-.pui-toast-exiting, .pui-toast-exiting ~ .pui-toast {
-  transform: translateY(0);
-  opacity: 1;
-  transition: none;
-}
-
-.pui-toast-exited {
-  transform: translateY(-$toast-approx-height);
-  opacity: 0;
-  transition: opacity $toast-half-animation-duration 0ms, transform $toast-half-animation-duration $toast-half-animation-duration;
+    .pui-toast-exited {
+      transform: translateY(-$toast-approx-height);
+      opacity: 0;
+      transition: opacity $toast-half-animation-duration 0ms, transform $toast-half-animation-duration $toast-half-animation-duration;
+    }
+  }
 }
 
 /**
@@ -595,18 +602,38 @@ body {
   .bx--loading {
     margin: -20px auto 0;
   }
+
+  .bx--modal-content__text {
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+}
+
+.pui-tx-success-h1 {
+  width: 438px;
+  line-height: 44px;
+  margin-bottom: 13px;
+}
+
+.pui-tx-success-h2 {
+  margin-top: 32px;
+  margin-bottom: 4px;
+  color: $poly-gray-dark;
+  font-weight: 300;
+  line-height: 35px;
+  text-align: center;
 }
 
 /**
- * STO OVERVIEW
+ * STOStatus
  */
 .pui-sto-status-contract {
-  color: #5A6872;
+  color: $poly-gray-dark;
   font-weight: 300;
   margin-bottom: 22px;
 
   a {
-    color: #3D70B2;
+    color: $poly-blue-light;
     text-decoration: none;
 
     &:hover {
@@ -656,7 +683,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
   padding-top: 20px;
 
   @include breakpoint(bp--md--major) {
@@ -664,17 +690,133 @@ body {
   }
 }
 
+/**
+ * COUNTDOWN
+ */
 .pui-countdown {
   flex-basis: 350px;
-  width: 352px;
-  float: right;
   flex-shrink: 1;
+  width: 352px;
   overflow: hidden;
   text-align: center;
 
   background-color: white;
   border-radius: 16px;
   box-shadow: 0 4px 16px 0 rgba(42, 63, 125, 0.2);
+
+  .pui-countdown-top-bar {
+    padding: 5px 16px;
+    line-height: 35px; // TODO Why not just increase vertical padding?
+    text-align: left;
+    font-weight: 300;
+
+    font-size: 18px;
+    color: white;
+    background-color: $poly-blue;
+
+    @include breakpoint(bp--md--major) {
+      font-size: 20px;
+    }
+  }
+
+  .pui-countdown-content {
+    display: flex;
+    flex-direction: row;
+    padding: 16px;
+
+    > * {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  .pui-countdown-number-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    > * {
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      padding: 5px 0;
+    }
+  }
+
+  .pui-countdown-days {
+    .pui-countdown-number {
+      font-size: 56px;
+    }
+
+    .pui-countdown-number-text {
+      font-size: 22px !important;
+    }
+
+    @include breakpoint(bp--md--major) {
+      .pui-countdown-number {
+        font-size: 64px;
+      }
+
+      .pui-countdown-number-text {
+        font-size: 34px;
+      }
+    }
+  }
+
+  .pui-countdown-number {
+    display: flex;
+    padding-right: 10px;
+
+    font-size: 28px;
+
+    @include breakpoint(bp--md--major) {
+      font-size: 32px;
+    }
+
+    > * {
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    .pui-countdown-hours {
+      font-weight: 600;
+    }
+
+    .pui-countdown-minutes {
+      font-weight: 400;
+    }
+
+    .pui-countdown-seconds {
+      font-weight: 300;
+    }
+  }
+
+  .pui-countdown-number-text {
+    display: flex;
+    padding-left: 10px;
+
+    font-size: 16px;
+    font-weight: 600;
+    color: $poly-gray;
+
+    > * {
+      align-items: center;
+      justify-content: flex-start;
+    }
+  }
+
+  .pui-countdown-raised {
+    padding: 15px;
+    font-size: 36px;
+    border-radius: 4px;
+    color: $poly-blue;
+    background-color: $poly-gray-light;
+
+    > div {
+      font-size: 14px;
+    }
+  }
 
   &.pui-countdown-small {
     width: 160px;
@@ -710,120 +852,11 @@ body {
   }
 }
 
-.pui-countdown-top-bar {
-  padding: 5px 16px;
-  line-height: 35px; // TODO Why not just increase vertical padding?
-  text-align: left;
-  font-weight: 300;
-
-  font-size: 18px;
-  color: white;
-  background-color: #252E6A;
-
-  @include breakpoint(bp--md--major) {
-    font-size: 20px;
-  }
-}
-
-.pui-countdown-content {
-  display: flex;
-  flex-direction: row;
-  padding: 16px;
-
-  > * {
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-  }
-}
-
-.pui-countdown-number-column {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-
-  > * {
-    flex: 1;
-    display: flex;
-    flex-direction: row;
-    padding: 5px 0;
-  }
-}
-
-.pui-countdown-days {
-  .pui-countdown-number {
-    font-size: 56px;
-  }
-
-  .pui-countdown-number-text {
-    font-size: 22px !important;
-  }
-
-  @include breakpoint(bp--md--major) {
-    .pui-countdown-number {
-      font-size: 64px;
-    }
-
-    .pui-countdown-number-text {
-      font-size: 34px;
-    }
-  }
-}
-
-.pui-countdown-number {
-  display: flex;
-  padding-right: 10px;
-
-  font-size: 28px;
-
-  @include breakpoint(bp--md--major) {
-    font-size: 32px;
-  }
-
-  > * {
-    align-items: center;
-    justify-content: flex-end;
-  }
-
-  .pui-countdown-hours {
-    font-weight: 600;
-  }
-
-  .pui-countdown-minutes {
-    font-weight: 400;
-  }
-
-  .pui-countdown-seconds {
-    font-weight: 300;
-  }
-}
-
-.pui-countdown-number-text {
-  display: flex;
-  padding-left: 10px;
-
-  font-size: 16px;
-  font-weight: 600;
-  color: #8C9BA5;
-
-  > * {
-    align-items: center;
-    justify-content: flex-start;
-  }
-}
-
-.pui-countdown-poly {
-  > div {
-    font-size: 14px;
-  }
-
-  padding: 15px;
-
-  color: #2E3F8F;
-  font-size: 36px;
-
-  border-radius: 4px;
-  background-color: #EBF0F7;
+/**
+ * OTHER
+ */
+.pui-sign-up-checkboxes {
+  margin-top: 24px;
 }
 
 .pui-checkbox-small-text p {
@@ -842,4 +875,14 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.pui-metamask-logo {
+  position: absolute;
+  left: 72px;
+  top: 50px;
+}
+
+.pui-metamask-accordion {
+  margin-top: 47px;
 }

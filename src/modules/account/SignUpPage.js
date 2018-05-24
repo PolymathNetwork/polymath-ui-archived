@@ -31,6 +31,7 @@ const mapDispatchToProps: DispatchProps = {
 type Props = StateProps & DispatchProps
 
 class SignUpPage extends Component<Props> {
+
   handleSubmit = () => {
     this.props.signUp()
   }
@@ -49,11 +50,12 @@ class SignUpPage extends Component<Props> {
               Token symbol, create your Token, plan and
               execute your Security Token Offering.
             </h3>
-            <div className='pui-clearfix' />
           </div>
           <SignUpForm onSubmit={this.handleSubmit} enableSubmit={this.props.enableSubmit} />
           <p className='pui-input-hint'>
-            <a href='https://www.fullstory.com/optout/'>Do not track my activity</a>
+            <a href='https://www.fullstory.com/optout/' target='_blank' rel='noopener noreferrer'>
+              Do not track my activity
+            </a>
           </p>
         </div>
       </DocumentTitle>

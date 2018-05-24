@@ -27,7 +27,11 @@ export const etherscanAddress = (address: string, label?: Node) => {
   return etherscan('address', address, label || address)
 }
 
-export const etherscanTx = (hash: string, label?: Node) => {
+export const etherscanTx = (hash: string, label?: Node, isShort?: boolean) => {
+  if (isShort && typeof label === 'string') {
+    // eslint-disable-next-line
+    label = label.substring(0, 23) + '...' + label.slice(-23)
+  }
   return etherscan('tx', hash, label || 'See on Etherscan')
 }
 

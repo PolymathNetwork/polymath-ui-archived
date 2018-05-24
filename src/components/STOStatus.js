@@ -94,7 +94,7 @@ export default class STOStatus extends Component<Props> {
                 </div>
               </div>
               <div>
-                <div className='pui-key-value pui-countdown-poly'>
+                <div className='pui-key-value pui-countdown-raised'>
                   <div>Total Funds Raised</div>
                   ~{raisedText}
                   <div>

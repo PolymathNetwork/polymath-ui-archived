@@ -71,9 +71,8 @@ class MetamaskPage extends Component<Props> {
               </div>
               <h1 className='pui-h1'>{h1}</h1>
               <h3 className='pui-h3'>{h3}</h3>
-              <div className='pui-clearfix' />
             </div>
-            <Accordion>
+            <Accordion className='pui-metamask-accordion'>
               <AccordionItem title='What software do you need to issue your Security Token?'>
                 <p>
                   To issue your Security Token, you need to have MetaMask installed in your browser.<br />

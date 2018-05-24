@@ -38,26 +38,28 @@ class SignUpForm extends Component<Props> {
           placeholder='Enter your email address'
           validate={[required, email]}
         />
-        <Field
-          name='acceptPrivacy'
-          component={Checkbox}
-          className='pui-checkbox-small-text'
-          label={
-            // $FlowFixMe
-            <React.Fragment>
-              <p>I accept that Polymath may contact me via email to send me updates on my token issuance process.</p>
-              <p>For more details, please consult our <Link href='https://polymath.network'>Privacy Policy</Link>.</p>
-            </React.Fragment>
-          }
-        />
-        <Field
-          name='acceptTerms'
-          component={Checkbox}
-          className='pui-checkbox-small-text'
-          label={
-            <p>I accept the <Link href='https://polymath.network'>Terms of Use</Link>.</p>
-          }
-        />
+        <div className='pui-sign-up-checkboxes'>
+          <Field
+            name='acceptPrivacy'
+            component={Checkbox}
+            className='pui-checkbox-small-text'
+            label={
+              // $FlowFixMe
+              <React.Fragment>
+                <p>I accept that Polymath may contact me via email to send me updates on my token issuance process.</p>
+                <p>For more details, please consult our <Link href='https://polymath.network'>Privacy Policy</Link>.</p>
+              </React.Fragment>
+            }
+          />
+          <Field
+            name='acceptTerms'
+            component={Checkbox}
+            className='pui-checkbox-small-text'
+            label={
+              <p>I accept the <Link href='https://polymath.network'>Terms of Use</Link>.</p>
+            }
+          />
+        </div>
         <Button type='submit' disabled={!this.props.enableSubmit}>
           CREATE ACCOUNT
         </Button>
