@@ -17,7 +17,7 @@ type StateProps = {|
   network: string,
   account: string,
   balance: ?BigNumber
-|};
+|}
 
 const mapStateToProps = (state: RootState): StateProps => ({
   network: state.network.name,

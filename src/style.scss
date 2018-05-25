@@ -5,7 +5,7 @@
  * VARIABLES
  */
 $navbar-height: 48px;
-$font-family: 'Overpass', sans-serif !important;
+$font: 'Overpass', sans-serif !important;
 
 $poly-blue: #252D6B;
 $poly-blue-hover: #58468E;
@@ -31,7 +31,7 @@ $toast-approx-height: 90px;
  * GLOBAL
  */
 body {
-  font-family: $font-family;
+  font-family: $font;
   background: white !important;
 }
 
@@ -106,7 +106,7 @@ body {
   margin-top: 20px;
   text-transform: uppercase;
   background: $poly-blue !important;
-  font-family: $font-family;
+  font-family: $font;
 
   &:hover {
     background: rgba(40, 38, 110, 0.8) !important;
@@ -120,7 +120,7 @@ body {
 
   &:hover {
     color: white !important;
-    border-color: $poly-blue-hover !important;
+    background: $poly-blue !important;
   }
 }
 
@@ -131,13 +131,21 @@ body {
   width: 100%;
 }
 
+.bx--checkbox-label {
+  font-family: $font;
+}
+
+.bx--fieldset {
+  margin-bottom: 0 !important;
+}
+
 .bx--form-item {
   margin-bottom: 16px !important;
   margin-right: 0 !important;
 
   p {
     font-size: 14px;
-    font-family: $font-family;
+    font-family: $font;
     display: inline-flex;
     line-height: 16px;
 
@@ -147,7 +155,7 @@ body {
 
     a {
       font-size: 12px;
-      font-family: $font-family;
+      font-family: $font;
     }
   }
 }
@@ -157,7 +165,7 @@ body {
   font-weight: 300;
   line-height: 22px;
   color: $poly-blue-dark !important;
-  font-family: $font-family;
+  font-family: $font;
 
   &::placeholder {
     color: $poly-gray-dark !important;
@@ -180,7 +188,7 @@ body {
 
   .bx--modal-content__text,
   .bx--modal-content__text p {
-    font-family: $font-family;
+    font-family: $font;
     font-weight: 300;
     line-height: 24px;
 
@@ -195,7 +203,7 @@ body {
 }
 
 .bx--form-requirement {
-  font-family: $font-family;
+  font-family: $font;
 }
 
 .bx--loading-overlay {
@@ -239,7 +247,7 @@ body {
 
 .bx--accordion__heading,
 .bx--accordion__content {
-  font-family: $font-family;
+  font-family: $font;
 }
 
 .bx--accordion__content {
@@ -247,7 +255,58 @@ body {
 }
 
 .bx--tag {
-  font-family: $font-family;
+  font-family: $font;
+}
+
+.bx--progress {
+
+  margin-top: 38px;
+  margin-bottom: 9px;
+
+  .bx--progress-label {
+    font-family: $font;
+    font-size: 14px;
+    color: $poly-blue !important;
+  }
+
+  .bx--progress-step--current {
+    circle:first-child {
+      stroke: $poly-blue;
+    }
+
+    circle:last-child {
+      fill: $poly-blue;
+    }
+
+    .bx--progress-line {
+      background-color: $poly-blue;
+    }
+  }
+
+  .bx--progress-step--complete {
+    circle {
+      stroke: $poly-blue;
+    }
+    polygon {
+      fill: $poly-blue;
+    }
+  }
+
+  .bx--progress-step--incomplete {
+    .bx--progress-label {
+      color: $poly-gray !important;
+    }
+
+    .bx--progress-line {
+      background-color: $poly-gray;
+    }
+  }
+
+  .bx--progress-step--complete {
+    .bx--progress-line {
+      background-color: $poly-blue;
+    }
+  }
 }
 
 /**
@@ -307,6 +366,14 @@ body {
     margin-bottom: 18px;
     margin-top: -3px;
   }
+
+  .bx--form-item {
+    p {
+      a {
+        word-break: break-word;
+      }
+    }
+  }
 }
 
 .pui-input-hint {
@@ -315,7 +382,7 @@ body {
   font-weight: 300;
   line-height: 18px;
   margin-top: 7px;
-  font-family: $font-family;
+  font-family: $font;
 
   a {
     text-decoration: none;
@@ -422,60 +489,6 @@ body {
       svg, img {
         margin-right: 8px;
       }
-    }
-  }
-}
-
-/**
- * PROGRESS INDICATOR
- */
-.bx--progress {
-
-  margin-top: 38px;
-  margin-bottom: 9px;
-
-  .bx--progress-label {
-    font-family: $font-family;
-    font-size: 14px;
-    color: $poly-blue !important;
-  }
-
-  .bx--progress-step--current {
-    circle:first-child {
-      stroke: $poly-blue;
-    }
-
-    circle:last-child {
-      fill: $poly-blue;
-    }
-
-    .bx--progress-line {
-      background-color: $poly-blue;
-    }
-  }
-
-  .bx--progress-step--complete {
-    circle {
-      stroke: $poly-blue;
-    }
-    polygon {
-      fill: $poly-blue;
-    }
-  }
-
-  .bx--progress-step--incomplete {
-    .bx--progress-label {
-      color: $poly-gray !important;
-    }
-
-    .bx--progress-line {
-      background-color: $poly-gray;
-    }
-  }
-
-  .bx--progress-step--complete {
-    .bx--progress-line {
-      background-color: $poly-blue;
     }
   }
 }
@@ -625,6 +638,61 @@ body {
 }
 
 /**
+ * REMARK
+ */
+.pui-remark {
+  display: flex;
+  font-size: 14px;
+  line-height: 22px;
+  color: $poly-gray-dark;
+  background-color: #F6F7FB;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  width: 100%;
+  min-height: 42px;
+  margin-bottom: 16px;
+
+  &.pui-remark-small {
+    min-height: 16px;
+    font-size: 10px;
+    line-height: 19px;
+    display: inline-flex;
+    width: auto;
+
+    div {
+      padding: 0 10px;
+      color: $poly-gray-dark;
+    }
+
+    .pui-remark-title {
+      min-width: 56px !important;
+    }
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .pui-remark-title {
+    text-align: center;
+    min-width: 120px !important;
+    background-color: #E1E8F2;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    font-weight: 600;
+  }
+
+  .pui-remark-text {
+    padding-left: 16px;
+    padding-right: 16px;
+    line-height: 17px;
+    font-weight: 300;
+  }
+}
+
+/**
  * STOStatus
  */
 .pui-sto-status-contract {
@@ -672,10 +740,6 @@ body {
 
   > div:first-child {
     padding-right: 34px;
-
-    @include breakpoint(bp--lg--major) {
-      padding-right: 68px;
-    }
   }
 }
 
@@ -684,10 +748,6 @@ body {
   justify-content: center;
   align-items: center;
   padding-top: 20px;
-
-  @include breakpoint(bp--md--major) {
-    padding-top: 0;
-  }
 }
 
 /**
@@ -702,7 +762,7 @@ body {
 
   background-color: white;
   border-radius: 16px;
-  box-shadow: 0 4px 16px 0 rgba(42, 63, 125, 0.2);
+  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.1);
 
   .pui-countdown-top-bar {
     padding: 5px 16px;
@@ -713,10 +773,6 @@ body {
     font-size: 18px;
     color: white;
     background-color: $poly-blue;
-
-    @include breakpoint(bp--md--major) {
-      font-size: 20px;
-    }
   }
 
   .pui-countdown-content {
@@ -746,33 +802,18 @@ body {
 
   .pui-countdown-days {
     .pui-countdown-number {
-      font-size: 56px;
+      font-size: 77px;
     }
 
     .pui-countdown-number-text {
-      font-size: 22px !important;
-    }
-
-    @include breakpoint(bp--md--major) {
-      .pui-countdown-number {
-        font-size: 64px;
-      }
-
-      .pui-countdown-number-text {
-        font-size: 34px;
-      }
+      font-size: 20px !important;
     }
   }
 
   .pui-countdown-number {
     display: flex;
     padding-right: 10px;
-
     font-size: 28px;
-
-    @include breakpoint(bp--md--major) {
-      font-size: 32px;
-    }
 
     > * {
       align-items: center;
@@ -794,7 +835,7 @@ body {
 
   .pui-countdown-number-text {
     display: flex;
-    padding-left: 10px;
+    padding-left: 7px;
 
     font-size: 16px;
     font-weight: 600;
@@ -819,8 +860,11 @@ body {
   }
 
   &.pui-countdown-small {
-    width: 160px;
-    height: 160px;
+    width: 150px;
+    height: 150px;
+    margin-left: 40px;
+    margin-bottom: 25px;
+    margin-top: 15px;
 
     .pui-countdown-content {
       padding-top: 10px;

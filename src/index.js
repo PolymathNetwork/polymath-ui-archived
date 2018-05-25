@@ -12,6 +12,7 @@ export { default as DatePickerRangeInput } from './components/inputs/DatePickerR
 export { default as TimePickerInput, twelveHourTimeToMinutes } from './components/inputs/TimePickerInput'
 export { default as STOStatus } from './components/STOStatus'
 export { default as Countdown } from './components/Countdown'
+export { default as Remark } from './components/Remark'
 export { default as Toaster } from './modules/toaster/Toaster'
 export { default as TxModal } from './modules/tx/TxModal'
 export { default as TxSuccess } from './modules/tx/TxSuccess'
