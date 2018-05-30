@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import Measure from 'react-measure'
 
+// TODO @bshevchenko: extract following styles into the scss file
 const backgroundColor = '#F0F3F6'
 const strokeColor = '#3D70B2'
 const strokeWidth = 16

@@ -16,8 +16,7 @@ type StateProps = {|
 |}
 
 const mapStateToProps = (state) => ({
-  enableSubmit: !!formValue(state, 'acceptPrivacy') &&
-    !!formValue(state, 'acceptTerms'),
+  enableSubmit: !!formValue(state, 'acceptPrivacy') && !!formValue(state, 'acceptTerms'),
 })
 
 type DispatchProps = {|

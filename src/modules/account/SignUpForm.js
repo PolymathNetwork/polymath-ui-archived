@@ -1,10 +1,10 @@
 // @flow
 
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Form, Button, Link } from 'carbon-components-react'
 import { Field, reduxForm } from 'redux-form'
 
-import { Checkbox, TextInput } from '../../'
+import { CheckboxInput, TextInput } from '../../'
 import {
   required,
   maxLength,
@@ -41,22 +41,21 @@ class SignUpForm extends Component<Props> {
         <div className='pui-sign-up-checkboxes'>
           <Field
             name='acceptPrivacy'
-            component={Checkbox}
+            component={CheckboxInput}
             className='pui-checkbox-small-text'
             label={
-              // $FlowFixMe
-              <React.Fragment>
+              <Fragment>
                 <p>I accept that Polymath may contact me via email to send me updates on my token issuance process.</p>
-                <p>For more details, please consult our <Link href='https://polymath.network'>Privacy Policy</Link>.</p>
-              </React.Fragment>
+                <p>For more details, please consult our <Link href='https://polymath.network'>Privacy Policy</Link></p>
+              </Fragment>
             }
           />
           <Field
             name='acceptTerms'
-            component={Checkbox}
+            component={CheckboxInput}
             className='pui-checkbox-small-text'
             label={
-              <p>I accept the <Link href='https://polymath.network'>Terms of Use</Link>.</p>
+              <p>I accept the <Link href='https://polymath.network'>Terms of Use</Link></p>
             }
           />
         </div>

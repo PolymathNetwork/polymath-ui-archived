@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable react/jsx-no-bind, no-useless-escape */
 
 import React from 'react'
 import { DatePicker, DatePickerInput } from 'carbon-components-react'
@@ -35,7 +36,7 @@ export default ({
       onChange={(date: Date) => {
         input.onChange(date || null)
       }}
-      {...rest}
+      dateFormat='m / d / Y'
     >
       <DatePickerInput
         labelText={label}
@@ -43,7 +44,10 @@ export default ({
         id={input.name}
         invalid={invalid}
         invalidText={error}
+        onClick={() => {}}
+        onChange={() => {}}
         pattern={null}
+        {...rest}
       />
     </DatePicker>
   )
