@@ -80,7 +80,29 @@ export const todayOrLater = (date: ?Date): ?string => {
     return null
   }
 
+  // eslint-disable-next-line
+  date = new Date(date)
+
   const now = new Date()
+  const dayBegin = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+
+  if (dayBegin.getTime() > date.getTime()) {
+    return 'Date is in the past.'
+  }
+
+  return null
+}
+
+export const tomorrowOrLater = (date: ?Date): ?string => {
+  if (!date) {
+    return null
+  }
+
+  // eslint-disable-next-line
+  date = new Date(date)
+
+  const now = new Date()
+  now.setDate(now.getDate() + 1)
   const dayBegin = new Date(now.getFullYear(), now.getMonth(), now.getDate())
 
   if (dayBegin.getTime() > date.getTime()) {

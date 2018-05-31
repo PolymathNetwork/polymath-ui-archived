@@ -64,57 +64,54 @@ export default class STOStatus extends Component<Props> {
       <div className='pui-page-box'>
         <h2 className='pui-h2'>Capped STO</h2>
         <p className='pui-sto-status-contract'>Contract { etherscanAddress(details.address) }</p>
-        <div className='bx--row'>
-          <div className='bx--col-xs-8 pui-sto-status-grow'>
-            <div className='pui-sto-status-numbers'>
-              <div>{fractionComplete}%</div>
+        <div className='pui-sto-status-grow'>
+          <div className='pui-sto-status-numbers'>
+            <div>{fractionComplete}%</div>
+            <div className='pui-key-value'>
+              <div>Cap</div>
+              {capText}
+            </div>
+          </div>
+          <ProgressBar
+            className='pui-sto-status-progress-bar'
+            progress={fractionComplete / 100}
+          />
+          <div className='pui-sto-status-bottom-row'>
+            <div className='pui-sto-status-dates'>
               <div className='pui-key-value'>
-                <div>Cap</div>
-                {capText}
+                <div>Start Date</div>
+                {dateFormat(details.start)}
+              </div>
+              <div className='pui-key-value'>
+                <div>End Date</div>
+                {dateFormat(details.end)}
+              </div>
+              <div className='pui-key-value'>
+                <div>
+                  1 {symbol} <span>= {details.rate} {token.ticker}</span>
+                </div>
               </div>
             </div>
-            <ProgressBar
-              className='pui-sto-status-progress-bar'
-              progress={fractionComplete / 100}
-            />
-            <div className='pui-sto-status-bottom-row'>
-              <div className='pui-sto-status-dates'>
-                <div className='pui-key-value'>
-                  <div>Start Date</div>
-                  {dateFormat(details.start)}
-                </div>
-                <div className='pui-key-value'>
-                  <div>End Date</div>
-                  {dateFormat(details.end)}
-                </div>
-                <div className='pui-key-value'>
-                  <div style={{ paddingLeft: '60px' }}>
-                    1 {symbol} = {details.rate} {token.ticker}
-                  </div>
-                </div>
-              </div>
-              <div>
-                <div className='pui-key-value pui-countdown-raised'>
-                  <div>Total Funds Raised</div>
-                  ~{raisedText}
-                  <div>
-                    ~{distTokens} {token.ticker}
-                  </div>
+            <div>
+              <div className='pui-key-value pui-countdown-raised'>
+                <div>Total Funds Raised (~)</div>
+                {raisedText}
+                <div>
+                  {distTokens} {token.ticker}
                 </div>
               </div>
             </div>
           </div>
-          {countdownProps != null && (
-            <div className='bx--col-xs-4'>
-              <div className='pui-sto-countdown-container'>
-                <Countdown
-                  deadline={countdownProps.deadline}
-                  title={countdownProps.title}
-                />
-              </div>
-            </div>
-          )}
         </div>
+        {countdownProps != null && (
+          <div className='pui-countdown-container'>
+            <Countdown
+              deadline={countdownProps.deadline}
+              title={countdownProps.title}
+            />
+          </div>
+        )}
+        <div className='pui-clearfix' />
       </div>
     )
   }

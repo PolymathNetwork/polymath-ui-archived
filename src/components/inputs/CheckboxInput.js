@@ -14,7 +14,8 @@ type Props = {
   className: string,
 }
 
-export class Checkbox extends Component<Props> {
+export default class CheckboxInput extends Component<Props> {
+
   handleChange = (value: [boolean] | boolean) => {
     const { input } = this.props
     return input.onChange(value instanceof Array ? value[0] : value)
@@ -49,5 +50,3 @@ export class Checkbox extends Component<Props> {
     )
   }
 }
-
-export default Checkbox
