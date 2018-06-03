@@ -1,5 +1,5 @@
 @import 'node_modules/carbon-components/src/globals/scss/styles.scss';
-@import url('https://fonts.googleapis.com/css?family=Overpass:300,400,600');
+@import url('https://fonts.googleapis.com/css?family=Overpass:100,200,300,400,600');
 
 /**
  * VARIABLES
@@ -96,6 +96,14 @@ div {
   font-size: 16px;
   font-weight: 300;
   line-height: 24px;
+  margin-bottom: 6px;
+}
+
+.pui-h5 {
+  color: $poly-gray-dark;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 22px;
   margin-bottom: 6px;
 }
 
@@ -232,6 +240,10 @@ div {
 
     p:first-child {
       margin-top: -3px;
+    }
+
+    .bx--inline-notification__title {
+      font-weight: 600 !important;
     }
   }
 
@@ -1057,4 +1069,8 @@ div {
 
 .pui-metamask-accordion {
   margin-top: 47px;
+}
+
+.pui-bold {
+  font-weight: 600 !important;
 }

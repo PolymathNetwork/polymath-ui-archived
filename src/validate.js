@@ -1,5 +1,6 @@
 // @flow
 
+import { keccak256 as sha3 } from 'js-sha3'
 import type { TwelveHourTime } from './components/inputs/TimePickerInput'
 
 export const required = (value: any) => {
@@ -51,8 +52,23 @@ export const integer = (value: ?number) => {
   return Number.isNaN(v) || v % 1 !== 0 ? 'Must be a whole number.' : null
 }
 
-export const ethereumAddress = (value: ?string) =>
-  (!value || /^0x[a-fA-F0-9]{40}$/.test(value)) ? null : 'Must be a valid Ethereum address.'
+export const ethereumAddress = (value: ?string) => {
+  let result = true
+  if (!value || !/^0x[a-fA-F0-9]{40}$/.test(value)) {
+    result = false
+  } else {
+    const address = value.replace('0x', '')
+    const addressHash = sha3(address.toLowerCase())
+    for (let i = 0; i < 40; i++ ) {
+      if ((parseInt(addressHash[i], 16) > 7 && address[i].toUpperCase() !== address[i])
+        || (parseInt(addressHash[i], 16) <= 7 && address[i].toLowerCase() !== address[i])) {
+        result = false
+        break
+      }
+    }
+  }
+  return result ? null : 'Must be a valid Ethereum address.'
+}
 
 export const date = (value: any) =>
   value instanceof Date ? null : 'Pick date from the calendar.'
