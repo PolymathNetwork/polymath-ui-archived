@@ -1,6 +1,6 @@
 {
   "name": "polymath-ui",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "7.2.3",
@@ -28,8 +28,8 @@
     "style-loader": "^0.20.3"
   },
   "peerDependencies": {
-    "polymathjs": "x",
-    "polymath-auth": "x"
+    "polymath-auth": "x",
+    "polymathjs": "x"
   },
   "dependencies": {
     "apollo-fetch": "^0.7.0",
@@ -39,6 +39,7 @@
     "carbon-components-react": "5.31.0",
     "carbon-icons": "6.3.2",
     "eth-sig-util": "^1.4.2",
+    "js-sha3": "^0.7.0",
     "react": "16.2.0",
     "react-document-title": "2.0.3",
     "react-dom": "16.2.0",
