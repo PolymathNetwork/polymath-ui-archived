@@ -23,7 +23,6 @@ export default ({
   label,
   meta: { touched, error },
   className,
-  placeholder,
   ...rest
 }: Props) => {
   const invalid = touched && !!error
@@ -40,7 +39,7 @@ export default ({
     >
       <DatePickerInput
         labelText={label}
-        placeholder={placeholder}
+        placeholder='mm / dd / yyyy'
         id={input.name}
         invalid={invalid}
         invalidText={error}
