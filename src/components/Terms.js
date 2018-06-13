@@ -15,8 +15,9 @@ type MenuItem = {|
       |}
 
 type Props = {|
-  headerText: string,
-    menuItems: Array<MenuItem>
+  pageTitle: string,
+    headerText: string,
+      menuItems: Array<MenuItem>
 |}
 
 export default class Terms extends Component<Props> {
@@ -58,7 +59,7 @@ export default class Terms extends Component<Props> {
   }
 
   render () {
-    const { menuItems, headerText } = this.props
+    const { menuItems, headerText, pageTitle } = this.props
     return (
       <DocumentTitle title='Polymath'>
 
@@ -73,7 +74,7 @@ export default class Terms extends Component<Props> {
               </div>
             </Link>
           </div>
-          <h1 className='pui-h1'>Terms of Use</h1>
+          <h1 className='pui-h1'>{pageTitle}</h1>
 
           <div className='bx--row'>
             <div className='bx--col-xs-4' >
