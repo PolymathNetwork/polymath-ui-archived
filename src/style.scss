@@ -627,6 +627,20 @@ div {
 /**
  * SIDEBAR
  */
+.pui-sidenav {
+  position: fixed;
+  width:300px;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+
+
+/**
+ * SIDEBAR
+ */
 .pui-sidebar {
   position: fixed;
   left: 0;
