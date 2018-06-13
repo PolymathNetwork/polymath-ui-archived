@@ -45,8 +45,12 @@ class SignUpForm extends Component<Props> {
             className='pui-checkbox-small-text'
             label={
               <Fragment>
-                <p>I accept that Polymath may contact me via email to send me updates on my token issuance process.</p>
-                <p>For more details, please consult our <Link href='https://polymath.network'>Privacy Policy</Link></p>
+                <p>I accept that Polymath may contact me via email to send me
+                  updates on my token issuance process.
+                </p>
+                <p>For more details, please consult our
+                  <Link target='_blank' href='/privacypolicy'>Privacy Policy</Link>
+                </p>
               </Fragment>
             }
           />
@@ -55,7 +59,7 @@ class SignUpForm extends Component<Props> {
             component={CheckboxInput}
             className='pui-checkbox-small-text'
             label={
-              <p>I accept the <Link href='https://polymath.network'>Terms of Use</Link></p>
+              <p>I accept the <Link target='_blank' href='/termsofuse'>Terms of Use</Link></p>
             }
           />
         </div>

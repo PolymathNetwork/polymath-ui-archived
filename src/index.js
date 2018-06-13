@@ -16,6 +16,7 @@ export { default as Countdown } from './components/Countdown'
 export { default as Remark } from './components/Remark'
 export { default as Toaster } from './modules/toaster/Toaster'
 export { default as TxModal } from './modules/tx/TxModal'
+export { default as ConfirmModal } from './modules/modal/ConfirmModal'
 export { default as TxSuccess } from './modules/tx/TxSuccess'
 export { default as Sidebar } from './components/Sidebar'
 export { default as SignUpPage } from './modules/account/SignUpPage'
@@ -31,6 +32,7 @@ export {
 } from './modules/account/actions'
 export type { AccountData } from './modules/account/actions'
 export { txStart, txEnd, txFailed, txHash, txSuccess } from './modules/tx/actions'
+export { confirm, cancelConfirm } from './modules/modal/actions'
 export { fetching, fetched, fetchingFailed } from './redux/common/actions'
 export {
   setHelpersNetwork,
