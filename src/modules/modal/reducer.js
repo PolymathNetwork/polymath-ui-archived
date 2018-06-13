@@ -6,40 +6,30 @@ import type { Action } from './actions'
 export type ModalState = {
   isModalVisible: boolean,
   headerText: string,
-  labelText: string,
-  confirmText: string,
   message: string,
   labelColor: string,
-  modalIcon: string,
-  onClose: () => any,
+  cancelConfirm: () => any,
   onSubmit: () => any,
 }
 
 const defaultState = {
   isModalVisible: false,
   headerText: '',
-  labelText: '',
-  confirmText: '',
   message: '',
   labelColor: '',
-  modalIcon: '',
-  onClose: () => {},
+  cancelConfirm: () => {},
   onSubmit: () => {},
 }
 
 export default (state: ModalState = defaultState, action: Action) => {
   switch (action.type) {
-    case a.SHOW:
+    case a.CONFIRM:
       return {
         ...state,
         isModalVisible: true,
         headerText: action.headerText,
-        labelText: action.labelText,
-        confirmText: action.confirmText,
-        labelColor: action.labelColor,
-        modalIcon: action.modalIcon,
         message: action.message,
-        onClose: action.onClose,
+        labelColor: action.labelColor,
         onSubmit: action.onSubmit,
       }
 

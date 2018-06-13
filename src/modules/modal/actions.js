@@ -2,19 +2,17 @@
 
 import type { ExtractReturn } from '../../redux/helpers'
 
-export const SHOW = 'polymath-ui/modal/SHOW'
-export const showModal = (
-  headerText: string,
-  labelText: string,
-  confirmText: string,
-  message: string,
-  labelColor: string,
-  modalIcon: string,
-  onClose: any,
-  onSubmit: any,
-) => ({ type: SHOW, headerText, labelText, confirmText, message, labelColor, modalIcon, onClose, onSubmit })
+export const CONFIRM = 'polymath-ui/modal/CONFIRM'
+export const confirm = (headerText: string, message: string, labelColor: string, onSubmit: any, onClose: any) => ({
+  type: CONFIRM,
+  headerText,
+  message,
+  labelColor,
+  onSubmit,
+  onClose,
+})
 
 export const CLOSE = 'polymath-ui/modal/CLOSE'
-export const closeModalAction = () => ({ type: CLOSE })
+export const cancelConfirm = () => ({ type: CLOSE })
 
-export type Action = ExtractReturn<typeof showModal> | ExtractReturn<typeof closeModalAction>
+export type Action = ExtractReturn<typeof confirm> | ExtractReturn<typeof cancelConfirm>

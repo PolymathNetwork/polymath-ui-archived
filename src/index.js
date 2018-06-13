@@ -32,7 +32,7 @@ export {
 } from './modules/account/actions'
 export type { AccountData } from './modules/account/actions'
 export { txStart, txEnd, txFailed, txHash, txSuccess } from './modules/tx/actions'
-export { showModal, closeModalAction } from './modules/modal/actions'
+export { confirm, cancelConfirm } from './modules/modal/actions'
 export { fetching, fetched, fetchingFailed } from './redux/common/actions'
 export {
   setHelpersNetwork,

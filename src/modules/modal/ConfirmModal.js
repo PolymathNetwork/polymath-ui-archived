@@ -1,53 +1,76 @@
 // @flow
 
 import React, { Component } from 'react'
+// import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { Modal, ModalHeader, Icon } from 'carbon-components-react'
+// import type { Dispatch } from 'redux'
+
+import { cancelConfirm } from './actions'
+// import type { Action } from './actions'
 
 import type { RootState } from '../../redux/reducer'
 import type { ModalState } from './reducer'
 
+// type Props = {
+//   cancelConfirm: typeof cancelConfirm,
+// }
+
+type DispatchProps = {|
+  cancelConfirm: () => { },
+|}
+
 const mapStateToProps = (state: RootState): ModalState => state.pui.modal
 
-class ConfirmModal extends Component<ModalState> {
+// const mapDispatchToProps: DispatchProps = {
+//   cancelConfirm,
+// }
+
+const mapDispatchToProps = (dispatch: Function): Object => {
+  return {
+    cancelConfirm: () => {
+      dispatch(cancelConfirm())
+    },
+  }
+}
+
+class ConfirmModal extends Component<ModalState, DispatchProps> {
   handleSubmit = () => {
     this.props.onSubmit()
   }
 
   handleClose = () => {
-    this.props.onClose()
+    this.props.cancelConfirm()
   }
-  //This function is necessary for Carbon Components ModalHeader
+  // This function is necessary for Carbon Components ModalHeader
   onClose = () => {
-    this.props.onClose()
+    this.props.cancelConfirm()
   }
   render () {
-    const { isModalVisible, onClose, headerText, labelText, labelColor, modalIcon, confirmText, message } = this.props
+    const { isModalVisible, headerText, message, labelColor } = this.props
     return (
       <Modal
         className='pui-tx-modal'
         open={isModalVisible}
         onFocus={this.handleClose}
-        onRequestClose={onClose}
+        onRequestClose={this.handleClose}
         onRequestSubmit={this.handleSubmit}
-        primaryButtonText={confirmText}
+        primaryButtonText='Confirm'
         secondaryButtonText='Cancel'
       >
         <ModalHeader
-          label={<span style={{ color: { labelColor } }}>{labelText}</span>}
-          closeModal={onClose}
+          label={<span style={{ color: `${labelColor}` }}>Confirmation Required</span>}
+          closeModal={this.onClose}
           title={
             <span>
-              <Icon name={`${modalIcon}`} fill='#E71D32' width='24' height='24' />&nbsp; {headerText}
+              <Icon name='warning--glyph' fill='#E71D32' width='24' height='24' />&nbsp; {headerText}
             </span>
           }
         />
-        <div className='bx--modal-content__text'>
-          <p>{message}</p>
-        </div>
+        <div className='bx--modal-content__text'>{message}</div>
       </Modal>
     )
   }
 }
 
-export default connect(mapStateToProps)(ConfirmModal)
+export default connect(mapStateToProps, mapDispatchToProps)(ConfirmModal)
