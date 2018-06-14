@@ -1,10 +1,11 @@
 // @flow
 
 import React, { Component } from 'react'
+import type { Node } from 'react'
 
 type Props = {|
   title: string,
-  children: string,
+  children: string | Node,
   small?: boolean,
 |}
 

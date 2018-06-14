@@ -902,23 +902,6 @@ div {
   min-height: 42px;
   margin-bottom: 16px;
 
-  &.pui-remark-small {
-    min-height: 16px;
-    font-size: 10px;
-    line-height: 19px;
-    display: inline-flex;
-    width: auto;
-
-    div {
-      padding: 0 10px;
-      color: $poly-gray-dark;
-    }
-
-    .pui-remark-title {
-      min-width: 56px !important;
-    }
-  }
-
   div {
     display: flex;
     flex-direction: column;
@@ -935,10 +918,26 @@ div {
   }
 
   .pui-remark-text {
-    padding-left: 16px;
-    padding-right: 16px;
     line-height: 17px;
     font-weight: 300;
+    padding: 3px 16px;
+  }
+
+  &.pui-remark-small {
+    min-height: 16px;
+    font-size: 10px;
+    line-height: 19px;
+    display: inline-flex;
+    width: auto;
+
+    div {
+      padding: 0 10px;
+      color: $poly-gray-dark;
+    }
+
+    .pui-remark-title {
+      min-width: 56px !important;
+    }
   }
 }
 
