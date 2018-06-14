@@ -10,20 +10,17 @@ export const setupHistory = (history: RouterHistory) => ({ type: SETUP_HISTORY, 
 export const FETCHING = 'polymath-ui/FETCHING'
 export const fetching = () => ({ type: FETCHING })
 
-export const FETCHING_FAILED = 'polymath-ui/FETCHING_FAILED'
-const fetchingFailedAction = (message: string) => ({ type: FETCHING_FAILED, message })
-
 export const FETCHED = 'polymath-ui/FETCHED'
 export const fetched = () => ({ type: FETCHED })
+
+export const FETCHING_FAILED = 'polymath-ui/FETCHING_FAILED'
+export const fetchingFailed = (e: Error) => async (dispatch: Function) => {
+  // eslint-disable-next-line
+  console.error('Fetching failed', e)
+  dispatch({ type: FETCHING_FAILED, message: e.message })
+}
 
 export type Action =
   | ExtractReturn<typeof setupHistory>
   | ExtractReturn<typeof fetching>
-  | ExtractReturn<typeof fetchingFailedAction>
   | ExtractReturn<typeof fetched>
-
-export const fetchingFailed = (e: Error) => async (dispatch: Function) => {
-  // eslint-disable-next-line
-  // TODO @bshevchenko: console.error('Fetching failed', e)
-  dispatch(fetchingFailedAction(e.message))
-}
