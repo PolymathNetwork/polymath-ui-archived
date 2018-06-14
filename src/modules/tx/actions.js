@@ -1,12 +1,30 @@
 // @flow
 
-import { notify } from '../../index'
-import { etherscanTx } from '../../helpers'
 import type { ExtractReturn } from '../../redux/helpers'
 import type { GetState } from '../../redux/reducer'
 
 export const START = 'polymath-ui/tx/START'
-export const txStart = (message: string) => ({ type: START, message })
+export const FAILED = 'polymath-ui/tx/FAILED'
+export const tx = (
+  titles: string | Array<string>,
+  code: () => any,
+  successTitle: string,
+  continueCode?: () => any,
+  continueRoute?: string,
+  continueLabel?: string,
+  isNoEmail?: boolean,
+) => async (dispatch: Function) => {
+  // eslint-disable-next-line
+  titles = typeof titles === 'string' ? [titles] : titles
+  dispatch({ type: START, titles, successTitle, continueRoute, continueLabel, continueCode, isNoEmail })
+  try {
+    await code()
+  } catch (error) {
+    // eslint-disable-next-line
+    console.error('Tx failed', error)
+    dispatch({ type: FAILED, error })
+  }
+}
 
 export const HASH = 'polymath-ui/tx/HASH'
 export const txHash = (hash: string) => ({ type: HASH, hash })
@@ -14,35 +32,20 @@ export const txHash = (hash: string) => ({ type: HASH, hash })
 export const END = 'polymath-ui/tx/END'
 export const txEnd = (receipt: Object) => ({ type: END, receipt })
 
-export const FAILED = 'polymath-ui/tx/FAILED'
-const txFailedAction = () => ({ type: FAILED })
-
-export const SUCCESS = 'polymath-ui/tx/SUCCESS'
-export const txSuccess = (title: string, goTitle: string, route: string) => ({ type: SUCCESS, title, goTitle, route })
-
 export const CONTINUE = 'polymath-ui/tx/CONTINUE'
-export const txContinue = () => (dispatch: Function, getState: GetState) => {
-  // $FlowFixMe
-  getState().pui.common.history.push(getState().pui.tx.success.route)
+export const txContinue = () => async (dispatch: Function, getState: GetState) => {
+  const { error, continueRoute, continueCode } = getState().pui.tx
   dispatch({ type: CONTINUE })
+  if (!error) {
+    if (continueCode) {
+      await continueCode()
+    }
+    if (continueRoute) { // $FlowFixMe
+      getState().pui.common.history.push(continueRoute)
+    }
+  }
 }
 
 export type Action =
-  | ExtractReturn<typeof txStart>
   | ExtractReturn<typeof txHash>
   | ExtractReturn<typeof txEnd>
-  | ExtractReturn<typeof txFailedAction>
-
-export const txFailed = (e: Error) => async (dispatch: Function, getState: GetState) => {
-  // eslint-disable-next-line
-  console.error('Transaction failed', e)
-  let caption
-  let isPinned = false
-  const receipt = getState().pui.tx.receipt
-  if (receipt && receipt.transactionHash) {
-    caption = etherscanTx(receipt.transactionHash)
-    isPinned = true
-  }
-  dispatch(notify('Transaction failed', false, e.message, caption, isPinned))
-  dispatch(txFailedAction())
-}
