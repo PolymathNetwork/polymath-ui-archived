@@ -5,7 +5,7 @@ import sigUtil from 'eth-sig-util'
 // $FlowFixMe
 import { PolyToken } from 'polymathjs'
 
-import { fetching, fetchingFailed, fetched, notify, txStart, txEnd, txFailed } from '../..'
+import { fetching, fetchingFailed, fetched, notify } from '../..'
 import { formName } from './SignUpForm'
 import type { ExtractReturn } from '../../redux/helpers'
 import type { GetState, RootState } from '../../redux/reducer'
@@ -189,7 +189,7 @@ export const updateAccount = (account: AccountInnerData) => async (dispatch: Fun
 }
 
 export const signUp = () => async (dispatch: Function, getState: GetState) => {
-  dispatch(txStart('Requesting your signature...'))
+  dispatch(fetching())
   try {
     const data = getState().form[formName].values
     const { web3 } = getState().network
@@ -205,13 +205,13 @@ export const signUp = () => async (dispatch: Function, getState: GetState) => {
     }))
 
     dispatch(signedUp(true))
+    dispatch(fetched())
     dispatch(notify(
       'You were successfully signed up',
       true
     ))
-    dispatch(txEnd({}))
   } catch (e) {
-    dispatch(txFailed(e))
+    dispatch(fetchingFailed(e))
   }
 }
 
