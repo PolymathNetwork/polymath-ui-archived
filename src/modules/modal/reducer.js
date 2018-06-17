@@ -1,12 +1,14 @@
 // @flow
 
+import React from 'react'
+import type { Node } from 'react'
 import * as a from './actions'
 import type { Action } from './actions'
 
 export type ModalState = {
   isModalVisible: boolean,
   headerText: string,
-  message: string,
+  message: Node,
   labelColor: string,
   cancelConfirm: () => any,
   onSubmit: () => any,
@@ -15,10 +17,10 @@ export type ModalState = {
 const defaultState = {
   isModalVisible: false,
   headerText: '',
-  message: '',
+  message: <div />,
   labelColor: '',
-  cancelConfirm: () => {},
-  onSubmit: () => {},
+  cancelConfirm: () => { },
+  onSubmit: () => { },
 }
 
 export default (state: ModalState = defaultState, action: Action) => {

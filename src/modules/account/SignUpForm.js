@@ -48,7 +48,7 @@ class SignUpForm extends Component<Props> {
                 <p>I accept that Polymath may contact me via email to send me
                   updates on my token issuance process.
                 </p>
-                <p>For more details, please consult our
+                <p>For more details, please consult our 
                   <Link target='_blank' href='/privacypolicy'>Privacy Policy</Link>
                 </p>
               </Fragment>

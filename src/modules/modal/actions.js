@@ -1,9 +1,9 @@
 // @flow
-
+import type { Node } from 'react'
 import type { ExtractReturn } from '../../redux/helpers'
 
 export const CONFIRM = 'polymath-ui/modal/CONFIRM'
-export const confirm = (headerText: string, message: string, labelColor: string, onSubmit: any, onClose: any) => ({
+export const confirm = (headerText: string, message: Node, labelColor: string, onSubmit: any, onClose: any) => ({
   type: CONFIRM,
   headerText,
   message,
