@@ -24,7 +24,7 @@ export default class Sidebar extends Component<Props> {
     return (
       <ul>
         {items.map((item: MenuItem) => item.isDisabled ? (
-          <li className='disabled'>
+          <li key={item.to} className='disabled'>
             {item.icon}
             <p>{item.title}</p>
           </li>

@@ -17,9 +17,7 @@ export { default as Remark } from './components/Remark'
 export { default as Toaster } from './modules/toaster/Toaster'
 export { default as TxModal } from './modules/tx/TxModal'
 export { default as ConfirmModal } from './modules/modal/ConfirmModal'
-export { default as TxSuccess } from './modules/tx/TxSuccess'
 export { default as Sidebar } from './components/Sidebar'
-export { default as Terms } from './components/Terms'
 export { default as SignUpPage } from './modules/account/SignUpPage'
 export { default as MetamaskPage } from './components/MetamaskPage'
 export { notify } from './modules/toaster/actions'
@@ -32,8 +30,7 @@ export {
   updateAccount,
 } from './modules/account/actions'
 export type { AccountData } from './modules/account/actions'
-export { txStart, txEnd, txFailed, txHash, txSuccess } from './modules/tx/actions'
-export { confirm, cancelConfirm } from './modules/modal/actions'
+export { tx, txEnd, txHash } from './modules/tx/actions'
 export { fetching, fetched, fetchingFailed } from './redux/common/actions'
 export {
   setHelpersNetwork,
@@ -42,6 +39,7 @@ export {
   etherscanToken,
   thousandsDelimiter,
   addressShortifier,
+  hashShortifier,
   timeZoneName,
 } from './helpers'
 export { default as reducer } from './redux/reducer'
@@ -52,6 +50,7 @@ export { default as bull } from '../img/bull.png'
 export { default as metamask } from '../img/metamask.png'
 export { default as icoBriefcase } from './svg/briefcase'
 export { default as icoInbox } from './svg/inbox'
+export { default as icoPaperPlane } from './svg/paper-plane'
 export { default as icoHandshake } from './svg/handshake'
 export { default as icoHelp } from './svg/help'
 export { default as icoWhitelist } from './svg/whitelist'

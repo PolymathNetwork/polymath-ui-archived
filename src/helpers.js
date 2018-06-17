@@ -17,7 +17,11 @@ export const setHelpersNetwork = (name: string) => {
 
 const etherscan = (type: string, value: string, label: Node) => {
   return (
-    <a href={`https://${network ? network + '.' : ''}etherscan.io/${type}/${value}`} target='_blank'>
+    <a
+      href={`https://${network ? network + '.' : ''}etherscan.io/${type}/${value}`}
+      rel='noopener noreferrer'
+      target='_blank'
+    >
       {label}
     </a>
   )
@@ -27,12 +31,8 @@ export const etherscanAddress = (address: string, label?: Node) => {
   return etherscan('address', address, label || address)
 }
 
-export const etherscanTx = (hash: string, label?: Node, isShort?: boolean) => {
-  if (isShort && typeof label === 'string') {
-    // eslint-disable-next-line
-    label = label.substring(0, 23) + '...' + label.slice(-23)
-  }
-  return etherscan('tx', hash, label || 'See on Etherscan')
+export const etherscanTx = (hash: string) => {
+  return etherscan('tx', hash, hashShortifier(hash))
 }
 
 export const etherscanToken = (address: string, label?: Node) => {
@@ -46,6 +46,9 @@ export const thousandsDelimiter = (v: number) => {
 
 export const addressShortifier = (address: string) =>
   address.substring(0, 7) + '...' + address.slice(-7)
+
+export const hashShortifier = (hash: string) =>
+  hash.substring(0, 10) + '...' + hash.slice(-4)
 
 export const timeZoneName = (): ?string => {
   const dateString = (new Date()).toLocaleDateString('en', { timeZoneName: 'long' })
