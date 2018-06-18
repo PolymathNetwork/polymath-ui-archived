@@ -7,15 +7,17 @@ import type { RouterHistory } from 'react-router-dom'
 
 import Toaster from './modules/toaster/Toaster'
 import TxModal from './modules/tx/TxModal'
+import ConfirmModal from './modules/modal/ConfirmModal'
 import Navbar from './components/Navbar'
+// import ConfirmModal from './components/ConfirmModal'
 import { setupHistory } from './redux/common/actions'
 
 type StateProps = {
-  isFetching: boolean
+  isFetching: boolean,
 }
 
 type DispatchProps = {|
-  setupHistory: (history: RouterHistory) => any
+  setupHistory: (history: RouterHistory) => any,
 |}
 
 const mapStateToProps = (state): StateProps => ({
@@ -29,12 +31,11 @@ const mapDispatchToProps: DispatchProps = {
 type Props = {|
   history: RouterHistory,
   ticker: ?string,
-  logo: ?string
+  logo: ?string,
 |} & StateProps &
   DispatchProps
 
 class PolymathUI extends Component<Props> {
-
   componentWillMount () {
     this.props.setupHistory(this.props.history)
   }
@@ -46,6 +47,7 @@ class PolymathUI extends Component<Props> {
         <Navbar ticker={ticker} logo={logo} />
         <Toaster />
         <TxModal />
+        <ConfirmModal />
         {this.props.isFetching ? <Loading /> : ''}
       </div>
     )
