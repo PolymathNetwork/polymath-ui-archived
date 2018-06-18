@@ -11,13 +11,13 @@ import logo from '../../img/logo.svg'
 
 type MenuItem = {|
   title: string,
-    body: Node
-      |}
+  body: Node
+|}
 
 type Props = {|
   pageTitle: string,
-    headerText: string,
-      menuItems: Array<MenuItem>
+  headerText: string,
+  menuItems: Array<MenuItem>
 |}
 
 export default class Terms extends Component<Props> {
