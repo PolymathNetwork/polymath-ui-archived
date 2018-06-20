@@ -621,6 +621,34 @@ div {
 }
 
 /**
+ * SIDENAV
+ */
+
+.pui-sidenav {
+  position: fixed;
+  min-width:300px;
+  width:20%;
+
+  ul{
+    color:#3D70B2;
+  }
+
+  li{
+    font-size:16px;
+    font-weight:550;
+    min-height:26px;
+    padding-top:10px;
+    padding-bottom:10px;
+    line-height:31px;
+    color:#3D70B2;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
+/**
  * SIDEBAR
  */
 .pui-sidebar {
