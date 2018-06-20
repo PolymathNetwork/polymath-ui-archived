@@ -17,7 +17,11 @@ export const setHelpersNetwork = (name: string) => {
 
 const etherscan = (type: string, value: string, label: Node) => {
   return (
-    <a href={`https://${network ? network + '.' : ''}etherscan.io/${type}/${value}`} target='_blank'>
+    <a
+      href={`https://${network ? network + '.' : ''}etherscan.io/${type}/${value}`}
+      rel='noopener noreferrer'
+      target='_blank'
+    >
       {label}
     </a>
   )
