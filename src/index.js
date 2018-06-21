@@ -19,6 +19,7 @@ export { default as TxModal } from './modules/tx/TxModal'
 export { default as Sidebar } from './components/Sidebar'
 export { default as SignUpPage } from './modules/account/SignUpPage'
 export { default as MetamaskPage } from './components/MetamaskPage'
+export { default as DummyPage } from './components/DummyPage'
 export { notify } from './modules/toaster/actions'
 export {
   initAccount,
