@@ -701,6 +701,14 @@ div {
     right: 0;
     pointer-events: all;
 
+    .bx--toast-notification {
+      font-family: $font;
+    }
+
+    .bx--toast-notification--success {
+      border-left: 5px $poly-green solid !important;
+    }
+
     .pui-toast {
       box-sizing: border-box;
       overflow: hidden;
@@ -732,17 +740,6 @@ div {
   }
 }
 
-/**
- * TOASTS
- */
-
-.bx--toast-notification {
-  font-family: 'Overpass', serif !important;
-}
-
-.bx--toast-notification--success {
-  border-left: 5px $poly-green solid !important;
-}
 
 /**
  * TX HANDLING
