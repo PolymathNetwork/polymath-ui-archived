@@ -7,6 +7,7 @@ import type { RouterHistory } from 'react-router-dom'
 
 import Toaster from './modules/toaster/Toaster'
 import TxModal from './modules/tx/TxModal'
+import ConfirmModal from './modules/modal/ConfirmModal'
 import Navbar from './components/Navbar'
 import { setupHistory } from './redux/common/actions'
 
@@ -46,6 +47,7 @@ class PolymathUI extends Component<Props> {
         <Navbar ticker={ticker} logo={logo} />
         <Toaster />
         <TxModal />
+        <ConfirmModal />
         {this.props.isFetching ? <Loading /> : ''}
       </div>
     )
