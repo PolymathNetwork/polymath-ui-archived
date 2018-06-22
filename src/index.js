@@ -30,6 +30,7 @@ export {
 } from './modules/account/actions'
 export type { AccountData } from './modules/account/actions'
 export { tx, txEnd, txHash } from './modules/tx/actions'
+export { confirm, cancelConfirm } from './modules/modal/actions'
 export { fetching, fetched, fetchingFailed } from './redux/common/actions'
 export {
   setHelpersNetwork,
