@@ -52,6 +52,8 @@ export const integer = (value: ?number) => {
   return Number.isNaN(v) || v % 1 !== 0 ? 'Must be a whole number.' : null
 }
 
+export const numeric = (value: ?string) => value && !/^\d{1,3}(,?\d{3})*?(.\d{2})?$/g.test(value)  ? 'Must be a whole number.' : null
+
 export const ethereumAddress = (value: ?string) => {
   let result = true
   if (!value || !/^0x[a-fA-F0-9]{40}$/.test(value)) {
