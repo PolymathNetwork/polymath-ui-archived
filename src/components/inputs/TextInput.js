@@ -7,6 +7,7 @@ import type { Node } from 'react'
 type Props = {
   input: {
     name: string,
+    onChange: (any) => void,
   },
   label: Node,
   meta: {
@@ -14,6 +15,7 @@ type Props = {
     error: string
   },
   className: string,
+  onChangeCode: (value: string) => void,
 }
 
 export default ({
@@ -21,6 +23,7 @@ export default ({
   label,
   meta: { touched, error },
   className,
+  onChangeCode,
   ...rest
 }: Props) => {
   return (<TextInput
@@ -30,6 +33,14 @@ export default ({
     invalid={touched && !!error}
     invalidText={error}
     className={className}
+    // eslint-disable-next-line
+    onChange={(event) => {
+      const value = event.target.value // $FlowFixMe
+      if (onChangeCode) { // $FlowFixMe
+        onChangeCode(value)
+      }
+      return input.onChange(value || '')
+    }}
     {...rest}
   />)
 }
