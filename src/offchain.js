@@ -1,0 +1,67 @@
+import axios from 'axios'
+import ReactDOMServer from 'react-dom/server'
+
+import type { Node } from 'react'
+
+let code
+let sig
+let address
+const instance = axios.create({
+  baseURL: 'https://polymath-offchain.herokuapp.com/',
+})
+
+const res = (response: Object) => {
+  if (response.status !== 200) {
+    throw new Error(response.statusText)
+  }
+  if (response.data.status !== 'ok') {
+    throw new Error(response.data.data)
+  }
+  return response.data.data
+}
+
+const get = async (url: string) => {
+  return res(await instance.get(url))
+}
+
+const post = async (url: string, params: Object) => {
+  return res(await instance.post(url, params))
+}
+
+export const getAuthName = async () => {
+  return get('/auth/name')
+}
+
+export const getAuthCode = async (address: string) => {
+  return get('/auth/' + address)
+}
+
+export const auth = async (_code: string, _sig: string, _address: string) => {
+  code = _code
+  sig = _sig
+  address = _address
+  return post('/auth', { code, sig, address })
+}
+
+export const newEmail = async (email: string, name: string) => {
+  return post('/email/new', { email, name, code, sig, address })
+}
+
+export const confirmEmail = async (pin: string) => {
+  return post('/email/confirm', { pin })
+}
+
+// TODO @bshevchenko: don't export this function for other packages, use action-creator instead
+export const email = async (txHash: string, subject: string, body: Node) => {
+  // const { coreVer, network } = ctx.request.body
+  return post('/email', {
+    code,
+    sig,
+    address,
+    txHash,
+    subject,
+    body: ReactDOMServer.renderToStaticMarkup(body),
+    coreVer: '1.1.1', // TODO @bshevchenko
+    network: '42', // TODO @bshevchenko
+  })
+}

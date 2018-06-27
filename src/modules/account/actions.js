@@ -2,49 +2,48 @@
 
 import BigNumber from 'bignumber.js'
 import sigUtil from 'eth-sig-util'
-// $FlowFixMe
 import { PolyToken } from 'polymathjs'
 
 import { fetching, fetchingFailed, fetched, notify } from '../..'
-import { formName } from './SignUpForm'
+import { formName as signUpFormName } from './SignUpForm'
+import * as offchain from '../../offchain'
 import type { ExtractReturn } from '../../redux/helpers'
-import type { GetState, RootState } from '../../redux/reducer'
-import offchainFetch from '../../offchainFetch'
+import type { GetState } from '../../redux/reducer'
 
-export const INITIALIZED = 'polymath-ui/account/INITIALIZED'
-export const setInitialized = (value: boolean) => ({ type: INITIALIZED, value })
+export const SIGN_IN_START = 'polymath-ui/account/SIGN_IN_START'
+export const signInStart = () => ({ type: SIGN_IN_START })
+
+export const SIGN_IN_CANCEL = 'polymath-ui/account/SIGN_IN_CANCEL'
+export const signInCancel = () => ({ type: SIGN_IN_CANCEL })
+
+export const SIGNED_IN = 'polymath-ui/account/SIGNED_IN'
+export const signedIn = () => ({ type: SIGNED_IN })
 
 export const SIGNED_UP = 'polymath-ui/account/SIGNED_UP'
-export const signedUp = (value: boolean) => ({ type: SIGNED_UP, value })
+export const signedUp = (name: string, email: string, isEmailConfirmed: boolean = true) =>
+  ({ type: SIGNED_UP, name, email, isEmailConfirmed })
+
+export const REQUEST_CONFIRM_EMAIL = 'polymath-ui/account/REQUEST_CONFIRM_EMAIL'
+export const ENTER_PIN_DEFAULT = 'polymath-ui/account/ENTER_PIN_DEFAULT'
+export const ENTER_PIN_SUCCESS = 'polymath-ui/account/ENTER_PIN_SUCCESS'
+export const ENTER_PIN_ERROR = 'polymath-ui/account/ENTER_PIN_ERROR'
+export const CANCEL_CONFIRM_EMAIL = 'polymath-ui/account/CANCEL_CONFIRM_EMAIL'
+export const cancelConfirmEmail = () => ({ type: CANCEL_CONFIRM_EMAIL })
+
+export const EMAIL_CONFIRMED = 'polymath-ui/account/EMAIL_CONFIRMED'
+export const emailConfirmed = () => ({ type: EMAIL_CONFIRMED })
 
 export const BALANCE = 'polymath-ui/account/BALANCE'
 export const setBalance = (balance: BigNumber) => ({ type: BALANCE, balance })
 
-export const ACTIVATED = 'polymath-ui/account/ACTIVATED'
-export const setActivated = (value: boolean) => ({ type: ACTIVATED, value })
-
 export type Action =
-  | ExtractReturn<typeof setInitialized>
+  | ExtractReturn<typeof signedIn>
   | ExtractReturn<typeof signedUp>
   | ExtractReturn<typeof setBalance>
-  | ExtractReturn<typeof setActivated>
 
 export type AccountInnerData = {|
   name: string,
   email: string,
-|}
-
-export type AccountData = {|
-  account: AccountInnerData,
-  accountJSON: string,
-  signature: string,
-  signerAddress?: string,
-|}
-
-export type AccountDataForFetch = {|
-  accountJSON: string,
-  signature: string,
-  signerAddress: string,
 |}
 
 const fetchBalance = () => async (dispatch: Function) => {
@@ -55,74 +54,75 @@ const fetchBalance = () => async (dispatch: Function) => {
   dispatch(setBalance(balance))
 }
 
-const fetchIsActivated = () => async (dispatch: Function, getState: GetState) => {
-  try {
-    const address = getState().network.account
-    const result = await offchainFetch({
-      query: `
-        query ($address: String!) {
-          isUserActivated(address: $address)
-        }
-      `,
-      variables: {
-        address,
-      },
-    })
-
-    if (result.errors) {
-      // eslint-disable-next-line no-console
-      console.error('isUserActivated failed:', result.errors)
-      dispatch(setActivated(false))
-      return
-    }
-
-    dispatch(setActivated(result.data.isUserActivated))
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error('fetchIsActivated failed:', err)
-  }
-}
-
-export const initAccount = () => async (dispatch: Function, getState: GetState) => {
+export const signIn = () => async (dispatch: Function, getState: GetState) => {
   dispatch(fetching())
-  const isSignedUp = getAccountData(getState()) != null
+  dispatch(signInStart())
 
+  const { web3, account } = getState().network
+
+  if (global.FS) {
+    global.FS.identify(account, {
+      ethAddress: account,
+    })
+  }
+
+  let authCode, authName
   try {
-    await Promise.all([
+    [authCode, authName] = await Promise.all([
+      offchain.getAuthCode(),
+      offchain.getAuthName(),
       dispatch(fetchBalance()),
-      ...(isSignedUp ? [dispatch(fetchIsActivated())] : []),
     ])
-  } catch (e) {
+  } catch (e) { // eslint-disable-next-line
+    console.error('Sign in', e)
     dispatch(fetchingFailed(e))
     return
   }
 
-  dispatch(signedUp(isSignedUp))
+  dispatch(fetched())
 
-  if (global.FS) {
-    const account = getState().network.account
-    const accountData = getAccountData(getState())
-    const email = accountData && accountData.account && accountData.account.email
-    global.FS.identify(account, {
-      ethAddress: account,
-      ...(email ? { email } : {}),
-    })
+  let sig
+  try {
+    sig = await signData(web3, authCode, [{ type: 'string', name: authName, value: authCode }], account)
+  } catch (e) {
+    dispatch(signInCancel())
+    return
   }
 
-  dispatch(setInitialized(true))
-  dispatch(fetched())
+  dispatch(fetching())
+  try {
+    const user = await offchain.auth(authCode, sig, account)
+
+    if (global.FS) {
+      global.FS.identify(account, {
+        ethAddress: account,
+        ...(user || {}),
+      })
+    }
+
+    dispatch(signedIn())
+
+    if (user) {
+      dispatch(signedUp(user.name, user.email, true))
+    }
+
+    dispatch(fetched())
+  } catch (e) { // eslint-disable-next-line
+    console.error('Sign in [end]', e)
+    dispatch(fetchingFailed(e))
+  }
 }
 
-const signData = async (web3, account, accountJSON, address) => {
+const signData = async (web3, normal, typed, address) => {
   if (!web3.currentProvider.sendAsync) {
-    return web3.eth.sign(accountJSON, address)
+    return web3.eth.sign(normal, address)
   }
 
   const result = await new Promise((resolve, reject) => {
     web3.currentProvider.sendAsync(
       {
         method: 'eth_signTypedData',
-        params: [account, address],
+        params: [typed, address],
         from: address,
       },
       (err, result) => err ? reject(err) : resolve(result),
@@ -134,7 +134,7 @@ const signData = async (web3, account, accountJSON, address) => {
   }
 
   const recovered = sigUtil.recoverTypedSignature({
-    data: account,
+    data: typed,
     sig: result.result,
   })
 
@@ -145,155 +145,59 @@ const signData = async (web3, account, accountJSON, address) => {
   return result.result
 }
 
-export const updateAccount = (account: AccountInnerData) => async (dispatch: Function, getState: GetState) => {
-  const { web3 } = getState().network
-  const address = getState().network.account
-
-  if (!web3 || !address) {
-    throw new Error('web3 or account is undefined')
-  }
-
-  const prevAccountData = getAccountData(getState())
-  if (prevAccountData) {
-    const prevAccount = prevAccountData.account
-    if (prevAccount.name === account.name && prevAccount.email === account.email) {
-      // No changes made
-      return
-    }
-  }
-
-  const typedSigAccount = [
-    {
-      type: 'string',
-      name: 'Name',
-      value: account.name,
-    },
-    {
-      type: 'string',
-      name: 'Email',
-      value: account.email,
-    },
-  ]
-  const accountJSON = JSON.stringify(typedSigAccount)
-  const signature = await signData(web3, typedSigAccount, accountJSON, address)
-
-  let accountData: AccountData = {
-    account,
-    accountJSON,
-    signature,
-  }
-  const accountDataString = JSON.stringify(accountData)
-  localStorage.setItem(address, accountDataString)
-
-  await dispatch(sendRegisterRequest())
+export const signUp = () => async (dispatch: Function, getState: GetState) => {
+  const { name, email } = getState().form[signUpFormName].values
+  dispatch(signedUp(name, email, false))
+  dispatch(fetched())
+  dispatch(notify(
+    'You Were Successfully Signed Up',
+    true
+  ))
 }
 
-export const signUp = () => async (dispatch: Function, getState: GetState) => {
+export const requestConfirmEmail = (email: ?string) => async (dispatch: Function, getState: GetState) => {
+  const { name } = getState().pui.account
+  if (!email) { // eslint-disable-next-line no-param-reassign
+    email = getState().pui.account.email
+  } else { // $FlowFixMe
+    dispatch(signedUp(name, email, false))
+  }
   dispatch(fetching())
   try {
-    const data = getState().form[formName].values
-    const { web3 } = getState().network
-    const address = getState().network.account
-
-    if (!web3 || !address) {
-      throw new Error('web3 or account is undefined')
-    }
-
-    await dispatch(updateAccount({
-      name: data.name,
-      email: data.email,
-    }))
-
-    dispatch(signedUp(true))
+    await offchain.newEmail(email, name)
+    dispatch({ type: REQUEST_CONFIRM_EMAIL })
     dispatch(fetched())
-    dispatch(notify(
-      'You were successfully signed up',
-      true
-    ))
-  } catch (e) {
+  } catch (e) { // eslint-disable-next-line
+    console.error('Request confirm email', e)
     dispatch(fetchingFailed(e))
   }
+
 }
 
-export const getAccountData = (state: RootState): ?AccountData => {
-  const address = state.network.account
-  const accountDataJSON = localStorage.getItem(address)
-
-  if (accountDataJSON == null) {
-    return null
+export const confirmEmail = (pin: string)  => async (dispatch: Function, getState: GetState) => {
+  // TODO @bshevchenko: fires two times for some reason, one time with string and another time with object
+  if (typeof pin !== 'string') {
+    return
   }
-
-  const accountData = JSON.parse(accountDataJSON)
-
-  if (!accountData.accountJSON) {
-    // Stored from old version
-    return null
+  if (!pin) {
+    dispatch({ type: ENTER_PIN_DEFAULT })
+    return
   }
-
-  accountData.signerAddress = address
-
-  return accountData
-}
-
-export const getAccountDataForFetch = (state: RootState): ?AccountDataForFetch => {
-  const accountData = getAccountData(state)
-  if (!accountData || !accountData.signerAddress) {
-    return null
-  }
-
-  return {
-    accountJSON: accountData.accountJSON,
-    signature: accountData.signature,
-    signerAddress: accountData.signerAddress,
+  try {
+    await offchain.confirmEmail(pin)
+    // TODO @bshevchenko: show success screen
+    if (global.FS) {
+      const { email, name } = getState().pui.account
+      const { account } = getState().network
+      global.FS.identify(account, {
+        ethAddress: account,
+        email,
+        name,
+      })
+    }
+    dispatch({ type: ENTER_PIN_SUCCESS })
+  } catch (e) {
+    dispatch({ type: ENTER_PIN_ERROR })
   }
 }
 
-export const sendRegisterRequest = () => async (dispatch: Function, getState: GetState) => {
-  const accountData = getAccountDataForFetch(getState())
-  if (!accountData) {
-    throw new Error('Not signed in.')
-  }
-
-  const emailResult = await offchainFetch({
-    query: `
-      mutation ($input: RegisterInput!) {
-        register(input: $input)
-      }
-    `,
-    variables: {
-      input: {
-        accountData,
-      },
-    },
-  })
-
-  if (emailResult.errors) {
-    // eslint-disable-next-line no-console
-    console.error('sendRegisterRequest failed.', emailResult.errors)
-  }
-}
-
-export const sendActivationEmail = () => async (dispatch: Function, getState: GetState) => {
-  const accountData = getAccountDataForFetch(getState())
-  if (!accountData) {
-    throw new Error('Not signed in.')
-  }
-
-  const emailResult = await offchainFetch({
-    query: `
-      mutation ($input: SendActivationEmailInput!) {
-        sendActivationEmail(input: $input)
-      }
-    `,
-    variables: {
-      input: {
-        accountData,
-      },
-    },
-  })
-
-  if (emailResult.errors) {
-    // eslint-disable-next-line no-console
-    console.error('sendActivationEmail failed.', emailResult.errors)
-  }
-}

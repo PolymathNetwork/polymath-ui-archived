@@ -2,7 +2,6 @@
 
 import 'carbon-components/css/carbon-components.min.css'
 
-export { default as offchainFetch } from './offchainFetch'
 export { default as TextInput } from './components/inputs/TextInput'
 export { default as TextAreaInput } from './components/inputs/TextAreaInput'
 export { default as SelectInput } from './components/inputs/SelectInput'
@@ -17,19 +16,14 @@ export { default as Remark } from './components/Remark'
 export { default as Toaster } from './modules/toaster/Toaster'
 export { default as TxModal } from './modules/tx/TxModal'
 export { default as Sidebar } from './components/Sidebar'
+export { default as SignInPage } from './modules/account/SignInPage'
 export { default as SignUpPage } from './modules/account/SignUpPage'
+export { default as SignUpSuccessPage } from './modules/account/SignUpSuccessPage'
 export { default as MetamaskPage } from './components/MetamaskPage'
 export { notify } from './modules/toaster/actions'
-export {
-  initAccount,
-  getAccountData,
-  getAccountDataForFetch,
-  sendRegisterRequest,
-  sendActivationEmail,
-  updateAccount,
-} from './modules/account/actions'
-export type { AccountData } from './modules/account/actions'
+export { signIn, signUp, requestConfirmEmail } from './modules/account/actions'
 export { tx, txEnd, txHash } from './modules/tx/actions'
+export { email } from './offchain'
 export { fetching, fetched, fetchingFailed } from './redux/common/actions'
 export {
   setHelpersNetwork,

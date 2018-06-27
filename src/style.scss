@@ -799,6 +799,16 @@ div {
     }
   }
 
+  &.pui-pin-modal {
+    .bx--modal-close {
+      display: flex !important;
+    }
+
+    .pui-tx-animation:after {
+      background: #5596E6;
+    }
+  }
+
   .pui-tx-continue {
     visibility: hidden;
     text-align: center;
