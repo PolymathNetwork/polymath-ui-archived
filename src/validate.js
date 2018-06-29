@@ -28,7 +28,10 @@ export const gt = (x: number) => (value: ?number) =>
   value && value <= x ? `Must be greater than ${x}.` : null
 
 export const alphanumeric = (value: ?string) =>
-  value && !/^[a-z0-9]+$/i.test(value) ? 'Invalid characters.' : null
+  value && !/^[a-z0-9]+$/i.test(value) ? 'Only alphanumeric symbols are allowed.' : null
+
+export const regex = (expr: RegExp, value: ?string, message: string = 'Invalid characters.') =>
+  value && !expr.test(value) ? message : null
 
 export const email = (value: ?string) =>
   value && !/^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z0-9-]+$/i.test(value)
