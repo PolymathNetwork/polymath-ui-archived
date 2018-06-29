@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import React, { Component } from 'react'
 import { reduxForm, Field } from 'redux-form'
 import { Form } from 'carbon-components-react'
@@ -13,12 +14,11 @@ type Props = {
 class EnterPINForm extends Component<Props> {
   render () {
     return (
-      <Form>
+      <Form onSubmit={(e) => e.preventDefault()}>
         <Field
           name='pin'
           component={TextInput}
           placeholder='Enter PIN Code'
-          // eslint-disable-next-line react/jsx-no-bind
           onChangeCode={(value: string) => this.props.onChange(value)}
         />
       </Form>
