@@ -55,6 +55,10 @@ const fetchBalance = () => async (dispatch: Function) => {
 }
 
 export const signIn = () => async (dispatch: Function, getState: GetState) => {
+  if (getState().pui.account.isSignedIn) {
+    return
+  }
+
   dispatch(fetching())
   dispatch(signInStart())
 
@@ -69,12 +73,11 @@ export const signIn = () => async (dispatch: Function, getState: GetState) => {
   let authCode, authName
   try {
     [authCode, authName] = await Promise.all([
-      offchain.getAuthCode(),
+      offchain.getAuthCode(account),
       offchain.getAuthName(),
       dispatch(fetchBalance()),
     ])
-  } catch (e) { // eslint-disable-next-line
-    console.error('Sign in', e)
+  } catch (e) {
     dispatch(fetchingFailed(e))
     return
   }
@@ -107,8 +110,7 @@ export const signIn = () => async (dispatch: Function, getState: GetState) => {
     }
 
     dispatch(fetched())
-  } catch (e) { // eslint-disable-next-line
-    console.error('Sign in [end]', e)
+  } catch (e) {
     dispatch(fetchingFailed(e))
   }
 }
@@ -167,8 +169,7 @@ export const requestConfirmEmail = (email: ?string) => async (dispatch: Function
     await offchain.newEmail(email, name)
     dispatch({ type: REQUEST_CONFIRM_EMAIL })
     dispatch(fetched())
-  } catch (e) { // eslint-disable-next-line
-    console.error('Request confirm email', e)
+  } catch (e) {
     dispatch(fetchingFailed(e))
   }
 
