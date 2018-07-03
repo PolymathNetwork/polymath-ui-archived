@@ -51,9 +51,7 @@ export const confirmEmail = async (pin: string) => {
   return post('/email/confirm', { pin })
 }
 
-// TODO @bshevchenko: don't export this function for other packages, use action-creator instead
-export const email = async (txHash: string, subject: string, body: Node) => {
-  // const { coreVer, network } = ctx.request.body
+export const email = async (txHash: string, subject: string, body: Node, coreVer: string, network: string) => {
   return post('/email', {
     code,
     sig,
@@ -61,7 +59,7 @@ export const email = async (txHash: string, subject: string, body: Node) => {
     txHash,
     subject,
     body: ReactDOMServer.renderToStaticMarkup(body),
-    coreVer: '1.1.1', // TODO @bshevchenko
-    network: '42', // TODO @bshevchenko
+    coreVer,
+    network,
   })
 }

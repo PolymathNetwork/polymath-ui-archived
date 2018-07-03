@@ -21,9 +21,8 @@ export { default as SignUpPage } from './modules/account/SignUpPage'
 export { default as SignUpSuccessPage } from './modules/account/SignUpSuccessPage'
 export { default as MetamaskPage } from './components/MetamaskPage'
 export { notify } from './modules/toaster/actions'
-export { signIn, signUp, requestConfirmEmail } from './modules/account/actions'
+export { signIn, signUp, requestConfirmEmail, email } from './modules/account/actions'
 export { tx, txEnd, txHash } from './modules/tx/actions'
-export { email } from './offchain'
 export { fetching, fetched, fetchingFailed } from './redux/common/actions'
 export {
   setHelpersNetwork,
