@@ -29,14 +29,21 @@ class TxModal extends Component<DispatchProps & TxState> {
   // eslint-disable-next-line
   render () {
     const current = Number(this.props.current)
-    const { total, error, isFinished, hashes, titles, successTitle } = this.props
-    const modalHeading =
+    const { total, error, isFinished, hashes, titles, successTitle, headingOverride } = this.props
+
+    let modalHeading
+    if(headingOverride){
+      modalHeading=this.props.headingOverride
+    }else{
+      modalHeading =
       error ?
         error.message :
         (isFinished ?
           successTitle :
           'Sign Transaction' + (Number(total) > 1 ? 's' : '')
         )
+    }
+
     return (
       <Modal
         className={

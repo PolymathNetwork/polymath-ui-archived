@@ -18,6 +18,7 @@ export type TxState = {
   current: ?number,
   isFinished: ?boolean,
   error: ?Error,
+  headingOverride: ?string
 }
 
 const defaultState = {
@@ -33,6 +34,7 @@ const defaultState = {
   current: null,
   isFinished: null,
   error: null,
+  headingOverride: null,
 }
 
 export default (state: TxState = defaultState, action: Action) => {
@@ -42,6 +44,7 @@ export default (state: TxState = defaultState, action: Action) => {
         ...state,
         ...action,
         current: 0,
+        headingOverride: action.headingOverride,
         total: action.titles.length,
       }
     case a.HASH:

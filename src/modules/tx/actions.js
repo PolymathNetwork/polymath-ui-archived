@@ -13,10 +13,14 @@ export const tx = (
   continueRoute?: string,
   continueLabel?: string,
   isNoEmail?: boolean,
+  headingOverride?: string
 ) => async (dispatch: Function) => {
   // eslint-disable-next-line
   titles = typeof titles === 'string' ? [titles] : titles
-  dispatch({ type: START, titles, successTitle, continueRoute, continueLabel, continueCode, isNoEmail })
+  dispatch({
+    type: START, titles, successTitle, continueRoute, continueLabel,
+    continueCode, isNoEmail, headingOverride,
+  })
   try {
     await code()
   } catch (error) {
