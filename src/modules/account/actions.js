@@ -3,6 +3,7 @@
 import BigNumber from 'bignumber.js'
 import sigUtil from 'eth-sig-util'
 import { PolyToken } from 'polymathjs'
+import type { Node } from 'react'
 
 import { fetching, fetchingFailed, fetched, notify } from '../..'
 import { formName as signUpFormName } from './SignUpForm'
@@ -175,7 +176,7 @@ export const requestConfirmEmail = (email: ?string) => async (dispatch: Function
 
 }
 
-export const confirmEmail = (pin: string)  => async (dispatch: Function, getState: GetState) => {
+export const confirmEmail = (pin: string) => async (dispatch: Function, getState: GetState) => {
   // TODO @bshevchenko: fires two times for some reason, one time with string and another time with object
   if (typeof pin !== 'string') {
     return
@@ -201,4 +202,9 @@ export const confirmEmail = (pin: string)  => async (dispatch: Function, getStat
     dispatch({ type: ENTER_PIN_ERROR })
   }
 }
-
+// eslint-disable-next-line max-len
+export const email = (txHash: string, subject: string, body: Node) => async (dispatch: Function, getState: GetState) => {
+  // eslint-disable-next-line global-require, import/no-unresolved, $FlowFixMe
+  const polymathJS = require('polymathjs/package.json')
+  await offchain.email(txHash, subject, body, polymathJS.dependencies['polymath-core'], getState().network.id)
+}
