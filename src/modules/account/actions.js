@@ -3,6 +3,7 @@
 import BigNumber from 'bignumber.js'
 import sigUtil from 'eth-sig-util'
 import { PolyToken } from 'polymathjs'
+import type { Address } from 'polymathjs/types'
 import type { Node } from 'react'
 
 import { fetching, fetchingFailed, fetched, notify } from '../..'
@@ -10,6 +11,7 @@ import { formName as signUpFormName } from './SignUpForm'
 import * as offchain from '../../offchain'
 import type { ExtractReturn } from '../../redux/helpers'
 import type { GetState } from '../../redux/reducer'
+import { tx } from '../tx/actions'
 
 export const SIGN_IN_START = 'polymath-ui/account/SIGN_IN_START'
 export const signInStart = () => ({ type: SIGN_IN_START })
@@ -49,9 +51,14 @@ export type AccountInnerData = {|
 
 const fetchBalance = () => async (dispatch: Function) => {
   const balance = await PolyToken.myBalance()
-  await PolyToken.subscribeMyTransfers(async () => {
-    dispatch(setBalance(await PolyToken.myBalance()))
-  })
+  await PolyToken.subscribeMyTransfers(
+    async (toOrFrom: Address, value: BigNumber, isFrom: boolean, isNoise: boolean) => {
+      if(!isNoise){
+        dispatch(setBalance(await PolyToken.myBalance()))
+        dispatch(notify(isFrom ? 'Sent '+ PolyToken.removeDecimals(value)+' POLY'
+          : 'Received '+PolyToken.removeDecimals(value)+' POLY', true))
+      }
+    })
   dispatch(setBalance(balance))
 }
 
@@ -207,4 +214,18 @@ export const email = (txHash: string, subject: string, body: Node) => async (dis
   // eslint-disable-next-line global-require, import/no-unresolved, $FlowFixMe
   const polymathJS = require('polymathjs/package.json')
   await offchain.email(txHash, subject, body, polymathJS.dependencies['polymath-core'], getState().network.id)
+}
+
+export const faucet = (address: ?string, polyAmount: number) => async (dispatch: Function) => {
+  dispatch(tx(
+    ['Receiving POLY From Faucet'],
+    async () => {
+      await PolyToken.getTokens(25000, address)
+    },
+    'You have successfully received ' + polyAmount + ' POLY',
+    undefined,
+    undefined,
+    'ok',
+    true // TODO @bshevchenko: !isEmailConfirmed
+  ))
 }
