@@ -216,13 +216,14 @@ export const email = (txHash: string, subject: string, body: Node) => async (dis
   await offchain.email(txHash, subject, body, polymathJS.dependencies['polymath-core'], getState().network.id)
 }
 
-export const faucet = (address: ?string, polyAmount: number) => async (dispatch: Function) => {
+export const faucet = (address: ?string) => async (dispatch: Function) => {
+  const polyFaucetAmount=25000
   dispatch(tx(
     ['Receiving POLY From Faucet'],
     async () => {
-      await PolyToken.getTokens(25000, address)
+      await PolyToken.getTokens(polyFaucetAmount, address)
     },
-    'You have successfully received ' + polyAmount + ' POLY',
+    'You have successfully received ' + polyFaucetAmount + ' POLY',
     undefined,
     undefined,
     'ok',
