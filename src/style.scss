@@ -1217,3 +1217,7 @@ div {
 .pui-bold {
   font-weight: 600 !important;
 }
+
+.paused {
+  filter: grayscale(100%) opacity(50%)
+}

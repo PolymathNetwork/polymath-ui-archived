@@ -6,10 +6,11 @@ import { Button } from 'carbon-components-react'
 export type CountdownProps = {|
   title: string,
   deadline: Date,
-  buttonTitle?: string,
-  handleButtonClick?: () => any,
-  small?: boolean,
-|}
+  buttonTitle ?: string,
+  handleButtonClick ?: () => any,
+  small ?: boolean,
+  isPaused: boolean
+  |}
 
 type State = {|
   days: number,
@@ -34,7 +35,41 @@ export default class Countdown extends Component<CountdownProps, State> {
   }
 
   componentDidMount () {
-    setInterval(() => this.updateTimeUntil(this.props.deadline), 1000)
+    setInterval(() => {
+      if(!this.props.isPaused){
+        this.updateTimeUntil(this.props.deadline)
+      }
+    }, 1000)
+  }
+
+  getButton (){
+    return(
+      this.props.buttonTitle ? (
+        <Button
+          kind='secondary'
+          onClick={this.props.handleButtonClick}
+        >
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            {this.props.buttonTitle
+            }
+            &nbsp;
+            {
+              this.props.isPaused ?
+                <svg width='16' height='16' viewBox='0 0 16 16'>
+                  <path d='M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zM5.497
+                4.776v6.456a.25.25 0 0 0 .377.216l5.498-3.232a.25.25
+                0 0 0 0-.431L5.874 4.56a.25.25 0 0 0-.377.215z'
+                  />
+                </svg>
+                :
+                <svg width='16' height='16' viewBox='0 0 16 16'>
+                  <path d='M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zM5 5v6h2V5H5zm4 0v6h2V5H9z' />
+                </svg>
+            }
+          </div>
+        </Button>
+      ) : ''
+    )
   }
 
   updateTimeUntil = (deadline: Date) => {
@@ -55,10 +90,10 @@ export default class Countdown extends Component<CountdownProps, State> {
   render () {
     return (
       <div className={'pui-countdown' + (this.props.small ? ' pui-countdown-small' : '')}>
-        <div className='pui-countdown-top-bar'>
+        <div className={'pui-countdown-top-bar' + (this.props.isPaused ? ' paused' : '')}>
           {this.props.title}
         </div>
-        <div className='pui-countdown-content'>
+        <div className={'pui-countdown-content' + (this.props.isPaused ? ' paused' : '')}>
           {!this.props.small ? (
             <div className='pui-countdown-days'>
               <div className='pui-countdown-number-column pui-countdown-number'>
@@ -92,14 +127,9 @@ export default class Countdown extends Component<CountdownProps, State> {
             </div>
           </div>
         </div>
-        {this.props.buttonTitle ? (
-          <Button
-            kind='secondary'
-            onClick={this.props.handleButtonClick}
-          >
-            {this.props.buttonTitle}
-          </Button>
-        ) : ''}
+        {
+          this.getButton()
+        }
       </div>
     )
   }
