@@ -90,10 +90,10 @@ export default class Countdown extends Component<CountdownProps, State> {
   render () {
     return (
       <div className={'pui-countdown' + (this.props.small ? ' pui-countdown-small' : '')}>
-        <div className={'pui-countdown-top-bar' + (this.props.isPaused ? ' paused' : '')}>
+        <div className={'pui-countdown-top-bar' + (this.props.isPaused ? ' pui-paused' : '')}>
           {this.props.title}
         </div>
-        <div className={'pui-countdown-content' + (this.props.isPaused ? ' paused' : '')}>
+        <div className={'pui-countdown-content' + (this.props.isPaused ? ' pui-paused' : '')}>
           {!this.props.small ? (
             <div className='pui-countdown-days'>
               <div className='pui-countdown-number-column pui-countdown-number'>

@@ -52,12 +52,10 @@ export type AccountInnerData = {|
 const fetchBalance = () => async (dispatch: Function) => {
   const balance = await PolyToken.myBalance()
   await PolyToken.subscribeMyTransfers(
-    async (toOrFrom: Address, value: BigNumber, isFrom: boolean, isNoise: boolean) => {
-      if(!isNoise){
-        dispatch(setBalance(await PolyToken.myBalance()))
-        dispatch(notify(isFrom ? 'Sent '+ PolyToken.removeDecimals(value)+' POLY'
-          : 'Received '+PolyToken.removeDecimals(value)+' POLY', true))
-      }
+    async (toOrFrom: Address, value: BigNumber, isFrom: boolean) => {
+      dispatch(setBalance(await PolyToken.myBalance()))
+      dispatch(notify(isFrom ? 'Sent '+ PolyToken.removeDecimals(value)+' POLY'
+        : 'Received '+PolyToken.removeDecimals(value)+' POLY', true))
     })
   dispatch(setBalance(balance))
 }
@@ -216,8 +214,9 @@ export const email = (txHash: string, subject: string, body: Node) => async (dis
   await offchain.email(txHash, subject, body, polymathJS.dependencies['polymath-core'], getState().network.id)
 }
 
-export const faucet = (address: ?string) => async (dispatch: Function) => {
+export const faucet = () => async (dispatch: Function, getState: GetState) => {
   const polyFaucetAmount=25000
+  const address = getState().network.account
   dispatch(tx(
     ['Receiving POLY From Faucet'],
     async () => {
@@ -227,6 +226,6 @@ export const faucet = (address: ?string) => async (dispatch: Function) => {
     undefined,
     undefined,
     'ok',
-    true // TODO @bshevchenko: !isEmailConfirmed
+    true
   ))
 }

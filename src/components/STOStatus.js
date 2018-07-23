@@ -72,7 +72,7 @@ export default class STOStatus extends Component<Props> {
       <div className='pui-page-box'>
         <h2 className='pui-h2'>Capped STO</h2>
         <p className='pui-sto-status-contract'>Contract {etherscanAddress(details.address)}</p>
-        <div className={'pui-sto-status-grow' + (this.props.isStoPaused ? ' paused' : '')}>
+        <div className={'pui-sto-status-grow' + (this.props.isStoPaused ? ' pui-paused' : '')}>
           <div className='pui-sto-status-numbers'>
             <div>{fractionComplete}%</div>
             <div className='pui-key-value'>
