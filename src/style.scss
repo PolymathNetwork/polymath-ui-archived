@@ -246,6 +246,15 @@ div {
     .bx--inline-notification__title {
       font-weight: 600 !important;
     }
+
+    .bx--details {
+      font-size: 12px;
+      color: #152935;
+      border-radius: 4px;
+      background-color: #EBF0F7;
+      padding: 6.5px 0 6.5px 16px;
+      margin-top: 10px;
+    }
   }
 
   .bx--modal-footer {
@@ -1207,4 +1216,8 @@ div {
 
 .pui-bold {
   font-weight: 600 !important;
+}
+
+.pui-paused {
+  filter: grayscale(100%) opacity(50%)
 }

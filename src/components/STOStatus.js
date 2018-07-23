@@ -12,6 +12,8 @@ import ProgressBar from './ProgressBar'
 type Props = {|
   token: SecurityToken,
   details: STODetails,
+  isStoPaused: boolean,
+  toggleStoPause: () => any
 |}
 
 const niceAmount = (poly: BigNumber) =>
@@ -24,18 +26,23 @@ const dateFormat = (date: Date) =>
     day: 'numeric',
   })
 
-const getCountdownProps = (startDate: Date, endDate: Date): ?CountdownProps => {
+const getCountdownProps = (startDate: Date, endDate: Date,
+  buttonTitle: string, isStoPaused: boolean): ?CountdownProps => {
   const now = new Date()
 
   if (now < startDate) {
     return {
       deadline: startDate,
       title: 'Time Left Until the Offering Starts',
+      buttonTitle: buttonTitle,
+      isPaused:isStoPaused,
     }
   } else if (now < endDate) {
     return {
       deadline: endDate,
       title: 'Time Left Until the Offering Ends',
+      buttonTitle: buttonTitle,
+      isPaused:isStoPaused,
     }
   }
 
@@ -46,7 +53,8 @@ export default class STOStatus extends Component<Props> {
   render () {
     const { token, details } = this.props
 
-    const countdownProps = getCountdownProps(details.start, details.end)
+    const countdownProps = getCountdownProps(details.start, details.end,
+      this.props.isStoPaused ? 'RESUME STO' : 'PAUSE STO', this.props.isStoPaused)
 
     const symbol = details.isPolyFundraise ? 'POLY' : 'ETH'
 
@@ -63,8 +71,8 @@ export default class STOStatus extends Component<Props> {
     return (
       <div className='pui-page-box'>
         <h2 className='pui-h2'>Capped STO</h2>
-        <p className='pui-sto-status-contract'>Contract { etherscanAddress(details.address) }</p>
-        <div className='pui-sto-status-grow'>
+        <p className='pui-sto-status-contract'>Contract {etherscanAddress(details.address)}</p>
+        <div className={'pui-sto-status-grow' + (this.props.isStoPaused ? ' pui-paused' : '')}>
           <div className='pui-sto-status-numbers'>
             <div>{fractionComplete}%</div>
             <div className='pui-key-value'>
@@ -108,6 +116,9 @@ export default class STOStatus extends Component<Props> {
             <Countdown
               deadline={countdownProps.deadline}
               title={countdownProps.title}
+              buttonTitle={countdownProps.buttonTitle}
+              handleButtonClick={this.props.toggleStoPause}
+              isPaused={this.props.isStoPaused}
             />
           </div>
         )}

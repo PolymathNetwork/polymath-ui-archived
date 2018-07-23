@@ -21,43 +21,43 @@ const mapDispatchToProps: DispatchProps = {
 }
 
 class TxModal extends Component<DispatchProps & TxState> {
-
   handleContinue = () => {
     this.props.txContinue()
   }
 
   // eslint-disable-next-line
-  render () {
+  render() {
     const current = Number(this.props.current)
-    const { total, error, isFinished, hashes, titles, successTitle } = this.props
-    const modalHeading =
-      error ?
-        error.message :
-        (isFinished ?
-          successTitle :
-          'Sign Transaction' + (Number(total) > 1 ? 's' : '')
-        )
+    const { total, error, isFinished, hashes, titles, successTitle, headingOverride } = this.props
+
+    let modalHeading
+    if (headingOverride) {
+      modalHeading = this.props.headingOverride
+    } else {
+      modalHeading = error
+        ? error.message
+        : isFinished
+          ? successTitle
+          : 'Sign Transaction' + (Number(total) > 1 ? 's' : '')
+    }
+
     return (
       <Modal
-        className={
-          'pui-tx-modal'
-          + (isFinished ? ' pui-tx-success' : '' )
-          + (error ? ' pui-tx-failed' : '' )
-        }
+        className={'pui-tx-modal' + (isFinished ? ' pui-tx-success' : '') + (error ? ' pui-tx-failed' : '')}
         open={!!total}
         passiveModal
         modalHeading={modalHeading}
         modalLabel={
-          'Transaction '
-          + (isFinished ? 'Completed' : '' )
-          + (error ? 'Failed' : '' )
-          + (!isFinished && !error ? 'Processing' : '' )
+          'Transaction ' +
+          (isFinished ? 'Completed' : '') +
+          (error ? 'Failed' : '') +
+          (!isFinished && !error ? 'Processing' : '')
         }
       >
         <div className='pui-tx-animation' />
 
         {titles.map((title: string, i: number) => (
-          <div key={title} className={'pui-tx-row' + ( i > current ? ' pui-tx-next' : '')}>
+          <div key={title} className={'pui-tx-row' + (i > current ? ' pui-tx-next' : '')}>
             <div className='pui-tx-icon'>
               {current === i ? (
                 error ? (
@@ -65,19 +65,17 @@ class TxModal extends Component<DispatchProps & TxState> {
                 ) : (
                   <Loading withOverlay={false} />
                 )
+              ) : i < current ? (
+                <Icon name='checkmark' fill='#00AA5E' width='32' height='24' />
               ) : (
-                i < current ? (
-                  <Icon name='checkmark' fill='#00AA5E' width='32' height='24' />
-                ) : (
-                  ''
-                )
+                ''
               )}
             </div>
             <div className='pui-tx-info'>
               <h3 className='pui-h3'>{title}</h3>
               <div className='pui-tx-details'>
                 Transaction details on Etherscan:&nbsp;
-                { hashes[i] ? etherscanTx(hashes[i]) : '...' }
+                {hashes[i] ? etherscanTx(hashes[i]) : '...'}
               </div>
             </div>
           </div>
@@ -85,25 +83,26 @@ class TxModal extends Component<DispatchProps & TxState> {
 
         {isFinished && !this.props.isNoEmail ? (
           <div className='pui-tx-row pui-tx-email'>
-            <div className='pui-tx-icon'>
-              {icoPaperPlane}
-            </div>
+            <div className='pui-tx-icon'>{icoPaperPlane}</div>
             <div className='pui-tx-details'>
               <h4 className='pui-h4'>
                 We just sent you an email with the transaction details for your records. Check your inbox.
               </h4>
             </div>
           </div>
-        ) : ''}
+        ) : (
+          ''
+        )}
 
         <p className='pui-tx-continue'>
-          <Button onClick={this.handleContinue}>
-            {this.props.continueLabel || 'Continue'}
-          </Button>
+          <Button onClick={this.handleContinue}>{this.props.continueLabel || 'Continue'}</Button>
         </p>
       </Modal>
     )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TxModal)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TxModal)
