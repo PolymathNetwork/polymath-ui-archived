@@ -3,6 +3,7 @@
 import type { RouterHistory } from 'react-router-dom'
 
 import type { ExtractReturn } from '../../redux/helpers'
+import type { GetState } from '../../redux/reducer'
 
 export const SETUP_HISTORY = 'polymath-ui/SETUP_HISTORY'
 export const setupHistory = (history: RouterHistory) => ({ type: SETUP_HISTORY, history })
@@ -14,7 +15,10 @@ export const FETCHED = 'polymath-ui/FETCHED'
 export const fetched = () => ({ type: FETCHED })
 
 export const FETCHING_FAILED = 'polymath-ui/FETCHING_FAILED'
-export const fetchingFailed = (e: Error) => async (dispatch: Function) => {
+export const fetchingFailed = (e: Error) => async (dispatch: Function,getState: GetState) => {
+  if(e.message==="permission denied"){
+    getState().pui.common.history.push('/')
+  }
   // eslint-disable-next-line
   console.error('Fetching failed', e)
   dispatch({ type: FETCHING_FAILED, message: e.message })
