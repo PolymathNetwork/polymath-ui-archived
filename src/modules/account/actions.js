@@ -1,17 +1,21 @@
 // @flow
 
+import React from 'react'
 import BigNumber from 'bignumber.js'
 import sigUtil from 'eth-sig-util'
 import { PolyToken } from 'polymathjs'
 import type { Address } from 'polymathjs/types'
 import type { Node } from 'react'
 
+import Remark from '../../components/Remark'
 import { fetching, fetchingFailed, fetched, notify } from '../..'
 import { formName as signUpFormName } from './SignUpForm'
 import * as offchain from '../../offchain'
+import { tx } from '../tx/actions'
+import { confirm } from '../modal/actions'
+import { thousandsDelimiter } from '../../helpers'
 import type { ExtractReturn } from '../../redux/helpers'
 import type { GetState } from '../../redux/reducer'
-import { tx } from '../tx/actions'
 
 export const SIGN_IN_START = 'polymath-ui/account/SIGN_IN_START'
 export const signInStart = () => ({ type: SIGN_IN_START })
@@ -54,8 +58,7 @@ const fetchBalance = () => async (dispatch: Function) => {
   await PolyToken.subscribeMyTransfers(
     async (toOrFrom: Address, value: BigNumber, isFrom: boolean) => {
       dispatch(setBalance(await PolyToken.myBalance()))
-      dispatch(notify(isFrom ? 'Sent '+ PolyToken.removeDecimals(value)+' POLY'
-        : 'Received '+PolyToken.removeDecimals(value)+' POLY', true))
+      dispatch(notify(`${isFrom ? 'Sent' : 'Received'} ${thousandsDelimiter(value)} POLY`), true)
     })
   dispatch(setBalance(balance))
 }
@@ -214,18 +217,78 @@ export const email = (txHash: string, subject: string, body: Node) => async (dis
   await offchain.email(txHash, subject, body, polymathJS.dependencies['polymath-core'], getState().network.id)
 }
 
-export const faucet = () => async (dispatch: Function, getState: GetState) => {
-  const polyFaucetAmount=25000
-  const address = getState().network.account
-  dispatch(tx(
-    ['Receiving POLY From Faucet'],
-    async () => {
-      await PolyToken.getTokens(polyFaucetAmount, address)
+export const faucet = (message: string) => async (dispatch: Function, getState: GetState) => {
+
+  const intro = (
+    <p>
+      {message}&nbsp;
+      Please make sure that your wallet has a sufficient balance in
+      POLY to complete this operation.
+    </p>
+  )
+  const title = 'Insufficient POLY Balance'
+  const headerLabel = 'Transaction Impossible'
+
+  if (Number(getState().network.id) === 1) {
+    dispatch(confirm(
+      <div>
+        {intro}
+        <p>
+          If you need to obtain POLY tokens, you can visit&nbsp;
+          <a target='_blank' rel='noopener noreferrer' href='https://shapeshift.io'>this</a> or
+          obtain more information&nbsp;
+          <a
+            target='_blank'
+            rel='noopener noreferrer'
+            href='https://etherscan.io/token/0x9992ec3cf6a55b00978cddf2b27bc6882d88d1ec#tokenExchange'
+          >
+            here
+          </a>.
+        </p>
+      </div>,
+      () => {},
+      title,
+      'Understood',
+      '',
+      headerLabel,
+    ))
+    return
+  }
+
+  const amount = 25000
+  const buttonLabel = `REQUEST ${amount / 1000}K POLY`
+  dispatch(confirm(
+    <div>
+      {intro}
+      <p>
+        You are currently connected to the <span style={{ fontWeight: 'bold' }}>Kovan Test Network</span>.
+      </p>
+      <p>
+        As such, you can click on the &laquo;{buttonLabel}&raquo; button below to
+        receive {thousandsDelimiter(amount)} test POLY in your wallet.
+      </p>
+      <br />
+      <Remark title='Note'>
+        This option is not available on the Mainnet.
+      </Remark>
+    </div>,
+    () => {
+      const { account } = getState().network
+      dispatch(tx(
+        ['Receiving POLY From Faucet'],
+        async () => {
+          await PolyToken.getTokens(amount, account)
+        },
+        'You have successfully received ' + thousandsDelimiter(amount) + ' POLY',
+        undefined,
+        undefined,
+        undefined,
+        true
+      ))
     },
-    'You have successfully received ' + polyFaucetAmount + ' POLY',
-    undefined,
-    undefined,
-    'ok',
-    true
+    title,
+    buttonLabel,
+    '',
+    headerLabel
   ))
 }

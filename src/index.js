@@ -23,6 +23,7 @@ export { default as MetamaskPage } from './components/MetamaskPage'
 export { notify } from './modules/toaster/actions'
 export { signIn, signUp, requestConfirmEmail, email, faucet } from './modules/account/actions'
 export { tx, txEnd, txHash } from './modules/tx/actions'
+export { confirm } from './modules/modal/actions'
 export { fetching, fetched, fetchingFailed } from './redux/common/actions'
 export {
   setHelpersNetwork,
