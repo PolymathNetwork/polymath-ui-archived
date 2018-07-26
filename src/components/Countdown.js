@@ -9,7 +9,8 @@ export type CountdownProps = {|
   buttonTitle ?: string,
   handleButtonClick ?: () => any,
   small ?: boolean,
-  isPaused: boolean
+  isPaused: ?boolean,
+  pausable: ?any,
   |}
 
 type State = {|
@@ -54,17 +55,19 @@ export default class Countdown extends Component<CountdownProps, State> {
             }
             &nbsp;
             {
-              this.props.isPaused ?
-                <svg width='16' height='16' viewBox='0 0 16 16'>
-                  <path d='M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zM5.497
+              this.props.pausable ?
+                this.props.isPaused ?
+                  <svg width='16' height='16' viewBox='0 0 16 16'>
+                    <path d='M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zM5.497
                 4.776v6.456a.25.25 0 0 0 .377.216l5.498-3.232a.25.25
                 0 0 0 0-.431L5.874 4.56a.25.25 0 0 0-.377.215z'
-                  />
-                </svg>
-                :
-                <svg width='16' height='16' viewBox='0 0 16 16'>
-                  <path d='M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zM5 5v6h2V5H5zm4 0v6h2V5H9z' />
-                </svg>
+                    />
+                  </svg>
+                  :
+                  <svg width='16' height='16' viewBox='0 0 16 16'>
+                    <path d='M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zM5 5v6h2V5H5zm4 0v6h2V5H9z' />
+                  </svg>
+                :''
             }
           </div>
         </Button>

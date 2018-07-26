@@ -36,6 +36,7 @@ const getCountdownProps = (startDate: Date, endDate: Date,
       title: 'Time Left Until the Offering Starts',
       buttonTitle: buttonTitle,
       isPaused:isStoPaused,
+      pausable: true,
     }
   } else if (now < endDate) {
     return {
@@ -43,6 +44,7 @@ const getCountdownProps = (startDate: Date, endDate: Date,
       title: 'Time Left Until the Offering Ends',
       buttonTitle: buttonTitle,
       isPaused:isStoPaused,
+      pausable: true,
     }
   }
 
@@ -119,6 +121,7 @@ export default class STOStatus extends Component<Props> {
               buttonTitle={countdownProps.buttonTitle}
               handleButtonClick={this.props.toggleStoPause}
               isPaused={this.props.isStoPaused}
+              pausable={countdownProps.pausable}
             />
           </div>
         )}
