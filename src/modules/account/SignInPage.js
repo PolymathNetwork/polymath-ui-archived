@@ -40,7 +40,7 @@ class SignInPage extends Component<Props> {
     )
     const desc = (
       <span>
-        Once you have digitally signed verification code with your MetaMask wallet,
+        Once you have digitally signed the verification code with your MetaMask wallet,
         your wallet will allow you to single-sign into your Polymath account without the need for a
         dedicated username and password combination.
       </span>
@@ -74,7 +74,7 @@ class SignInPage extends Component<Props> {
       <DocumentTitle title='Sign In – Polymath'>
         <div className='pui-single-box'>
           {ico}
-          <h2 className='pui-h2' align='center'>Digital Signature with Your Wallet</h2>
+          <h2 className='pui-h2' align='center'>Sign In with Your Wallet</h2>
           <h3 className='pui-h3' align='center'>
             {desc} This signing operation has no cost associated and can be
             completed by clicking on the &laquo;SIGN&raquo; button in your MetaMask.
