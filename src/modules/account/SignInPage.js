@@ -74,7 +74,7 @@ class SignInPage extends Component<Props> {
       <DocumentTitle title='Sign In – Polymath'>
         <div className='pui-single-box'>
           {ico}
-          <h2 className='pui-h2' align='center'>Sign In With Your Wallet</h2>
+          <h2 className='pui-h2' align='center'>Sign In with Your Wallet</h2>
           <h3 className='pui-h3' align='center'>
             {desc} This signing operation has no cost associated and can be
             completed by clicking on the &laquo;SIGN&raquo; button in your MetaMask.
