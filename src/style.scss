@@ -1227,6 +1227,7 @@ div {
   filter: grayscale(100%) opacity(50%)
 }
 
-.pui-polyRequiredRed {
+.pui-requiredStar::after {
   color: $poly-red;
+  content: "*"
 }
