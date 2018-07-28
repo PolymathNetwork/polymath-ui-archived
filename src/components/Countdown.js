@@ -10,7 +10,7 @@ export type CountdownProps = {|
   handleButtonClick ?: () => any,
   small ?: boolean,
   isPaused: ?boolean,
-  pausable: ?any,
+  pausable: ?boolean,
   |}
 
 type State = {|
