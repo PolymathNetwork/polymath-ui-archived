@@ -95,7 +95,9 @@ class TxModal extends Component<DispatchProps & TxState> {
         )}
 
         <p className='pui-tx-continue'>
-          <Button onClick={this.handleContinue}>{this.props.continueLabel || 'Continue'}</Button>
+          {isFinished || error ? (
+            <Button onClick={this.handleContinue}>{this.props.continueLabel || 'Continue'}</Button>
+          ) : ''}
         </p>
       </Modal>
     )

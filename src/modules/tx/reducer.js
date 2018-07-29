@@ -41,10 +41,9 @@ export default (state: TxState = defaultState, action: Action) => {
   switch (action.type) {
     case a.START:
       return {
-        ...state,
+        ...defaultState,
         ...action,
         current: 0,
-        headingOverride: action.headingOverride,
         total: action.titles.length,
       }
     case a.HASH:
@@ -71,7 +70,10 @@ export default (state: TxState = defaultState, action: Action) => {
         error: action.error,
       }
     case a.CONTINUE:
-      return defaultState
+      return {
+        ...state,
+        total: null,
+      }
     default:
       return state
   }
