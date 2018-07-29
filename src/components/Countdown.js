@@ -6,12 +6,12 @@ import { Button } from 'carbon-components-react'
 export type CountdownProps = {|
   title: string,
   deadline: Date,
-  buttonTitle ?: string,
-  handleButtonClick ?: () => any,
-  small ?: boolean,
-  isPaused: ?boolean,
-  pausable: ?boolean,
-  |}
+  buttonTitle?: string,
+  handleButtonClick?: () => any,
+  small?: boolean,
+  isPaused?: boolean,
+  pausable?: boolean,
+|}
 
 type State = {|
   days: number,
@@ -37,13 +37,13 @@ export default class Countdown extends Component<CountdownProps, State> {
 
   componentDidMount () {
     setInterval(() => {
-      if(!this.props.isPaused){
+      if (!this.props.isPaused) {
         this.updateTimeUntil(this.props.deadline)
       }
     }, 1000)
   }
 
-  getButton (){
+  getButton () {
     return(
       this.props.buttonTitle ? (
         <Button

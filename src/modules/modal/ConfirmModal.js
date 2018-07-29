@@ -39,7 +39,8 @@ class ConfirmModal extends Component<ModalState & DispatchProps> {
               <Icon name='warning--glyph' fill='#E71D32' width='24' height='24' />&nbsp;
               {this.props.title}
             </span>
-          )}
+          )} // eslint-disable-next-line react/jsx-handler-names
+          buttonOnClick={this.handleClose}
         />
         <ModalBody>
           <div className='bx--modal-content__text'>
