@@ -1233,3 +1233,9 @@ div {
   color: $poly-red;
   content: "*"
 }
+
+.pui-large-confirm-modal {
+  .bx--modal-container{
+  width: 700px;
+  }
+}
