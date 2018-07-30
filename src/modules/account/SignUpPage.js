@@ -52,8 +52,9 @@ class SignUpPage extends Component<Props> {
           </div>
           <SignUpForm onSubmit={this.handleSubmit} enableSubmit={this.props.enableSubmit} />
           <p className='pui-input-hint'>
+            Polymath collects information to understand how you interact with the Service and to make improvements.<br/>
             <a href='https://www.fullstory.com/optout/' target='_blank' rel='noopener noreferrer'>
-              Do not track my activity
+              Click here to disable the collection of this information
             </a>
           </p>
         </div>
