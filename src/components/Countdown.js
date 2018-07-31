@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
-import { Button } from 'carbon-components-react'
+import { Button,Icon } from 'carbon-components-react'
 
 export type CountdownProps = {|
   title: string,
@@ -57,17 +57,10 @@ export default class Countdown extends Component<CountdownProps, State> {
             {
               this.props.pausable ?
                 this.props.isPaused ?
-                  <svg width='16' height='16' viewBox='0 0 16 16'>
-                    <path d='M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zM5.497
-                4.776v6.456a.25.25 0 0 0 .377.216l5.498-3.232a.25.25
-                0 0 0 0-.431L5.874 4.56a.25.25 0 0 0-.377.215z'
-                    />
-                  </svg>
-                  :
-                  <svg width='16' height='16' viewBox='0 0 16 16'>
-                    <path d='M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16zM5 5v6h2V5H5zm4 0v6h2V5H9z' />
-                  </svg>
-                :''
+                <Icon name='icon--play--outline' fill='#252D6B' width='16' height='16' />
+                :
+                <Icon name='icon--pause--outline' fill='#252D6B' width='16' height='16' />
+              :''
             }
           </div>
         </Button>
