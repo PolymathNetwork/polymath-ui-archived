@@ -426,11 +426,6 @@ div {
     .bx--btn {
       margin-top: 27px;
     }
-    .bx--overflow-menu {
-      margin-top: 25px;
-      margin-left: 20px;
-      margin-right:20px;
-    }
   }
 
   .bx--batch-summary__para {
@@ -502,6 +497,10 @@ div {
         word-break: break-word;
       }
     }
+  }
+
+  .bx--overflow-menu {
+    float: right;
   }
 }
 
