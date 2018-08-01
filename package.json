@@ -1,6 +1,6 @@
 {
   "name": "polymath-ui",
-  "version": "5.5.5",
+  "version": "5.5.8",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "7.2.3",
@@ -29,7 +29,8 @@
   },
   "peerDependencies": {
     "polymath-auth": "x",
-    "polymathjs": "x"
+    "polymathjs": "x",
+    "web3": "x"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -39,7 +40,6 @@
     "carbon-components-react": "5.31.0",
     "carbon-icons": "6.3.2",
     "eth-sig-util": "^1.4.2",
-    "js-sha3": "^0.7.0",
     "react": "16.2.0",
     "react-document-title": "2.0.3",
     "react-dom": "16.2.0",

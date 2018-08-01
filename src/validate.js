@@ -1,7 +1,10 @@
+/* eslint-disable import/extensions, import/no-unresolved */
 // @flow
-
-import { keccak256 as sha3 } from 'js-sha3'
+// $FlowFixMe
+import Web3 from 'web3'
 import type { TwelveHourTime } from './components/inputs/TimePickerInput'
+
+const web3 = new Web3()
 
 export const required = (value: any) => {
   return (value !== null && value !== undefined && value !== '') ?
@@ -56,21 +59,7 @@ export const integer = (value: ?number) => {
 }
 
 export const ethereumAddress = (value: ?string) => {
-  let result = true
-  if (!value || !/^0x[a-fA-F0-9]{40}$/.test(value)) {
-    result = false
-  } else {
-    const address = value.replace('0x', '')
-    const addressHash = sha3(address.toLowerCase())
-    for (let i = 0; i < 40; i++ ) {
-      if ((parseInt(addressHash[i], 16) > 7 && address[i].toUpperCase() !== address[i])
-        || (parseInt(addressHash[i], 16) <= 7 && address[i].toLowerCase() !== address[i])) {
-        result = false
-        break
-      }
-    }
-  }
-  return result ? null : 'Must be a valid Ethereum address.'
+  return web3.utils.isAddress(value) ? null : 'Must be a valid Ethereum address.'
 }
 
 export const date = (value: any) =>

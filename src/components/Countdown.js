@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
-import { Button,Icon } from 'carbon-components-react'
+import { Button, Icon } from 'carbon-components-react'
 
 export type CountdownProps = {|
   title: string,
@@ -51,16 +51,14 @@ export default class Countdown extends Component<CountdownProps, State> {
           onClick={this.props.handleButtonClick}
         >
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            {this.props.buttonTitle
-            }
+            {this.props.buttonTitle}
             &nbsp;
             {
-              this.props.pausable ?
+              this.props.pausable ? (
                 this.props.isPaused ?
-                <Icon name='icon--play--outline' fill='#252D6B' width='16' height='16' />
-                :
-                <Icon name='icon--pause--outline' fill='#252D6B' width='16' height='16' />
-              :''
+                  <Icon name='icon--play--outline' fill='#252D6B' width='16' height='16' /> :
+                  <Icon name='icon--pause--outline' fill='#252D6B' width='16' height='16' />
+              ) : ''
             }
           </div>
         </Button>

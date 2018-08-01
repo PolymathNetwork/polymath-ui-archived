@@ -24,7 +24,7 @@ const get = async (url: string) => {
   return res(await instance.get(url))
 }
 
-const post = async (url: string, params: Object) => {
+export const post = async (url: string, params: Object) => {
   return res(await instance.post(url, params))
 }
 
@@ -59,6 +59,17 @@ export const email = async (txHash: string, subject: string, body: Node, coreVer
     txHash,
     subject,
     body: ReactDOMServer.renderToStaticMarkup(body),
+    coreVer,
+    network,
+  })
+}
+
+export const providersApply = async (data: Object, coreVer: string, network: string) => {
+  return post('/providers/apply', {
+    ...data,
+    code,
+    sig,
+    address,
     coreVer,
     network,
   })
