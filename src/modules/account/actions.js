@@ -210,11 +210,17 @@ export const confirmEmail = (pin: string) => async (dispatch: Function, getState
     dispatch({ type: ENTER_PIN_ERROR })
   }
 }
+
+// eslint-disable-next-line global-require, import/no-unresolved, $FlowFixMe
+const polymathJS = require('polymathjs/package.json')
+
 // eslint-disable-next-line max-len
 export const email = (txHash: string, subject: string, body: Node) => async (dispatch: Function, getState: GetState) => {
-  // eslint-disable-next-line global-require, import/no-unresolved, $FlowFixMe
-  const polymathJS = require('polymathjs/package.json')
   await offchain.email(txHash, subject, body, polymathJS.dependencies['polymath-core'], getState().network.id)
+}
+
+export const providersApply = (data: Object) => async (dispatch: Function, getState: GetState) => {
+  await offchain.providersApply(data, polymathJS.dependencies['polymath-core'], getState().network.id)
 }
 
 export const faucet = (message: string) => async (dispatch: Function, getState: GetState) => {
