@@ -10,6 +10,7 @@ import TxModal from './modules/tx/TxModal'
 import EnterPINModal from './modules/account/EnterPINModal'
 import ConfirmModal from './modules/modal/ConfirmModal'
 import Navbar from './components/Navbar'
+import PausedBar from './components/PausedBar'
 import { setupHistory } from './redux/common/actions'
 
 type StateProps = {
@@ -31,7 +32,8 @@ const mapDispatchToProps: DispatchProps = {
 type Props = {|
   history: RouterHistory,
   ticker: ?string,
-  logo: ?string
+  logo: ?string,
+  handleResume: () => any
 |} & StateProps &
   DispatchProps
 
@@ -46,6 +48,7 @@ class PolymathUI extends Component<Props> {
     return (
       <div>
         <Navbar ticker={ticker} logo={logo} />
+        <PausedBar onResume={this.props.handleResume} />
         <Toaster />
         <TxModal />
         <EnterPINModal />
