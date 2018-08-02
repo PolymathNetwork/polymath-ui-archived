@@ -11,6 +11,7 @@ import EnterPINModal from './modules/account/EnterPINModal'
 import ConfirmModal from './modules/modal/ConfirmModal'
 import Navbar from './components/Navbar'
 import PausedBar from './components/PausedBar'
+import Footer from './components/Footer'
 import { setupHistory } from './redux/common/actions'
 
 type StateProps = {
@@ -53,6 +54,7 @@ class PolymathUI extends Component<Props> {
         <TxModal />
         <EnterPINModal />
         <ConfirmModal />
+        <Footer/>
         {this.props.isFetching ? <Loading /> : ''}
       </div>
     )
