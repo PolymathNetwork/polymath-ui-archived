@@ -11,15 +11,13 @@ export default class Footer extends Component<Props> {
         <ul className='pui-footer-links'>
           <li>
             <Link
-             to='termsofuse'
-             href='https://polymath.network/termsofservice.html'
+             to='https://polymath.network/termsofservice.html'
              target='_blank'>Terms Of Service
             </Link>
           </li>
           <li>
             <Link
-             to='privacypolicy'
-             href='https://polymath.network/privacypolicy.html'
+             to='https://polymath.network/privacypolicy.html'
              target='_blank'>Privacy Policy
             </Link>
           </li>
