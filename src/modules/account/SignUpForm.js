@@ -48,7 +48,7 @@ class SignUpForm extends Component<Props> {
                 <p>I accept that Polymath may contact me via email to send me updates on my token issuance process.</p>
                 <p>
                   For more details, please consult
-                  our <Link target="_blank" href='https://polymath.network/privacypolicy.html'>Privacy Policy</Link>
+                  our <Link target='_blank' href='https://polymath.network/privacypolicy.html'>Privacy Policy</Link>
                 </p>
               </Fragment>
             }
@@ -59,7 +59,7 @@ class SignUpForm extends Component<Props> {
             className='pui-checkbox-small-text'
             label={
               <p>I accept the
-                <Link target="_blank" href='https://polymath.network/termsofservice.html'>
+                <Link target='_blank' href='https://polymath.network/termsofservice.html'>
                   Terms of Service
                 </Link>
               </p>
