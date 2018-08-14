@@ -33,8 +33,7 @@ type Props = {|
   history: RouterHistory,
   ticker: ?string,
   logo: ?string,
-|} & StateProps &
-  DispatchProps
+|} & StateProps & DispatchProps
 
 class PolymathUI extends Component<Props> {
 
@@ -51,7 +50,7 @@ class PolymathUI extends Component<Props> {
         <TxModal />
         <EnterPINModal />
         <ConfirmModal />
-        <Footer/>
+        <Footer />
         {this.props.isFetching ? <Loading /> : ''}
       </div>
     )
