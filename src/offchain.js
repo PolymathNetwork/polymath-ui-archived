@@ -7,7 +7,7 @@ let code
 let sig
 let address
 const instance = axios.create({
-  baseURL: 'https://polymath-offchain.herokuapp.com/',
+  baseURL: process.env.REACT_APP_POLYMATH_OFFCHAIN_ADDRESS || 'https://polymath-offchain.herokuapp.com/',
 })
 
 const res = (response: Object) => {
