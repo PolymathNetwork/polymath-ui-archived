@@ -58,7 +58,7 @@ class SignUpForm extends Component<Props> {
             component={CheckboxInput}
             className='pui-checkbox-small-text'
             label={
-              <p>I accept the
+              <p>I accept the&nbsp;
                 <Link target='_blank' href='https://polymath.network/termsofservice.html'>
                   Terms of Service
                 </Link>
