@@ -74,3 +74,7 @@ export const providersApply = async (data: Object, coreVer: string, network: str
     network,
   })
 }
+
+export const notice = async (scope: string) => {
+  return get('/notice/' + scope)
+}
