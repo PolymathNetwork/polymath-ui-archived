@@ -4,7 +4,10 @@ import type { ExtractReturn } from '../../redux/helpers'
 export const NOTICE = 'polymath-ui/notice/NOTICE'
 export const getNotice = (scope: string) => async (dispatch: Function) => {
   const notice = await fetchNotice(scope)
-  if (!notice.isOneTime) { // eslint-disable-next-line no-underscore-dangle
+  if (!notice) {
+    return
+  }
+  if (notice.isOneTime) { // eslint-disable-next-line no-underscore-dangle
     const lsId = 'notice-' + notice._id
     if (localStorage.getItem(lsId)) {
       return
