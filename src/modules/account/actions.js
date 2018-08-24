@@ -53,7 +53,7 @@ export type AccountInnerData = {|
   email: string,
 |}
 
-const fetchBalance = () => async (dispatch: Function) => {
+export const fetchBalance = () => async (dispatch: Function) => {
   const balance = await PolyToken.myBalance()
   await PolyToken.subscribeMyTransfers(
     async (toOrFrom: Address, value: BigNumber, isFrom: boolean) => {

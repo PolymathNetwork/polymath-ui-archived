@@ -31,8 +31,11 @@ const mapDispatchToProps: DispatchProps = {
 
 type Props = {|
   history: RouterHistory,
-  ticker: ?string,
-  logo: ?string,
+  ticker?: string,
+  logo?: string,
+  title?: string,
+  termsOfService?: string,
+  privacyPolicy?: string,
 |} & StateProps & DispatchProps
 
 class PolymathUI extends Component<Props> {
@@ -42,7 +45,7 @@ class PolymathUI extends Component<Props> {
   }
 
   render () {
-    const { ticker, logo } = this.props
+    const { ticker, logo, title, termsOfService, privacyPolicy } = this.props
     return (
       <div>
         <Navbar ticker={ticker} logo={logo} />
@@ -50,7 +53,7 @@ class PolymathUI extends Component<Props> {
         <TxModal />
         <EnterPINModal />
         <ConfirmModal />
-        <Footer />
+        <Footer title={title} termsOfService={termsOfService} privacyPolicy={privacyPolicy} />
         {this.props.isFetching ? <Loading /> : ''}
       </div>
     )

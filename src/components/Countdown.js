@@ -121,9 +121,7 @@ export default class Countdown extends Component<CountdownProps, State> {
             </div>
           </div>
         </div>
-        {
-          this.getButton()
-        }
+        {this.getButton()}
       </div>
     )
   }

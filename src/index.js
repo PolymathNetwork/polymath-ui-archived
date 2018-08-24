@@ -21,7 +21,15 @@ export { default as SignUpPage } from './modules/account/SignUpPage'
 export { default as SignUpSuccessPage } from './modules/account/SignUpSuccessPage'
 export { default as MetamaskPage } from './components/MetamaskPage'
 export { notify } from './modules/toaster/actions'
-export { signIn, signUp, requestConfirmEmail, email, faucet, providersApply } from './modules/account/actions'
+export {
+  fetchBalance,
+  signIn,
+  signUp,
+  requestConfirmEmail,
+  email,
+  faucet,
+  providersApply,
+} from './modules/account/actions'
 export { tx, txEnd, txHash } from './modules/tx/actions'
 export { confirm } from './modules/modal/actions'
 export { getNotice } from './modules/notice/actions'

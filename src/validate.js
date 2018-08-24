@@ -53,9 +53,15 @@ export const integer = (value: ?number) => {
   if (!value) {
     return null
   }
-
   const v = Number(value)
   return Number.isNaN(v) || v % 1 !== 0 ? 'Must be a whole number.' : null
+}
+
+export const float = (value: string) => {
+  if (!value) {
+    return null
+  }
+  return !/^[+-]?\d+(\.\d+)?$/.test(value) ? 'Must be a float number.' : null
 }
 
 export const ethereumAddress = (value: ?string) => {
@@ -69,12 +75,10 @@ export const dateRange = (value: any) => {
   if (!value) {
     return null
   }
-
   if (!(value instanceof Array) || value.length !== 2 ||
     !(value[0] instanceof Date) || !(value[1] instanceof Date)) {
     return 'Pick dates from the calendar.'
   }
-
   return null
 }
 
