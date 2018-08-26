@@ -20,6 +20,7 @@ export { default as SignInPage } from './modules/account/SignInPage'
 export { default as SignUpPage } from './modules/account/SignUpPage'
 export { default as SignUpSuccessPage } from './modules/account/SignUpSuccessPage'
 export { default as MetamaskPage } from './components/MetamaskPage'
+export { default as DummyPage } from './components/DummyPage'
 export { notify } from './modules/toaster/actions'
 export {
   fetchBalance,
