@@ -49,9 +49,11 @@ class ConfirmModal extends Component<ModalState & DispatchProps> {
         </ModalBody>
 
         <ModalFooter>
-          <Button kind='secondary' onClick={this.handleClose}>
-            Cancel
-          </Button>
+          {!this.props.isAlert ? (
+            <Button kind='secondary' onClick={this.handleClose}>
+              Cancel
+            </Button>
+          ) : ''}
           <Button onClick={this.handleConfirm}>{this.props.buttonLabel}</Button>
         </ModalFooter>
       </ComposedModal>

@@ -9,8 +9,9 @@ export const confirm = (
   buttonLabel: string = 'Confirm',
   className: string = '',
   headerLabel: string = 'Confirmation Required',
+  isAlert: boolean = false,
 ) =>
-  ({ type: CONFIRM, content, onConfirm, title, className, headerLabel, buttonLabel })
+  ({ type: CONFIRM, content, onConfirm, title, className, headerLabel, buttonLabel, isAlert })
 
 export const CLOSE = 'polymath-ui/modal/CLOSE'
 export const closeModal = () => ({ type: CLOSE })

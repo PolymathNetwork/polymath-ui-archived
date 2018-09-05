@@ -12,6 +12,7 @@ export type ModalState = {
   className: string,
   headerLabel: string,
   buttonLabel: string,
+  isAlert: boolean,
 }
 
 const defaultState: ModalState = {
@@ -22,6 +23,7 @@ const defaultState: ModalState = {
   className: '',
   headerLabel: '',
   buttonLabel: '',
+  isAlert: false,
 }
 
 export default (state: ModalState = defaultState, action: Action) => {
