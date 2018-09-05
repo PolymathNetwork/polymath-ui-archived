@@ -37,7 +37,7 @@ export const regex = (expr: RegExp, value: ?string, message: string = 'Invalid c
   value && !expr.test(value) ? message : null
 
 export const email = (value: ?string) =>
-  value && !/^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z0-9-]+$/i.test(value)
+  value && !/^[\sA-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z0-9-]+$/i.test(value)
     ? 'Invalid email address.'
     : null
 
