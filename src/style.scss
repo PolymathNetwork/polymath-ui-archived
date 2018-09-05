@@ -135,14 +135,20 @@ div {
   color: $poly-blue !important;
   background: white !important;
 
-  &:hover {
-    color: white !important;
-    background: $poly-blue !important;
-  }
-
   .bx--btn__icon {
     fill: #252E6A !important;
   }
+
+  &:hover {
+    color: white !important;
+    background: $poly-blue !important;
+
+    .bx--btn__icon {
+      fill: white !important;
+    }
+  }
+
+  
 }
 
 .bx--btn--sm {
