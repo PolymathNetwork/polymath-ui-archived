@@ -10,6 +10,7 @@ import {
   maxLength,
   email,
 } from '../../validate'
+import { trim } from '../../helpers'
 
 export const formName = 'signup'
 
@@ -37,6 +38,7 @@ class SignUpForm extends Component<Props> {
           label='Email'
           placeholder='Enter your email address'
           validate={[required, email]}
+          normalize={trim}
         />
         <div className='pui-sign-up-checkboxes'>
           <Field
