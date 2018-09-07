@@ -44,6 +44,7 @@ export {
   addressShortifier,
   hashShortifier,
   timeZoneName,
+  trim,
 } from './helpers'
 export { default as reducer } from './redux/reducer'
 export { default as PolymathUI } from './PolymathUI'

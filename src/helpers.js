@@ -17,7 +17,11 @@ export const setHelpersNetwork = (name: string) => {
 
 const etherscan = (type: string, value: string, label: Node) => {
   return (
-    <a href={`https://${network ? network + '.' : ''}etherscan.io/${type}/${value}`} target='_blank'>
+    <a
+      href={`https://${network ? network + '.' : ''}etherscan.io/${type}/${value}`} 
+      target='_blank'
+      rel='noopener noreferrer'
+    >
       {label}
     </a>
   )
@@ -55,3 +59,6 @@ export const timeZoneName = (): ?string => {
 
   return dateString.substring(comma + 2)
 }
+
+export const trim = (value: string) =>
+  value && value.trim()
