@@ -28,7 +28,7 @@ const txArgs = [
 
 let store: MockStoreEnhanced<any>
 
-afterEach(() => {
+beforeEach(() => {
   store = mockStore()
 })
 
