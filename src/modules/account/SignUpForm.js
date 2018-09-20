@@ -34,6 +34,7 @@ class SignUpForm extends Component<Props> {
         />
         <Field
           name='email'
+          type='email'
           component={TextInput}
           label='Email'
           placeholder='Enter your email address'
