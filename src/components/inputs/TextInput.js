@@ -10,6 +10,7 @@ type Props = {
     onChange: (any) => void,
   },
   label: Node,
+  type: string,
   meta: {
     touched: boolean,
     error: string
@@ -21,6 +22,7 @@ type Props = {
 export default ({
   input,
   label,
+  type,
   meta: { touched, error },
   className,
   onChangeCode,
@@ -39,7 +41,10 @@ export default ({
       if (onChangeCode) { // $FlowFixMe
         onChangeCode(value)
       }
-      return input.onChange(value || '')
+      if(type === 'email')
+      {return input.onChange(value.trim() || '')}
+      else
+      {return input.onChange(value || '')}
     }}
     {...rest}
   />)
